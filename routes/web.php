@@ -12,6 +12,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::get('profile', [ProfileController::class, 'index'])->name('profile');
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('password', [ProfileController::class, 'updatePassword'])->name('password.update');
 });
 
 

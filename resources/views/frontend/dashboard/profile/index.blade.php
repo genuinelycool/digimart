@@ -139,7 +139,8 @@
                                                         name="country">
                                                         <option value="">Select</option>
                                                         @foreach (config('options.countries') as $key => $value)
-                                                            <option @selected($user->country == $value) value="{{ $value }}">{{ $value }}</option>
+                                                            <option @selected($user->country == $value)
+                                                                value="{{ $value }}">{{ $value }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -228,7 +229,10 @@
                             </div>
                             <div class="tab-pane fade" id="pills-changePassword" role="tabpanel"
                                 aria-labelledby="pills-changePassword-tab" tabindex="0">
-                                <form action="#" autocomplete="off">
+                                <form action="{{ route('password.update') }}" autocomplete="off" method="POST">
+                                    @csrf
+                                    @method('PUT')
+
                                     <div class="row">
 
                                         <div class="col-12">
@@ -239,13 +243,13 @@
                                                 <div class="position-relative">
                                                     <input type="password"
                                                         class="common-input common-input--withIcon common-input--withLeftIcon "
-                                                        id="current-password" placeholder="************">
+                                                        id="current-password" placeholder="************"
+                                                        name="current_password">
                                                     <span class="input-icon input-icon--left"><img
-                                                            src="assets/images/icons/key-icon.svg" alt=""></span>
-                                                    <span
-                                                        class="input-icon password-show-hide fas fa-eye la-eye-slash toggle-password-two"
-                                                        id="#current-password"></span>
+                                                            src="{{ asset('assets/frontend/images/icons/key-icon.svg') }}"
+                                                            alt=""></span>
                                                 </div>
+                                                <x-input-error :message="$errors->first('current_password')" />
                                             </div>
                                         </div>
 
@@ -257,31 +261,30 @@
                                                 <div class="position-relative">
                                                     <input type="password"
                                                         class="common-input common-input--withIcon common-input--withLeftIcon "
-                                                        id="new-password" placeholder="************">
+                                                        id="new-password" placeholder="************" name="password">
                                                     <span class="input-icon input-icon--left"><img
-                                                            src="assets/images/icons/lock-two.svg" alt=""></span>
-                                                    <span
-                                                        class="input-icon password-show-hide fas fa-eye la-eye-slash toggle-password-two"
-                                                        id="#new-password"></span>
+                                                            src="{{ asset('assets/frontend/images/icons/lock-two.svg') }}"
+                                                            alt=""></span>
                                                 </div>
+                                                <x-input-error :message="$errors->first('password')" />
                                             </div>
                                         </div>
 
                                         <div class="col-sm-6 col-xs-6">
                                             <div class="form_box">
                                                 <label for="confirm-password"
-                                                    class="form-label mb-2 font-18 font-heading fw-600">Current
+                                                    class="form-label mb-2 font-18 font-heading fw-600">Confirm
                                                     Password</label>
                                                 <div class="position-relative">
                                                     <input type="password"
                                                         class="common-input common-input--withIcon common-input--withLeftIcon "
-                                                        id="confirm-password" placeholder="************">
+                                                        id="confirm-password" placeholder="************"
+                                                        name="password_confirmation">
                                                     <span class="input-icon input-icon--left"><img
-                                                            src="assets/images/icons/lock-two.svg" alt=""></span>
-                                                    <span
-                                                        class="input-icon password-show-hide fas fa-eye la-eye-slash toggle-password-two"
-                                                        id="#confirm-password"></span>
+                                                            src="{{ asset('assets/frontend/images/icons/lock-two.svg') }}"
+                                                            alt=""></span>
                                                 </div>
+                                                <x-input-error :message="$errors->first('password_confirmation')" />
                                             </div>
                                         </div>
 
