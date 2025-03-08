@@ -108,27 +108,10 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-6 col-xs-6">
-                                            <div class="form_box">
-                                                <label for="name" class="form-label mb-2 font-18 font-heading fw-600">
-                                                    Full Name
-                                                </label>
-                                                <input type="text" class="common-input border" id="name"
-                                                    value="{{ $user->name }}" placeholder="Full Name" name="name">
-                                                <x-input-error :message="$errors->first('name')" />
-                                            </div>
+                                            <x-frontend.input-text name="name" value="{{ $user->name }}" placeholder="Full Name" />
                                         </div>
-
-
                                         <div class="col-sm-6 col-xs-6">
-                                            <div class="form_box">
-                                                <label for="email"
-                                                    class="form-label mb-2 font-18 font-heading fw-600">Email
-                                                </label>
-                                                <input type="email" class="common-input border" id="email"
-                                                    value="{{ $user->email }}" placeholder="Email" name="email">
-                                                <x-input-error :message="$errors->first('email')" />
-
-                                            </div>
+                                            <x-frontend.input-text name="email" :value="$user->email" placeholder="Email" />
                                         </div>
                                         <div class="col-sm-6 col-xs-6">
                                             <div class="form_box">
@@ -147,26 +130,10 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-6 col-xs-6">
-                                            <div class="form_box">
-                                                <label for="city"
-                                                    class="form-label mb-2 font-18 font-heading fw-600">City
-                                                </label>
-                                                <input type="text" class="common-input border" id="city"
-                                                    value="{{ $user->city }}" placeholder="City" name="city">
-                                                <x-input-error :message="$errors->first('city')" />
-
-                                            </div>
+                                            <x-frontend.input-text name="city" :value="$user->city" placeholder="City" />
                                         </div>
                                         <div class="col-sm-6 col-xs-6">
-                                            <div class="form_box">
-                                                <label for="address"
-                                                    class="form-label mb-2 font-18 font-heading fw-600">Address
-                                                </label>
-                                                <input type="text" class="common-input border" id="address"
-                                                    value="{{ $user->address }}" placeholder="Address" name="address">
-                                                <x-input-error :message="$errors->first('address')" />
-
-                                            </div>
+                                            <x-frontend.input-text name="address" :value="$user->address" placeholder="Address" />
                                         </div>
 
                                         <div class="col-sm-12">
