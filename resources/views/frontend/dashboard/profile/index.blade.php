@@ -49,7 +49,7 @@
                             </span>
                             <span class="profile-info-list__info">$0.00 USD</span>
                         </li>
-                        
+
                         <li class="profile-info-list__item">
                             <span class="profile-info-list__content flx-align flex-nowrap gap-2">
                                 <i class="ti ti-basket-check"></i>
@@ -90,7 +90,8 @@
                         <div class="tab-content" id="pills-tabContent">
                             <div class="tab-pane fade show active" id="pills-personalInfo" role="tabpanel"
                                 aria-labelledby="pills-personalInfo-tab" tabindex="0">
-                                <form action="{{ route('profile.update') }}" autocomplete="off" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('profile.update') }}" autocomplete="off" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
 
@@ -133,12 +134,13 @@
                                             <div class="form_box">
                                                 <label for="country"
                                                     class="form-label mb-2 font-18 font-heading fw-600">Country</label>
-                                                <div class="select-has-icon">
-                                                    <select class="common-input border" id="country" name="country">
-                                                        <option value="1">Dhaka</option>
-                                                        <option value="1">Chandpur</option>
-                                                        <option value="1">Comilla</option>
-                                                        <option value="1">Rangpur</option>
+                                                <div class="">
+                                                    <select class="common-input border select_2" id="country"
+                                                        name="country">
+                                                        <option value="">Select</option>
+                                                        @foreach (config('options.countries') as $key => $value)
+                                                            <option @selected($user->country == $value) value="{{ $value }}">{{ $value }}</option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                             </div>
