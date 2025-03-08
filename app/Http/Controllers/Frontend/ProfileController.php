@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\ProfileUpdateRequest;
+use App\Services\NotificationService;
 use App\Traits\FileUpload;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -35,6 +36,10 @@ class ProfileController extends Controller
         $user->city = $request->city;
         $user->address = $request->address;
         $user->save();
+
+        // notyf()->success('Updated Successfully');
+        // NotificationService::UPDATED("Profile Updated Successfully");
+        NotificationService::UPDATED();
 
         return redirect()->back();
     }
