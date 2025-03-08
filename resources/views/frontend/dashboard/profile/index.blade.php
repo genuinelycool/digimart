@@ -107,11 +107,14 @@
                         <div class="tab-content" id="pills-tabContent">
                             <div class="tab-pane fade show active" id="pills-personalInfo" role="tabpanel"
                                 aria-labelledby="pills-personalInfo-tab" tabindex="0">
-                                <form action="#" autocomplete="off">
+                                <form action="{{ route('profile.update') }}" autocomplete="off" method="POST">
+                                    @csrf
+                                    @method('PUT')
+
                                     <div class="row">
                                         <div class="col-sm-6 col-xs-6">
                                             <div class="form_box">
-                                                <label for="lastNamee"
+                                                <label for="avatar"
                                                     class="form-label mb-2 font-18 font-heading fw-600">Avatar
                                                 </label>
                                                 <input type="file" name="avatar" class="common-input border"
@@ -122,11 +125,11 @@
                                         </div>
                                         <div class="col-sm-6 col-xs-6">
                                             <div class="form_box">
-                                                <label for="fName" class="form-label mb-2 font-18 font-heading fw-600">
+                                                <label for="name" class="form-label mb-2 font-18 font-heading fw-600">
                                                     Full Name
                                                 </label>
-                                                <input type="text" class="common-input border" id="fName"
-                                                    value="Michel" placeholder="Full Name" name="name">
+                                                <input type="text" class="common-input border" id="name"
+                                                    value="{{ $user->name }}" placeholder="Full Name" name="name">
                                                 <x-input-error :message="$errors->first('name')" />
                                             </div>
                                         </div>
@@ -134,11 +137,11 @@
 
                                         <div class="col-sm-6 col-xs-6">
                                             <div class="form_box">
-                                                <label for="phonee"
+                                                <label for="email"
                                                     class="form-label mb-2 font-18 font-heading fw-600">Email
                                                 </label>
                                                 <input type="email" class="common-input border" id="email"
-                                                    value="" placeholder="Email" name="email">
+                                                    value="{{ $user->email }}" placeholder="Email" name="email">
                                                 <x-input-error :message="$errors->first('email')" />
 
                                             </div>
@@ -148,7 +151,7 @@
                                                 <label for="country"
                                                     class="form-label mb-2 font-18 font-heading fw-600">Country</label>
                                                 <div class="select-has-icon">
-                                                    <select class="common-input border" id="country">
+                                                    <select class="common-input border" id="country" name="country">
                                                         <option value="1">Dhaka</option>
                                                         <option value="1">Chandpur</option>
                                                         <option value="1">Comilla</option>
@@ -163,7 +166,7 @@
                                                     class="form-label mb-2 font-18 font-heading fw-600">City
                                                 </label>
                                                 <input type="text" class="common-input border" id="city"
-                                                    value="" placeholder="City" name="city">
+                                                    value="{{ $user->city }}" placeholder="City" name="city">
                                                 <x-input-error :message="$errors->first('city')" />
 
                                             </div>
@@ -174,7 +177,7 @@
                                                     class="form-label mb-2 font-18 font-heading fw-600">Address
                                                 </label>
                                                 <input type="text" class="common-input border" id="address"
-                                                    value="" placeholder="Address" name="address">
+                                                    value="{{ $user->address }}" placeholder="Address" name="address">
                                                 <x-input-error :message="$errors->first('address')" />
 
                                             </div>
