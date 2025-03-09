@@ -26,6 +26,9 @@ class ProfileController extends Controller
         $user = Auth::guard('admin')->user();
 
         if($request->hasFile('avatar')) {
+            
+            $this->deleteFile($user->avatar);
+
             $avatarPath = $this->uploadFile($request->file('avatar'));
             $user->avatar = $avatarPath;
         }
