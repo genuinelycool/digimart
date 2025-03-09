@@ -9,29 +9,56 @@
                     @method('PUT')
 
                     <div class="card-body">
-                        <h3 class="card-title">Edit Profile</h3>
+                        <h3 class="card-title">{{ __('Edit Profile') }}</h3>
                         <div class="row row-cards">
 
                             <div class="col-md-12">
-                                <x-admin.image-preview :src="asset(auth()->user()->avatar)" height="128" width="128" />
+                                <x-admin.image-preview :src="asset(auth('admin')->user()->avatar)" height="128" width="128" />
                             </div>
 
                             <div class="col-md-12">
-                                <x-admin.input-text type="file" name="avatar" label="Avatar" />
+                                <x-admin.input-text type="file" name="avatar" :label="__('Avatar')" />
                             </div>
 
                             <div class="col-md-6">
-                                <x-admin.input-text name="name" label="Name" :value="auth()->user()->name" />
+                                <x-admin.input-text name="name" :label="__('Name')" :value="auth('admin')->user()->name" />
                             </div>
 
                             <div class="col-md-6">
-                                <x-admin.input-text name="email" label="Email" :value="auth()->user()->email" />
+                                <x-admin.input-text name="email" :label="__('Email')" :value="auth('admin')->user()->email" />
                             </div>
 
                         </div>
                     </div>
                     <div class="card-footer text-end">
-                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                        <button type="submit" class="btn btn-primary">{{ __('Update Profile') }}</button>
+                    </div>
+                </form>
+
+                <form class="card mt-4" action="{{ route('admin.password.update') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+
+                    <div class="card-body">
+                        <h3 class="card-title">{{ __('Update Password') }}</h3>
+                        <div class="row row-cards">
+
+                            <div class="col-md-12">
+                                <x-admin.input-text type="password" name="current_password" :label="__('Current Password')" :placeholder="__('Your current password')" />
+                            </div>
+
+                            <div class="col-md-6">
+                                <x-admin.input-text type="password" name="password" :label="__('New Password')" :placeholder="__('Your new password')" />
+                            </div>
+
+                            <div class="col-md-6">
+                                <x-admin.input-text type="password" name="password_confirmation" :label="__('Confirm Password')" :placeholder="__('Confirm your new password')" />
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-footer text-end">
+                        <button type="submit" class="btn btn-primary">{{ __('Update Password') }}</button>
                     </div>
                 </form>
             </div>

@@ -41,4 +41,5 @@ Route::middleware('auth:admin')->prefix('admin')->as('admin.')->group(function (
     /** Profile Routes */
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('password', [ProfileController::class, 'updatePassword'])->name('password.update');
 });

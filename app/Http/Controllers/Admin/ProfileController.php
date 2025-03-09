@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\PasswordUpdateRequest;
 use App\Http\Requests\Admin\ProfileUpdateRequest;
 use App\Services\NotificationService;
 use App\Traits\FileUpload;
@@ -26,7 +27,7 @@ class ProfileController extends Controller
         $user = Auth::guard('admin')->user();
 
         if($request->hasFile('avatar')) {
-            
+
             $this->deleteFile($user->avatar);
 
             $avatarPath = $this->uploadFile($request->file('avatar'));
@@ -35,6 +36,17 @@ class ProfileController extends Controller
 
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->save();
+
+        NotificationService::UPDATED();
+
+        return redirect()->back();
+    }
+
+    function updatePassword(PasswordUpdateRequest $request) : RedirectResponse
+    {
+        $user = Auth::guard('admin')->user();
+        $user->password = bcrypt($request->password);
         $user->save();
 
         NotificationService::UPDATED();
