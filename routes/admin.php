@@ -38,5 +38,7 @@ Route::middleware('auth:admin')->prefix('admin')->as('admin.')->group(function (
     Route::get('dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
 
+    /** Profile Routes */
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
 });
