@@ -23,14 +23,14 @@
                         <li class="profile-info-list__item">
                             <span class="profile-info-list__content flx-align flex-nowrap gap-2">
                                 <i class="ti ti-user"></i>
-                                <span class="text text-heading fw-500">Name</span>
+                                <span class="text text-heading fw-500">{{ __('Name') }}</span>
                             </span>
                             <span class="profile-info-list__info">{{ $user->name }}</span>
                         </li>
                         <li class="profile-info-list__item">
                             <span class="profile-info-list__content flx-align flex-nowrap gap-2">
                                 <i class="ti ti-mail-forward"></i>
-                                <span class="text text-heading fw-500">Email</span>
+                                <span class="text text-heading fw-500">{{ __('Email') }}</span>
                             </span>
                             <span class="profile-info-list__info">{{ $user->email }}</span>
                         </li>
@@ -38,14 +38,14 @@
                         <li class="profile-info-list__item">
                             <span class="profile-info-list__content flx-align flex-nowrap gap-2">
                                 <i class="ti ti-map-pin"></i>
-                                <span class="text text-heading fw-500">Country</span>
+                                <span class="text text-heading fw-500">{{ __('Country') }}</span>
                             </span>
                             <span class="profile-info-list__info">{{ $user->country }}</span>
                         </li>
                         <li class="profile-info-list__item">
                             <span class="profile-info-list__content flx-align flex-nowrap gap-2">
                                 <i class="ti ti-currency-dollar"></i>
-                                <span class="text text-heading fw-500">Balance</span>
+                                <span class="text text-heading fw-500">{{ __('Balance') }}</span>
                             </span>
                             <span class="profile-info-list__info">$0.00 USD</span>
                         </li>
@@ -53,9 +53,9 @@
                         <li class="profile-info-list__item">
                             <span class="profile-info-list__content flx-align flex-nowrap gap-2">
                                 <i class="ti ti-basket-check"></i>
-                                <span class="text text-heading fw-500">Purchased</span>
+                                <span class="text text-heading fw-500">{{ __('Purchased') }}</span>
                             </span>
-                            <span class="profile-info-list__info">0 items</span>
+                            <span class="profile-info-list__info">0 {{ __('items') }}</span>
                         </li>
                     </ul>
 
@@ -68,20 +68,18 @@
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link font-18 font-heading active" id="pills-personalInfo-tab"
                                     data-bs-toggle="pill" data-bs-target="#pills-personalInfo" type="button" role="tab"
-                                    aria-controls="pills-personalInfo" aria-selected="true">Personal
-                                    Info</button>
+                                    aria-controls="pills-personalInfo" aria-selected="true">{{ __('Personal Info') }}</button>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link font-18 font-heading" id="pills-payouts-tab" data-bs-toggle="pill"
                                     data-bs-target="#pills-payouts" type="button" role="tab"
-                                    aria-controls="pills-payouts" aria-selected="false" tabindex="-1">Payouts</button>
+                                    aria-controls="pills-payouts" aria-selected="false" tabindex="-1">{{ __('Payouts') }}</button>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link font-18 font-heading" id="pills-changePassword-tab"
                                     data-bs-toggle="pill" data-bs-target="#pills-changePassword" type="button"
                                     role="tab" aria-controls="pills-changePassword" aria-selected="false"
-                                    tabindex="-1">Change
-                                    Password</button>
+                                    tabindex="-1">{{ __('Change Password') }}</button>
                             </li>
                         </ul>
                     </div>
@@ -127,8 +125,7 @@
                                         </div>
 
                                         <div class="col-sm-12">
-                                            <button class="btn btn-main btn-lg"> Update
-                                                Profile</button>
+                                            <button class="btn btn-main btn-lg"> {{ __('Update Profile') }}</button>
                                         </div>
                                     </div>
                                 </form>
@@ -211,8 +208,7 @@
                                         </div>
 
                                         <div class="col-sm-12">
-                                            <button class="btn btn-main btn-lg"> Update
-                                                Password</button>
+                                            <button class="btn btn-main btn-lg"> {{ __('Update Password') }}</button>
                                         </div>
                                     </div>
                                 </form>

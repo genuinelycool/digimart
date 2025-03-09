@@ -4,28 +4,23 @@ namespace App\Services;
 
 class NotificationService
 {
-    private static $createMessage = 'Created Successfully';
-    private static $updateMessage = 'Updated Successfully';
-    private static $deleteMessage = 'Deleted Successfully';
-    private static $errorMessage = 'Something went wrong';
-
     static function CREATED($message = null)
     {
-        notyf()->success($message ?? self::$createMessage);
+        notyf()->success($message ?? __('Created Successfully'));
     }
 
     static function UPDATED($message = null)
     {
-        notyf()->success($message ?? self::$updateMessage);
+        notyf()->success($message ?? __('Updated Successfully'));
     }
 
     static function DELETED($message = null)
     {
-        notyf()->success($message ?? self::$deleteMessage);
+        notyf()->success($message ?? __('Deleted Successfully'));
     }
 
     static function ERROR($message = null)
     {
-        notyf()->error($message ?? self::$errorMessage);
+        notyf()->error($message ?? __('Something went wrong'));
     }
 }
