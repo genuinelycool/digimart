@@ -26,6 +26,18 @@
                         <div class="col-md-12">
                             <x-admin.input-text name="role" :label="__('Role Name')" />
                         </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-4">
+                                @foreach ($permissions as $permission)
+                                <label class="form-check">
+                                    <input class="form-check-input" type="checkbox" >
+                                    <span class="form-check-label">{{ $permission->name }}</span>
+                                </label>
+                                @endforeach
+
+                            </div>
+                        </div>
                     </div>
 
                     <div class="card-footer text-end">

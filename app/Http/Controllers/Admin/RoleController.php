@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
@@ -21,7 +22,10 @@ class RoleController extends Controller
      */
     public function create() : View
     {
-        return view('admin.access-management.role.create');
+        $permissions = Permission::all()->groupBy('group_name');
+        dd($permissions);
+
+        return view('admin.access-management.role.create', compact('permissions'));
     }
 
     /**
