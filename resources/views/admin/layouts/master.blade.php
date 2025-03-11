@@ -35,7 +35,8 @@
         @yield('content')
     </div>
 
-
+    <!-- Libs JS -->
+    <script src="{{ asset('assets/admin/js/jquery.js') }}"></script>
     <!-- Tabler Core -->
     <script src="{{ asset('assets/admin/js/tabler.min.js') }}" defer></script>
     <script src="{{ asset('assets/admin/js/demo.min.js') }}" defer></script>

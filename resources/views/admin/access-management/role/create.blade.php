@@ -23,25 +23,29 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="col-md-12">
-                            <x-admin.input-text name="role" :label="__('Role Name')" />
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-4">
-                                @foreach ($permissions as $permission)
-                                <label class="form-check">
-                                    <input class="form-check-input" type="checkbox" >
-                                    <span class="form-check-label">{{ $permission->name }}</span>
-                                </label>
-                                @endforeach
-
+                        <form action="{{ route('admin.roles.store') }}" method="POST">
+                            @csrf
+                            <div class="col-md-12">
+                                <x-admin.input-text name="role" :label="__('Role Name')" />
                             </div>
-                        </div>
+                            <hr>
+                            <div class="row">
+                                @foreach ($permissions as $groupName => $permissionItems)
+                                    <div class="col-md-4">
+                                        <h3>{{ $groupName }}</h3>
+                                        @foreach ($permissionItems as $permission)
+                                            <label class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="{{ $permission->name }}" name="permissions[]">
+                                                <span class="form-check-label">{{ $permission->name }}</span>
+                                            </label>
+                                        @endforeach
+                                    </div>
+                                @endforeach
+                            </div>
+                        </form>
                     </div>
-
                     <div class="card-footer text-end">
-
+                        <button type="submit" onclick="$('form').submit();" class="btn btn-primary">{{ __('Create') }}</button>
                     </div>
                 </div>
             </div>

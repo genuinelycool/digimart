@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 
@@ -23,7 +24,6 @@ class RoleController extends Controller
     public function create() : View
     {
         $permissions = Permission::all()->groupBy('group_name');
-        dd($permissions);
 
         return view('admin.access-management.role.create', compact('permissions'));
     }
@@ -31,9 +31,9 @@ class RoleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request) : RedirectResponse
     {
-        //
+        dd($request->all());
     }
 
     /**
