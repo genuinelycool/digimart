@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\RoleStoreRequest;
+use App\Services\NotificationService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
@@ -31,9 +34,18 @@ class RoleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) : RedirectResponse
+    public function store(RoleStoreRequest $request) : RedirectResponse
     {
-        dd($request->all());
+        $role = Role::create([
+            'name' => $request->role,
+            'guard_name' => 'admin'
+        ]);
+
+        $role->syncPermissions($request->permissions);
+
+        NotificationService::CREATED();
+
+        return to_route('admin.roles.index');
     }
 
     /**
