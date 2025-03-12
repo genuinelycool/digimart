@@ -29,28 +29,28 @@
                                 <table class="table table-vcenter card-table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Title</th>
-                                            <th>Email</th>
                                             <th>Role</th>
+                                            <th>Permissions</th>
                                             <th class="w-1"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Maryjo Lebarree</td>
-                                            <td class="text-secondary">
-                                                Civil Engineer, Product Management
+                                        @forelse ($roles as $role)
+                                            <tr>
+                                                <td>{{ $role->name }}</td>
+                                                <td class="text-secondary">
+                                                    {{ $role->permissions_count }}
+                                                </td>
+                                                <td>
+                                                    <a href="{{ route('admin.roles.edit', $role->id) }}">Edit</a>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <td colspan="3">
+                                                No roles found
                                             </td>
-                                            <td class="text-secondary"><a href="#"
-                                                    class="text-reset">mlebarree5@unc.edu</a></td>
-                                            <td class="text-secondary">
-                                                User
-                                            </td>
-                                            <td>
-                                                <a href="#">Edit</a>
-                                            </td>
-                                        </tr>
+                                        @endforelse
+
 
                                     </tbody>
                                 </table>

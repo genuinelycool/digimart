@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\RoleStoreRequest;
+use App\Http\Requests\Admin\RoleUpdateRequest;
 use App\Services\NotificationService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -18,7 +19,9 @@ class RoleController extends Controller
      */
     public function index() : View
     {
-        return view('admin.access-management.role.index');
+        $roles = Role::withCount('permissions')->get();
+        // dd($roles);
+        return view('admin.access-management.role.index', compact('roles'));
     }
 
     /**
@@ -49,27 +52,28 @@ class RoleController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Role $role) : View
     {
-        //
+        $permissions = Permission::all()->groupBy('group_name');
+
+        return view('admin.access-management.role.edit', compact('permissions', 'role'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(RoleUpdateRequest $request, Role $role)
     {
-        //
+        $role->name = $request->role;
+        $role->save();
+
+        $role->syncPermissions($request->permissions);
+
+        NotificationService::UPDATED();
+
+        return to_route('admin.roles.index');
     }
 
     /**
