@@ -2,6 +2,8 @@
 
 const csrf = $('meta[name=csrf]').attr('content');
 
+var notyf = new Notyf();
+
 $(function () {
     $('.delete-item').on('click', function (e) {
         e.preventDefault();
@@ -27,18 +29,16 @@ $(function () {
                         _token: csrf
                     },
                     success: function (data) {
-
+                        if(data.status == 'success') {
+                            window.location.reload();
+                        }
                     },
                     error: function (xhr, status, error) {
-
+                        const errorMessage = xhr.responseJSON?.message || 'An unexpected error occurred!';
+                        notyf.error(errorMessage);
                     }
                 });
 
-                Swal.fire({
-                    title: "Deleted!",
-                    text: "Your file has been deleted.",
-                    icon: "success"
-                });
             }
         });
     });

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\RoleStoreRequest;
 use App\Http\Requests\Admin\RoleUpdateRequest;
 use App\Services\NotificationService;
+use Flasher\Prime\Notification\Notification;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -99,6 +100,8 @@ class RoleController extends Controller
 
             DB::commit();
 
+            NotificationService::DELETED();
+
             return response()->json(['status' => 'success', 'message' => __('Deleted Successfully')], 200);
 
         } catch (\Throwable $th) {
@@ -106,7 +109,7 @@ class RoleController extends Controller
 
             Log::error("an error occurred during deleting role:", ["exception" => $th]);
 
-            return response()->json(['status' => 'error', 'message' => $th], 400);
+            return response()->json(['status' => 'error', 'message' => $th->getMessage()], 400);
 
         }
 

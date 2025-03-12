@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="csrf" content="{{ csrf_token() }}" >
     <title>Dashboard</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
     <!-- CSS files -->
     <link href="{{ asset('assets/admin/css/tabler.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/admin/css/tabler-flags.min.css') }}" rel="stylesheet" />
@@ -39,6 +41,8 @@
     <!-- Libs JS -->
     <script src="{{ asset('assets/admin/js/jquery.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    
     <!-- Tabler Core -->
     <script src="{{ asset('assets/admin/js/tabler.min.js') }}" defer></script>
     <script src="{{ asset('assets/admin/js/demo.min.js') }}" defer></script>
