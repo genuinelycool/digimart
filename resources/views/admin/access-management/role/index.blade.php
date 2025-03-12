@@ -29,9 +29,9 @@
                                 <table class="table table-vcenter card-table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Role</th>
-                                            <th>Permissions</th>
-                                            <th class="w-1"></th>
+                                            <th>{{ __('Role') }}</th>
+                                            <th>{{ __('Permissions') }}</th>
+                                            <th class="w-8"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -42,13 +42,13 @@
                                                     {{ $role->permissions_count }}
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('admin.roles.edit', $role->id) }}">Edit</a>
-                                                    <a class="delete-item" href="{{ route('admin.roles.destroy', $role->id) }}">Delete</a>
+                                                    <a href="{{ route('admin.roles.edit', $role->id) }}" class="text-primary"><i class="ti ti-edit"></i></a>
+                                                    <a class="delete-item text-danger" href="{{ route('admin.roles.destroy', $role->id) }}"><i class="ti ti-trash"></i></a>
                                                 </td>
                                             </tr>
                                         @empty
                                             <td colspan="3" class="text-center">
-                                                No roles found
+                                                {{ __('No roles found') }}
                                             </td>
                                         @endforelse
 
