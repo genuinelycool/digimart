@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="csrf" content="{{ csrf_token() }}" >
     <title>Dashboard</title>
     <!-- CSS files -->
     <link href="{{ asset('assets/admin/css/tabler.min.css') }}" rel="stylesheet" />
@@ -37,9 +38,14 @@
 
     <!-- Libs JS -->
     <script src="{{ asset('assets/admin/js/jquery.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Tabler Core -->
     <script src="{{ asset('assets/admin/js/tabler.min.js') }}" defer></script>
     <script src="{{ asset('assets/admin/js/demo.min.js') }}" defer></script>
+
+    <!-- Admin JS -->
+    <script src="{{ asset('assets/admin/js/default/admin.js') }}"></script>
+
 </body>
 
 </html>

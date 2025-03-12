@@ -43,6 +43,7 @@
                                                 </td>
                                                 <td>
                                                     <a href="{{ route('admin.roles.edit', $role->id) }}">Edit</a>
+                                                    <a class="delete-item" href="{{ route('admin.roles.destroy', $role->id) }}">Delete</a>
                                                 </td>
                                             </tr>
                                         @empty
