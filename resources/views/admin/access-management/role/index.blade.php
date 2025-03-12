@@ -47,7 +47,7 @@
                                                 </td>
                                             </tr>
                                         @empty
-                                            <td colspan="3">
+                                            <td colspan="3" class="text-center">
                                                 No roles found
                                             </td>
                                         @endforelse

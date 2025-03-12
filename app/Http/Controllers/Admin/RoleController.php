@@ -7,10 +7,17 @@ use App\Http\Requests\Admin\RoleStoreRequest;
 use App\Http\Requests\Admin\RoleUpdateRequest;
 use App\Services\NotificationService;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Log\Logger;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+
+use function Illuminate\Log\log;
 
 class RoleController extends Controller
 {
@@ -79,8 +86,30 @@ class RoleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Role $role) : JsonResponse
     {
-        dd($id);
+        try {
+            DB::beginTransaction();
+
+            // remove role from user
+
+            // detach permission from role
+            $role->permissions()->detach();
+            $role->delete();
+
+            DB::commit();
+
+            return response()->json(['status' => 'success', 'message' => __('Deleted Successfully')], 200);
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+
+            Log::error("an error occurred during deleting role:", ["exception" => $th]);
+
+            return response()->json(['status' => 'error', 'message' => $th], 400);
+
+        }
+
+        return response()->json(['status' => 'error', 'message' => __('something went wrong')], 400);
     }
 }
