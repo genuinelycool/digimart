@@ -9,15 +9,13 @@
                         <h3 class="card-title">{{ __('All Roles') }}</h3>
 
                         <div class="card-actions">
-                            <a href="{{ route('admin.roles.create') }}" class="btn btn-primary">
-                                <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                            <a href="{{ route('admin.role-users.create') }}" class="btn btn-primary">
                                 <i class="ti ti-plus"></i>
                                 {{ __('Add new') }}
                             </a>
                         </div>
                     </div>
                     <div class="card-body">
-
                         <div class="card">
                             <div class="table-responsive">
                                 <table class="table table-vcenter card-table table-striped">
@@ -29,22 +27,25 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($roles as $role)
+                                        {{-- @forelse ($roles as $role)
                                             <tr>
                                                 <td>{{ $role->name }}</td>
                                                 <td class="text-secondary">
                                                     {{ $role->permissions_count }}
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('admin.roles.edit', $role->id) }}" class="text-primary"><i class="ti ti-edit"></i></a>
-                                                    <a class="delete-item text-danger" href="{{ route('admin.roles.destroy', $role->id) }}"><i class="ti ti-trash"></i></a>
+                                                    <a href="{{ route('admin.roles.edit', $role->id) }}"
+                                                        class="text-primary"><i class="ti ti-edit"></i></a>
+                                                    <a class="delete-item text-danger"
+                                                        href="{{ route('admin.roles.destroy', $role->id) }}"><i
+                                                            class="ti ti-trash"></i></a>
                                                 </td>
                                             </tr>
                                         @empty
                                             <td colspan="3" class="text-center">
                                                 {{ __('No roles found') }}
                                             </td>
-                                        @endforelse
+                                        @endforelse --}}
 
 
                                     </tbody>

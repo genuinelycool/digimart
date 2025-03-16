@@ -287,8 +287,8 @@
                     <div class="dropdown-menu">
                         <div class="dropdown-menu-columns">
                             <div class="dropdown-menu-column">
-                                <a class="dropdown-item" href="./layout-horizontal.html">
-                                    Horizontal
+                                <a class="dropdown-item" href="{{ route('admin.role-users.index') }}">
+                                    Role Users
                                 </a>
                                 <a class="dropdown-item" href="{{ route('admin.roles.index') }}">
                                     Role & Permissions
