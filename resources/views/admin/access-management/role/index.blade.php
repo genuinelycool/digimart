@@ -33,11 +33,21 @@
                                             <tr>
                                                 <td>{{ $role->name }}</td>
                                                 <td class="text-secondary">
-                                                    {{ $role->permissions_count }}
+                                                    @if ($role->name == 'super admin')
+                                                        <span
+                                                            class="badge bg-blue text-blue-fg">{{ __('All permissions') }}</span>
+                                                    @else
+                                                        {{ $role->permissions_count }}
+                                                    @endif
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('admin.roles.edit', $role->id) }}" class="text-primary"><i class="ti ti-edit"></i></a>
-                                                    <a class="delete-item text-danger" href="{{ route('admin.roles.destroy', $role->id) }}"><i class="ti ti-trash"></i></a>
+                                                    @if ($role->name !== 'super admin')
+                                                        <a href="{{ route('admin.roles.edit', $role->id) }}"
+                                                            class="text-primary"><i class="ti ti-edit"></i></a>
+                                                        <a class="delete-item text-danger"
+                                                            href="{{ route('admin.roles.destroy', $role->id) }}"><i
+                                                                class="ti ti-trash"></i></a>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @empty

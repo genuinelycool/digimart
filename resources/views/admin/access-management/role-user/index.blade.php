@@ -43,11 +43,13 @@
                                                 </td>
 
                                                 <td>
-                                                    <a href="{{ route('admin.role-users.edit', $admin->id) }}"
-                                                        class="text-primary"><i class="ti ti-edit"></i></a>
-                                                    <a class="delete-item text-danger"
-                                                        href="{{ route('admin.role-users.destroy', $admin->id) }}"><i
-                                                            class="ti ti-trash"></i></a>
+                                                    @if ($admin->roles->first()->name !== 'super admin')
+                                                        <a href="{{ route('admin.role-users.edit', $admin->id) }}"
+                                                            class="text-primary"><i class="ti ti-edit"></i></a>
+                                                        <a class="delete-item text-danger"
+                                                            href="{{ route('admin.role-users.destroy', $admin->id) }}"><i
+                                                                class="ti ti-trash"></i></a>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @empty
