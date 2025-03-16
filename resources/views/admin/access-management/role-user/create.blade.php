@@ -16,7 +16,9 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="">
+                        <form action="{{ route('admin.role-users.store') }}" method="POST">
+                            @csrf
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <x-admin.input-text name="name" :label="__('Name')" />
@@ -31,8 +33,12 @@
                                     <x-admin.input-text type="password" name="password_conformation" :label="__('Confirm Password')" />
                                 </div>
                                 <div class="col-md-12">
-                                    <x-admin.input-select name="roles" :label="__('Roles')">
-
+                                    <x-admin.input-select name="role" :label="__('Role')">
+                                        @foreach ($roles as $role)
+                                            <option value="{{ $role->name }}">
+                                                {{ $role->name }}
+                                            </option>
+                                        @endforeach
                                     </x-admin.input-select>
                                 </div>
                             </div>

@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\RoleUserStoreRequest;
+use App\Models\Admin;
+use App\Services\NotificationService;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-
+use Spatie\Permission\Models\Role;
 
 class RoleUserController extends Controller
 {
@@ -21,15 +25,27 @@ class RoleUserController extends Controller
      */
     public function create() : View
     {
-        return view('admin.access-management.role-user.create');
+        $roles = Role::all();
+        return view('admin.access-management.role-user.create', compact('roles'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(RoleUserStoreRequest $request) : RedirectResponse
     {
-        //
+        $admin = new Admin();
+        $admin->name = $request->name;
+        $admin->email = $request->email;
+        $admin->password = bcrypt($request->password);
+        $admin->save();
+
+        // Assign role to user
+        $admin->assignRole($request->role);
+
+        NotificationService::CREATED();
+
+        return to_route('admin.role-users.index');
     }
 
     /**
