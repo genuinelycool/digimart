@@ -6,7 +6,7 @@
             <div class="container-xl">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">{{ __('All Roles') }}</h3>
+                        <h3 class="card-title">{{ __('Role Users') }}</h3>
 
                         <div class="card-actions">
                             <a href="{{ route('admin.role-users.create') }}" class="btn btn-primary">

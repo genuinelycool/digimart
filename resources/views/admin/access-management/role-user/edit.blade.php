@@ -16,8 +16,9 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('admin.role-users.store') }}" method="POST">
+                        <form action="{{ route('admin.role-users.update', $admin->id) }}" method="POST">
                             @csrf
+                            @method('PUT')
 
                             <div class="row">
                                 <div class="col-md-6">
@@ -30,7 +31,7 @@
                                     <x-admin.input-text type="password" name="password" :label="__('Password')" />
                                 </div>
                                 <div class="col-md-6">
-                                    <x-admin.input-text type="password" name="password_conformation" :label="__('Confirm Password')" />
+                                    <x-admin.input-text type="password" name="password_confirmation" :label="__('Confirm Password')" />
                                 </div>
                                 <div class="col-md-12">
                                     <x-admin.input-select name="role" :label="__('Role')">
@@ -46,7 +47,7 @@
                     </div>
 
                     <div class="card-footer text-end">
-                        <x-admin.submit-button :label="__('Create')" onclick="$('form').submit();" />
+                        <x-admin.submit-button :label="__('Update')" onclick="$('form').submit();" />
                     </div>
                 </div>
             </div>

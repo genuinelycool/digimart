@@ -30,7 +30,7 @@
                                     <x-admin.input-text type="password" name="password" :label="__('Password')" />
                                 </div>
                                 <div class="col-md-6">
-                                    <x-admin.input-text type="password" name="password_conformation" :label="__('Confirm Password')" />
+                                    <x-admin.input-text type="password" name="password_confirmation" :label="__('Confirm Password')" />
                                 </div>
                                 <div class="col-md-12">
                                     <x-admin.input-select name="role" :label="__('Role')">

@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\RoleUserStoreRequest;
+use App\Http\Requests\Admin\RoleUserUpdateRequest;
 use App\Models\Admin;
 use App\Services\NotificationService;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
@@ -15,7 +18,7 @@ class RoleUserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index() : View
+    public function index(): View
     {
         $admins = Admin::all();
         return view('admin.access-management.role-user.index', compact('admins'));
@@ -24,7 +27,7 @@ class RoleUserController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create() : View
+    public function create(): View
     {
         $roles = Role::all();
         return view('admin.access-management.role-user.create', compact('roles'));
@@ -33,7 +36,7 @@ class RoleUserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(RoleUserStoreRequest $request) : RedirectResponse
+    public function store(RoleUserStoreRequest $request): RedirectResponse
     {
         $admin = new Admin();
         $admin->name = $request->name;
@@ -52,7 +55,7 @@ class RoleUserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Admin $role_user) : View
+    public function edit(Admin $role_user): View
     {
         $roles = Role::all();
         $admin = $role_user;
@@ -62,16 +65,40 @@ class RoleUserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(RoleUserUpdateRequest $request, Admin $role_user): RedirectResponse
     {
-        //
+        $admin = $role_user;
+        $admin->name = $request->name;
+        $admin->email = $request->email;
+        if ($request->has('password') && $request->filled('password')) $admin->password = bcrypt($request->password);
+        $admin->save();
+
+        // Assign role to user
+        $admin->assignRole($request->role);
+
+        NotificationService::UPDATED();
+
+        return to_route('admin.role-users.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Admin $role_user): JsonResponse
     {
-        //
+        try {
+            // remove role form user
+            foreach ($role_user->getRoleNames() as $role) {
+                $role_user->removeRole($role);
+            }
+
+            $role_user->delete();
+
+            NotificationService::DELETED();
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+
+        return response()->json(['status' => 'success', 'message' => __('Role User deleted successfully')]);
     }
 }
