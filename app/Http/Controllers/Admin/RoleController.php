@@ -62,8 +62,13 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Role $role) : View
+    public function edit(Role $role) : View|RedirectResponse
     {
+        if($role->name === 'super admin') {
+            NotificationService::ERROR();
+            return to_route('admin.roles.index');
+        }
+
         $permissions = Permission::all()->groupBy('group_name');
 
         return view('admin.access-management.role.edit', compact('permissions', 'role'));
@@ -72,8 +77,13 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(RoleUpdateRequest $request, Role $role)
+    public function update(RoleUpdateRequest $request, Role $role) : RedirectResponse
     {
+        if($role->name === 'super admin') {
+            NotificationService::ERROR();
+            return to_route('admin.roles.index');
+        }
+
         $role->name = $request->role;
         $role->save();
 
@@ -89,6 +99,12 @@ class RoleController extends Controller
      */
     public function destroy(Role $role) : JsonResponse
     {
+        if($role->name === 'super admin') {
+            NotificationService::ERROR();
+            return response()->json(['status' => 'error', 'message' => __('You cannot delete this role')], 400);
+
+        }
+
         try {
             DB::beginTransaction();
 

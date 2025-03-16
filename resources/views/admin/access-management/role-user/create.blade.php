@@ -10,7 +10,7 @@
 
                         <div class="card-actions">
                             <a href="{{ route('admin.roles.index') }}" class="btn btn-primary">
-                                <i class="ti ti-plus"></i>
+                                <i class="ti ti-arrow-narrow-left"></i>
                                 {{ __('Back') }}
                             </a>
                         </div>

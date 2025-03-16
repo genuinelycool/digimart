@@ -55,8 +55,13 @@ class RoleUserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Admin $role_user): View
+    public function edit(Admin $role_user): View|RedirectResponse
     {
+        if ($role_user->roles()->first()->name === 'super admin') {
+            NotificationService::ERROR();
+            return redirect()->back();
+        }
+
         $roles = Role::all();
         $admin = $role_user;
         return view('admin.access-management.role-user.edit', compact('admin', 'roles'));
@@ -67,6 +72,11 @@ class RoleUserController extends Controller
      */
     public function update(RoleUserUpdateRequest $request, Admin $role_user): RedirectResponse
     {
+        if ($role_user->roles()->first()->name === 'super admin') {
+            NotificationService::ERROR();
+            return redirect()->back();
+        }
+
         $admin = $role_user;
         $admin->name = $request->name;
         $admin->email = $request->email;
@@ -86,6 +96,11 @@ class RoleUserController extends Controller
      */
     public function destroy(Admin $role_user): JsonResponse
     {
+        if ($role_user->roles()->first()->name === 'super admin') {
+            NotificationService::ERROR();
+            return response()->json(['status' => 'error', 'message' => __('You cannot delete this user')], 400);
+        }
+
         try {
             // remove role form user
             foreach ($role_user->getRoleNames() as $role) {
@@ -95,10 +110,11 @@ class RoleUserController extends Controller
             $role_user->delete();
 
             NotificationService::DELETED();
+
+            return response()->json(['status' => 'success', 'message' => __('Role User deleted successfully')]);
+
         } catch (\Exception $e) {
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
         }
-
-        return response()->json(['status' => 'success', 'message' => __('Role User deleted successfully')]);
     }
 }
