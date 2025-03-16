@@ -21,23 +21,32 @@
                                 <table class="table table-vcenter card-table table-striped">
                                     <thead>
                                         <tr>
+                                            <th>{{ __('Name') }}</th>
+                                            <th>{{ __('Email') }}</th>
                                             <th>{{ __('Role') }}</th>
-                                            <th>{{ __('Permissions') }}</th>
                                             <th class="w-8"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{-- @forelse ($roles as $role)
+                                        @forelse ($admins as $admin)
                                             <tr>
-                                                <td>{{ $role->name }}</td>
+                                                <td>{{ $admin->name }}</td>
                                                 <td class="text-secondary">
-                                                    {{ $role->permissions_count }}
+                                                    {{ $admin->email }}
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('admin.roles.edit', $role->id) }}"
+                                                    @foreach ($admin->getRoleNames() as $role)
+                                                        <span class="badge bg-blue text-blue-fg">
+                                                            {{ $role }}
+                                                        </span>
+                                                    @endforeach
+                                                </td>
+
+                                                <td>
+                                                    <a href="{{ route('admin.role-users.edit', $admin->id) }}"
                                                         class="text-primary"><i class="ti ti-edit"></i></a>
                                                     <a class="delete-item text-danger"
-                                                        href="{{ route('admin.roles.destroy', $role->id) }}"><i
+                                                        href="{{ route('admin.role-users.destroy', $admin->id) }}"><i
                                                             class="ti ti-trash"></i></a>
                                                 </td>
                                             </tr>
@@ -45,7 +54,7 @@
                                             <td colspan="3" class="text-center">
                                                 {{ __('No roles found') }}
                                             </td>
-                                        @endforelse --}}
+                                        @endforelse
 
 
                                     </tbody>
