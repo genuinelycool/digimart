@@ -43,7 +43,7 @@
                                                 </td>
 
                                                 <td>
-                                                    @if ($admin->roles->first()->name !== 'super admin')
+                                                    @if ($admin->roles->first()?->name !== 'super admin')
                                                         <a href="{{ route('admin.role-users.edit', $admin->id) }}"
                                                             class="text-primary"><i class="ti ti-edit"></i></a>
                                                         <a class="delete-item text-danger"

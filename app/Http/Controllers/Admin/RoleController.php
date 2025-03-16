@@ -109,6 +109,7 @@ class RoleController extends Controller
             DB::beginTransaction();
 
             // remove role from user
+            $role->users()->detach();
 
             // detach permission from role
             $role->permissions()->detach();

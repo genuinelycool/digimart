@@ -57,7 +57,7 @@ class RoleUserController extends Controller
      */
     public function edit(Admin $role_user): View|RedirectResponse
     {
-        if ($role_user->roles()->first()->name === 'super admin') {
+        if ($role_user->roles()->first()?->name === 'super admin') {
             NotificationService::ERROR();
             return redirect()->back();
         }
@@ -72,7 +72,7 @@ class RoleUserController extends Controller
      */
     public function update(RoleUserUpdateRequest $request, Admin $role_user): RedirectResponse
     {
-        if ($role_user->roles()->first()->name === 'super admin') {
+        if ($role_user->roles()->first()?->name === 'super admin') {
             NotificationService::ERROR();
             return redirect()->back();
         }
@@ -96,7 +96,7 @@ class RoleUserController extends Controller
      */
     public function destroy(Admin $role_user): JsonResponse
     {
-        if ($role_user->roles()->first()->name === 'super admin') {
+        if ($role_user->roles()->first()?->name === 'super admin') {
             NotificationService::ERROR();
             return response()->json(['status' => 'error', 'message' => __('You cannot delete this user')], 400);
         }
