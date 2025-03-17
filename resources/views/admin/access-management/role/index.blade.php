@@ -55,8 +55,6 @@
                                                 {{ __('No roles found') }}
                                             </td>
                                         @endforelse
-
-
                                     </tbody>
                                 </table>
                             </div>
