@@ -16,8 +16,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::put('password', [ProfileController::class, 'updatePassword'])->name('password.update');
 
     /** Kyc Routes */
-    Route::get('kyc', [KycVerificationController::class, 'index'])->name('kyc.index');
-    Route::post('kyc', [KycVerificationController::class, 'store'])->name('kyc.store');
+    Route::get('kyc', [KycVerificationController::class, 'index'])->name('kyc.index')->middleware('kyc');
+    Route::post('kyc', [KycVerificationController::class, 'store'])->name('kyc.store')->middleware('kyc');
 });
 
 
