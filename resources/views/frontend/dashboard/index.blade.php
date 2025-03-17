@@ -1,6 +1,20 @@
 @extends('frontend.dashboard.layouts.master')
 
 @section('content')
+    @if (user()->kyc_status == 0 && user()->kyc->first()?->status == 'pending')
+        <div class="alert alert-important alert-warning alert-dismissible" role="alert">
+            <div class="d-flex">
+                <div class="me-2">
+                    <i class="ti ti-alert-square-rounded"></i>
+                </div>
+                <div>
+                    {{ __('Your KYC Request is Pending. You will get Notify when it will be approved') }}
+                </div>
+            </div>
+            <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>
+        </div>
+    @endif
+
     <!-- welcome balance Content Start -->
     <div class="welcome-balance mt-2 mb-40 flx-between gap-2">
         <div class="welcome-balance__left">
