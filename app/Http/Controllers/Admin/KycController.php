@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\KycVerification;
+use App\Models\User;
+use App\Services\NotificationService;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
@@ -43,6 +46,26 @@ class KycController extends Controller
         }
 
         abort(404);
+    }
+
+    function updateStatus(Request $request, KycVerification $kyc) : RedirectResponse
+    {
+        $request->validate([
+            'status' => ['required', 'in:pending,approved,rejected']
+        ]);
+
+        $kyc->status = $request->status;
+        $kyc->save();
+
+        if($kyc->status == 'approved') {
+            User::findOrFail($kyc->user_id)?->update(['kyc_status' => 1]);
+        } else {
+            User::findOrFail($kyc->user_id)?->update(['kyc_status' => 0]);
+        }
+
+        NotificationService::UPDATED();
+
+        return to_route('admin.kyc.index');
     }
 
     /**

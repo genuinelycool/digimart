@@ -72,6 +72,25 @@
                                         </td>
                                     </tr>
 
+                                    <tr>
+                                        <th>{{ __('Action') }}</th>
+                                        <td>
+                                            <div>
+                                                <form action="{{ route('admin.kyc.status', $kyc->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+
+                                                    <x-admin.input-select name="status" label="Status">
+                                                        <option @selected($kyc->status == 'pending') value="pending">{{ __('Pending') }}</option>
+                                                        <option @selected($kyc->status == 'approved') value="approved">{{ __('Approved') }}</option>
+                                                        <option @selected($kyc->status == 'rejected') value="rejected">{{ __('Rejected') }}</option>
+                                                    </x-admin.input-select>
+                                                    <x-admin.submit-button :label="__('Update')" onclick="$('form').submit();" />
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+
                                 </tbody>
                             </table>
                         </div>
