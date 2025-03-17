@@ -25,7 +25,7 @@ class KycSettingUpdateRequest extends FormRequest
             'nid_verification' => ['nullable', 'boolean'],
             'passport_verification' => ['nullable', 'boolean'],
             'auto_approve' => ['nullable', 'boolean'],
-            'kyc_status' => ['required', 'boolean'],
+            'status' => ['required', 'boolean'],
             'instructions' => ['nullable', 'string', 'max:2000']
         ];
     }

@@ -14,11 +14,14 @@ class KYCSettingController extends Controller
 {
     function index() : View
     {
-         return view('admin.kyc.kyc-setting.index');
+        $kycSetting = KycSetting::first();
+        // dd($kycSetting);
+        return view('admin.kyc.kyc-setting.index', compact('kycSetting'));
     }
 
     function update(KycSettingUpdateRequest $request) : RedirectResponse
     {
+        // dd($request->all());
         KycSetting::updateOrCreate(
             ['id' => 1],
             $request->validated()

@@ -18,27 +18,27 @@
                                     <label for="" class="form-label">Verification Types</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <x-admin.input-toggle name="nid_verification" label="NID Verification" />
+                                    <x-admin.input-toggle name="nid_verification" label="NID Verification" :checked="$kycSetting->nid_verification" />
                                 </div>
 
                                 <div class="col-md-4">
-                                    <x-admin.input-toggle name="passport_verification" label="Passport Verification" />
+                                    <x-admin.input-toggle name="passport_verification" label="Passport Verification" :checked="$kycSetting->passport_verification" />
                                 </div>
                                 <hr>
                                 <div class="col-md-12">
-                                    <x-admin.input-textarea name="instructions" label="Instructions" />
+                                    <x-admin.input-textarea name="instructions" label="Instructions" :value="$kycSetting->instructions" />
                                 </div>
 
                                 <div class="col-md-6">
                                     <x-admin.input-select name="auto_approve" label="Auto Approve">
-                                        <option value="0">Disable</option>
-                                        <option value="1">Enable</option>
+                                        <option @selected($kycSetting->auto_approve == 0) value="0">Disable</option>
+                                        <option @selected($kycSetting->auto_approve == 1) value="1">Enable</option>
                                     </x-admin.input-select>
                                 </div>
                                 <div class="col-md-6">
-                                    <x-admin.input-select name="kyc_status" label="KYC Status">
-                                        <option value="1">Active</option>
-                                        <option value="0">Inactive</option>
+                                    <x-admin.input-select name="status" label="KYC Status">
+                                        <option @selected($kycSetting->status == 1) value="1">Active</option>
+                                        <option @selected($kycSetting->status == 0) value="0">Inactive</option>
                                     </x-admin.input-select>
                                 </div>
                             </div>
