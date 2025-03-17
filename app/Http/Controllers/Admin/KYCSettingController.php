@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\KycSettingUpdateRequest;
+use App\Models\KycSetting;
+use App\Services\NotificationService;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class KYCSettingController extends Controller
@@ -11,5 +15,17 @@ class KYCSettingController extends Controller
     function index() : View
     {
          return view('admin.kyc.kyc-setting.index');
+    }
+
+    function update(KycSettingUpdateRequest $request) : RedirectResponse
+    {
+        KycSetting::updateOrCreate(
+            ['id' => 1],
+            $request->validated()
+        );
+
+        NotificationService::UPDATED();
+
+        return redirect()->back();
     }
 }
