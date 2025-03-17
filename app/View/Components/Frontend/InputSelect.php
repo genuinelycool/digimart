@@ -10,17 +10,20 @@ class InputSelect extends Component
 {
     public string $name;
     public string $label;
+    public ?bool $required;
 
     /**
      * Create a new component instance.
      */
     public function __construct(
         string $name,
-        string $label = null
+        string $label = null,
+        ?bool $required = false
     )
     {
         $this->name = $name;
         $this->label = $label ?? \Str::title(str_replace('_', ' ', $name));
+        $this->required = $required;
     }
 
     /**
