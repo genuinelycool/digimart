@@ -57,6 +57,7 @@ Route::middleware('auth:admin')->prefix('admin')->as('admin.')->group(function (
     Route::get('kyc-settings', [KYCSettingController::class, 'index'])->name('kyc-settings.index');
     Route::put('kyc-settings', [KYCSettingController::class, 'update'])->name('kyc-settings.update');
 
+    Route::get('kyc-download-document/{kyc}/{attachment_id}', [KycController::class, 'downloadDocument'])->name('kyc.download-document');
     Route::resource('kyc', KycController::class);
 
 });

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\KycVerification;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 class KycController extends Controller
 {
@@ -19,43 +21,28 @@ class KycController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(KycVerification $kyc)
     {
-        //
+        return view('admin.kyc.show', compact('kyc'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    function downloadDocument(int $id, int $index)
     {
-        //
-    }
+        $kyc = KycVerification::findOrFail($id);
+        $attachmentPath = null;
+        foreach(json_decode($kyc->documents) as $key => $value) {
+            if($key == $index) {
+                $attachmentPath = $value;
+            }
+        }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
+        if(Storage::exists($attachmentPath)) {
+            return Storage::download($attachmentPath);
+        }
+
+        abort(404);
     }
 
     /**
