@@ -40,17 +40,21 @@
                     <!-- Session Status -->
 
                     <div class="wsus__login_area">
-                        <h2>{{ __('Welcome back!') }}</h2>
-                        <p>{{ __('sign in to continue') }}</p>
-                        <form method="POST" action="{{ route('login') }}">
+                        <h4>{{ __('KYC Verification') }}</h4>
+                        <p>{{ $kycSetting->instructions }}</p>
+                        <form action="{{ route('kyc.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="row">
 
                                 <div class="col-md-12">
                                     <x-frontend.input-select name="document_type" :label="__('Document Type')" :required="true">
-                                        <option value="nid">NID</option>
-                                        <option value="passport">Passport</option>
+                                        @if ($kycSetting->nid_verification == 1)
+                                            <option value="nid">NID</option>
+                                        @endif
+                                        @if ($kycSetting->passport_verification == 1)
+                                            <option value="passport">Passport</option>
+                                        @endif
                                     </x-frontend.input-select>
                                 </div>
 
@@ -59,8 +63,17 @@
                                 </div>
 
                                 <div class="col-md-12">
-                                    <x-frontend.input-text type="file" multiple name="documents[]" :label="__('Attach Documents')" :required="true" />
+                                    <x-frontend.input-text type="file" multiple name="documents[]" :label="__('Attach Documents')"
+                                        :required="true" />
                                 </div>
+                                {{-- @dump($errors) --}}
+                                @if ($errors->has('documents'))
+                                    <p class="text-danger mb-0">{{ $errors->first('documents') }}</p>
+                                @elseif ($errors->has('documents.*'))
+                                    @foreach ($errors->get('documents.*') as $error)
+                                        <p class="text-danger mb-0">{{ $error[0] }}</p>
+                                    @endforeach
+                                @endif
 
                                 <div class="col-xl-12">
                                     <div class="wsus__login_imput">

@@ -10,5 +10,6 @@
             <option value="">{{ __('Select') }}</option>
             {{ $slot }}
         </select>
+        <x-input-error :message="$errors->first($name)" />
     </div>
 </div>
