@@ -6,12 +6,11 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class InputTextarea extends Component
+class InputToggle extends Component
 {
     public string $name;
     public string $label;
-    public ?string $value;
-    public ?string $placeholder;
+    public ?bool $checked;
 
     /**
      * Create a new component instance.
@@ -19,13 +18,12 @@ class InputTextarea extends Component
     public function __construct(
         string $name,
         string $label = null,
-        ?string $value = null,
-        ?string $placeholder = null
-    ) {
+        bool $checked = false
+    )
+    {
         $this->name = $name;
         $this->label = $label ?? \Str::title(str_replace('_', ' ', $name));
-        $this->value = old($name, $value);
-        $this->placeholder = $placeholder;
+        $this->checked = old($name, $checked);
     }
 
     /**
@@ -33,6 +31,6 @@ class InputTextarea extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.admin.input-textarea');
+        return view('components.admin.input-toggle');
     }
 }
