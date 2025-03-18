@@ -7,13 +7,13 @@
             <form action="{{ route('admin.settings.general.update') }}" method="POST">
                 @csrf
                 @method('PUT')
-                
+
                 <div class="row">
                     <div class="col-md-6">
-                        <x-admin.input-text name="site_name" label="Site Name" />
+                        <x-admin.input-text name="site_name" label="Site Name" :value="config('settings.site_name')" />
                     </div>
                     <div class="col-md-6">
-                        <x-admin.input-text name="site_email" label="Site Email" />
+                        <x-admin.input-text name="site_email" label="Site Email" :value="config('settings.site_email')" />
                     </div>
                 </div>
             </form>
