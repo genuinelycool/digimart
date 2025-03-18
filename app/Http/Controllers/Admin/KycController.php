@@ -20,14 +20,14 @@ class KycController extends Controller
      */
     public function index(): View
     {
-        $kycRequests = KycVerification::with('user')->paginate(25);
+        $kycRequests = KycVerification::with('user')->latest()->paginate(25);
         return view('admin.kyc.index', compact('kycRequests'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(KycVerification $kyc)
+    public function show(KycVerification $kyc) : View
     {
         return view('admin.kyc.show', compact('kyc'));
     }
@@ -83,13 +83,5 @@ class KycController extends Controller
         NotificationService::UPDATED();
 
         return to_route('admin.kyc.index');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

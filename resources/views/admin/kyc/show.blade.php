@@ -6,13 +6,10 @@
             <div class="container-xl">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">{{ __('All Roles') }}</h3>
+                        <h3 class="card-title">{{ __('KYC Details') }}</h3>
 
                         <div class="card-actions">
-                            <a href="{{ route('admin.roles.create') }}" class="btn btn-primary">
-                                <i class="ti ti-plus"></i>
-                                {{ __('Go Back') }}
-                            </a>
+                            <x-admin.back-button :href="route('admin.kyc.index')" />
                         </div>
                     </div>
                     <div class="card-body">
@@ -89,8 +86,8 @@
                                                             {{ __('Rejected') }}</option>
                                                     </x-admin.input-select>
 
-                                                    <div class="d-none" id="reason">
-                                                        <x-admin.input-textarea name="reason" :label="__('Reason')" />
+                                                    <div class="{{ $kyc->status == 'rejected' ? '' : 'd-none' }}" id="reason">
+                                                        <x-admin.input-textarea name="reason" :label="__('Reason')" :value="$kyc->reject_reason" />
                                                     </div>
 
                                                     <x-admin.submit-button :label="__('Update')"

@@ -47,9 +47,7 @@
                                             <td>
                                                 <a href="{{ route('admin.kyc.show', $request->id) }}"
                                                     class="text-primary"><i class="ti ti-eye"></i></a>
-                                                <a class="delete-item text-danger"
-                                                    href="{{ route('admin.kyc.destroy', $request->id) }}"><i
-                                                        class="ti ti-trash"></i></a>
+
                                             </td>
                                         </tr>
                                         @empty
@@ -63,7 +61,7 @@
                         </div>
 
                         <div class="card-footer text-end">
-
+                            {{ $kycRequests->links() }}
                         </div>
                     </div>
                 </div>
