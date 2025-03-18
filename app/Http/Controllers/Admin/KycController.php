@@ -63,8 +63,8 @@ class KycController extends Controller
             MailSenderService::sendMail(
                 name: $kyc->user->name,
                 toMail: $kyc->user->email,
-                subject: 'Your KYC has been approved',
-                content: 'We are happy to inform you that your KYC has been approved.',
+                subject: __('Your KYC has been approved'),
+                content: __('We are happy to inform you that your KYC has been approved.'),
             );
         } else {
             User::findOrFail($kyc->user_id)?->update(['kyc_status' => 0]);
