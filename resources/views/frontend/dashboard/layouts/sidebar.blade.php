@@ -26,6 +26,18 @@
                     <span class="text">Profile</span>
                 </a>
             </li>
+
+            @if(isAuthor())
+            <li class="sidebar-list__item">
+                <a href="setting.html" class="sidebar-list__link">
+                    <span class="sidebar-list__icon">
+                        <i class="ti ti-settings"></i>
+                    </span>
+                    <span class="text">Products</span>
+                </a>
+            </li>
+            @endif
+
             <li class="sidebar-list__item">
                 <a href="setting.html" class="sidebar-list__link">
                     <span class="sidebar-list__icon">

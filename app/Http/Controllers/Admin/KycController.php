@@ -69,7 +69,7 @@ class KycController extends Controller
                 content: __('We are happy to inform you that your KYC has been approved.'),
             );
         } elseif ($kyc->status == 'rejected') {
-            User::findOrFail($kyc->user_id)?->update(['kyc_status' => 0]);
+            User::findOrFail($kyc->user_id)?->update(['kyc_status' => 0, 'user_type' => 'user']);
             MailSenderService::sendMail(
                 name: $kyc->user->name,
                 toMail: $kyc->user->email,

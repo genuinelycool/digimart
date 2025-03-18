@@ -18,7 +18,11 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     /** Kyc Routes */
     Route::get('kyc', [KycVerificationController::class, 'index'])->name('kyc.index')->middleware('kyc');
     Route::post('kyc', [KycVerificationController::class, 'store'])->name('kyc.store')->middleware('kyc');
+
+    // Route::get('test-for-author', function () {
+    //     dd('This page is for author');
+    // })->middleware('is_author');
 });
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
