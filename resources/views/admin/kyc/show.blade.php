@@ -80,12 +80,21 @@
                                                     @csrf
                                                     @method('PUT')
 
-                                                    <x-admin.input-select name="status" label="Status">
-                                                        <option @selected($kyc->status == 'pending') value="pending">{{ __('Pending') }}</option>
-                                                        <option @selected($kyc->status == 'approved') value="approved">{{ __('Approved') }}</option>
-                                                        <option @selected($kyc->status == 'rejected') value="rejected">{{ __('Rejected') }}</option>
+                                                    <x-admin.input-select name="status" label="Status" id="status">
+                                                        <option @selected($kyc->status == 'pending') value="pending">
+                                                            {{ __('Pending') }}</option>
+                                                        <option @selected($kyc->status == 'approved') value="approved">
+                                                            {{ __('Approved') }}</option>
+                                                        <option @selected($kyc->status == 'rejected') value="rejected">
+                                                            {{ __('Rejected') }}</option>
                                                     </x-admin.input-select>
-                                                    <x-admin.submit-button :label="__('Update')" onclick="$('form').submit();" />
+
+                                                    <div class="d-none" id="reason">
+                                                        <x-admin.input-textarea name="reason" :label="__('Reason')" />
+                                                    </div>
+
+                                                    <x-admin.submit-button :label="__('Update')"
+                                                        onclick="$('form').submit();" />
                                                 </form>
                                             </div>
                                         </td>
@@ -105,3 +114,20 @@
     </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        'use strict';
+        $(function() {
+
+            $('#status').on('change', function() {
+                let status = $(this).val();
+                if (status == 'rejected') {
+                    $('#reason').removeClass('d-none');
+                } else {
+                    $('#reason').addClass('d-none');
+                }
+            });
+        })
+    </script>
+@endpush

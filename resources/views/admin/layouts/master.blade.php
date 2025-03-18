@@ -31,6 +31,7 @@
             font-feature-settings: "cv03", "cv04", "cv11";
         }
     </style>
+    @stack('styles')
 </head>
 
 <body>
@@ -54,6 +55,8 @@
 
     <!-- Admin JS -->
     <script src="{{ asset('assets/admin/js/default/admin.js') }}"></script>
+
+    @stack('scripts')
 
 </body>
 

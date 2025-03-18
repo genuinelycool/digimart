@@ -18,7 +18,7 @@ class KycController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index() : View
+    public function index(): View
     {
         $kycRequests = KycVerification::with('user')->paginate(25);
         return view('admin.kyc.index', compact('kycRequests'));
@@ -36,35 +36,45 @@ class KycController extends Controller
     {
         $kyc = KycVerification::findOrFail($id);
         $attachmentPath = null;
-        foreach(json_decode($kyc->documents) as $key => $value) {
-            if($key == $index) {
+        foreach (json_decode($kyc->documents) as $key => $value) {
+            if ($key == $index) {
                 $attachmentPath = $value;
             }
         }
 
-        if(Storage::exists($attachmentPath)) {
+        if (Storage::exists($attachmentPath)) {
             return Storage::download($attachmentPath);
         }
 
         abort(404);
     }
 
-    function updateStatus(Request $request, KycVerification $kyc) : RedirectResponse
+    function updateStatus(Request $request, KycVerification $kyc): RedirectResponse
     {
         $request->validate([
-            'status' => ['required', 'in:pending,approved,rejected']
+            'status' => ['required', 'in:pending,approved,rejected'],
+            'reason' => ['nullable', 'string', 'max:500']
         ]);
 
         $kyc->status = $request->status;
+        $kyc->reject_reason = $request->reason;
         $kyc->save();
 
-        if($kyc->status == 'approved') {
-            User::findOrFail($kyc->user_id)?->update(['kyc_status' => 1]);
+        if ($kyc->status == 'approved') {
+            User::findOrFail($kyc->user_id)?->update(['kyc_status' => 1, 'user_type' => 'author']);
             MailSenderService::sendMail(
                 name: $kyc->user->name,
                 toMail: $kyc->user->email,
                 subject: __('Your KYC has been approved'),
                 content: __('We are happy to inform you that your KYC has been approved.'),
+            );
+        } elseif ($kyc->status == 'rejected') {
+            User::findOrFail($kyc->user_id)?->update(['kyc_status' => 0]);
+            MailSenderService::sendMail(
+                name: $kyc->user->name,
+                toMail: $kyc->user->email,
+                subject: __('Your KYC has been rejected'),
+                content: $kyc->reject_reason ?? __('We are sorry to inform you that your KYC has been rejected.'),
             );
         } else {
             User::findOrFail($kyc->user_id)?->update(['kyc_status' => 0]);

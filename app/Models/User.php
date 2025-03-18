@@ -23,6 +23,7 @@ class User extends Authenticatable
         'email',
         'password',
         'kyc_status',
+        'user_type'
     ];
 
     /**
