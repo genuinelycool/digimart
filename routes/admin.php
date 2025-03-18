@@ -63,6 +63,7 @@ Route::middleware('auth:admin')->prefix('admin')->as('admin.')->group(function (
     Route::resource('kyc', KycController::class);
 
     /** Settings Routes */
-    Route::resource('settings', SettingController::class);
+    Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
+    Route::put('general-settings', [SettingController::class, 'updateGeneralSetting'])->name('settings.general.update');
 
 });
