@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\KycVerification;
 use App\Models\User;
+use App\Services\MailSenderService;
 use App\Services\NotificationService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -59,6 +60,12 @@ class KycController extends Controller
 
         if($kyc->status == 'approved') {
             User::findOrFail($kyc->user_id)?->update(['kyc_status' => 1]);
+            MailSenderService::sendMail(
+                name: $kyc->user->name,
+                toMail: $kyc->user->email,
+                subject: 'Your KYC has been approved',
+                content: 'We are happy to inform you that your KYC has been approved.',
+            );
         } else {
             User::findOrFail($kyc->user_id)?->update(['kyc_status' => 0]);
         }
