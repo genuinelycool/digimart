@@ -9,7 +9,7 @@
                         <h3 class="card-title">{{ __('All Categories') }}</h3>
 
                         <div class="card-actions">
-                            <a href="{{ route('admin.roles.create') }}" class="btn btn-primary">
+                            <a href="{{ route('admin.categories.create') }}" class="btn btn-primary">
                                 <i class="ti ti-plus"></i>
                                 {{ __('Add new') }}
                             </a>
@@ -47,7 +47,7 @@
                                 </table>
                             </div>
                         </div>
-                        
+
                     </div>
 
                     <div class="card-footer text-end">

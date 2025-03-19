@@ -20,6 +20,7 @@
     <link href="{{ asset('assets/admin/css/tabler-payments.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/admin/css/tabler-vendors.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/admin/css/demo.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/admin/css/bootstrap-tagsinput.css') }}" rel="stylesheet" />
     <style>
         @import url('https://rsms.me/inter/inter.css');
 
@@ -48,6 +49,7 @@
     <script src="{{ asset('assets/admin/js/jquery.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    <script src="{{ asset('assets/admin/js/bootstrap-tagsinput.min.js') }}"></script>
 
     <!-- Tabler Core -->
     <script src="{{ asset('assets/admin/js/tabler.min.js') }}" defer></script>
