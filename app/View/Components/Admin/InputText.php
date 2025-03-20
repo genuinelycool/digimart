@@ -13,6 +13,7 @@ class InputText extends Component
     public string $label;
     public ?string $value;
     public ?string $placeholder;
+    public ?string $hint;
 
     /**
      * Create a new component instance.
@@ -22,7 +23,8 @@ class InputText extends Component
         string $name,
         string $label = null,
         string $value = null,
-        string $placeholder = null
+        string $placeholder = null,
+        string $hint = null
     )
     {
         $this->type = $type;
@@ -30,6 +32,7 @@ class InputText extends Component
         $this->label = $label ?? \Str::title(str_replace('_', ' ', $name));
         $this->value = old($name, $value);
         $this->placeholder = $placeholder;
+        $this->hint = $hint;
     }
 
     /**

@@ -1,5 +1,9 @@
 @extends('admin.layouts.master')
 
+@push('styles')
+<link rel="stylesheet" href="{{ asset('assets/admin/css/ez-icon-picker.css') }}">
+@endpush
+
 @section('content')
     <div class="page-wrapper">
         <div class="page-body">
@@ -15,11 +19,18 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label class="form-label">{{ __('Category Icon') }}</label>
+                                    <div class="icon-picker" data-name="icon"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
                                 <x-admin.input-text name="name" :label="__('Category Name')" />
                             </div>
 
                             <div class="col-md-12">
-                                <x-admin.input-text name="file_types[]" :label="__('File Types')" data-role="tagsinput" />
+                                <x-admin.input-text name="file_types[]" :label="__('File Types')" data-role="tagsinput" :hint="__('The allowed files to be uploaded as main file, like (ZIP, MP4, MP3, PNG, etc)')" />
                             </div>
                         </div>
 
@@ -36,3 +47,16 @@
 
     </script>
 @endsection
+
+@push('scripts')
+<script src="{{ asset('assets/admin/js/ez-icon-picker.iife.js') }}"></script>
+<script>
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+        new EzIconPicker({
+            selector: '.icon-picker'
+        });
+
+    });
+</script>
+@endpush

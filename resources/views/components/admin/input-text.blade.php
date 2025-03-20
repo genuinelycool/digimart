@@ -5,5 +5,9 @@
         {{ $attributes->class(['form-control', 'is-invalid' => $errors->has($name)]) }}
         placeholder="{{ $placeholder }}"
         value="{{ $value }}" name="{{ $name }}" />
+
+    @if($hint)
+        <span class="form-hint">{{ $hint }}</span>
+    @endif
     <x-input-error :message="$errors->first($name)" />
 </div>

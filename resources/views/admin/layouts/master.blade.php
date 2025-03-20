@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.21.0/tabler-icons.min.css"
         integrity="sha512-XrgoTBs7P5YtpkeKqKOKkruURsawIaRrhe8QrcWeMnFeyRZiOcRNjBAX+AQeXOvx9/9fSY32dVct1PccRoCICQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+        
     <!-- CSS files -->
     <link href="{{ asset('assets/admin/css/tabler.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/admin/css/tabler-flags.min.css') }}" rel="stylesheet" />
@@ -21,6 +21,7 @@
     <link href="{{ asset('assets/admin/css/tabler-vendors.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/admin/css/demo.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/admin/css/bootstrap-tagsinput.css') }}" rel="stylesheet" />
+    @stack('styles')
     <style>
         @import url('https://rsms.me/inter/inter.css');
 
@@ -32,7 +33,7 @@
             font-feature-settings: "cv03", "cv04", "cv11";
         }
     </style>
-    @stack('styles')
+
 </head>
 
 <body>
