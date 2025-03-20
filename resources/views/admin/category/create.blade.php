@@ -17,27 +17,28 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="mb-3">
-                                    <label class="form-label">{{ __('Category Icon') }}</label>
-                                    <div class="icon-picker" data-name="icon"></div>
+                        <form action="{{ route('admin.categories.store') }}" method="POST">
+                            @csrf
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <x-admin.input-icon name="icon" :label="__('Category Icon')" />
+                                </div>
+
+                                <div class="col-md-12">
+                                    <x-admin.input-text name="name" :label="__('Category Name')" />
+                                </div>
+
+                                <div class="col-md-12">
+                                    <x-admin.input-text name="file_types" :label="__('File Types')" data-role="tagsinput" :hint="__('The allowed files to be uploaded as main file, like (ZIP, MP4, MP3, PNG, etc)')" />
                                 </div>
                             </div>
-
-                            <div class="col-md-12">
-                                <x-admin.input-text name="name" :label="__('Category Name')" />
-                            </div>
-
-                            <div class="col-md-12">
-                                <x-admin.input-text name="file_types[]" :label="__('File Types')" data-role="tagsinput" :hint="__('The allowed files to be uploaded as main file, like (ZIP, MP4, MP3, PNG, etc)')" />
-                            </div>
-                        </div>
+                        </form>
 
                     </div>
 
                     <div class="card-footer text-end">
-
+                        <x-admin.submit-button :label="__('Create')" onclick="$('form').submit();" />
                     </div>
                 </div>
             </div>
