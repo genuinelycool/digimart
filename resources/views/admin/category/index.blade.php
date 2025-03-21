@@ -29,7 +29,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($categories as $category)
+                                        @forelse ($categories as $category)
                                         <tr>
                                             <td><i class="{{ $category->icon }}"></i></td>
                                             <td>
@@ -49,7 +49,11 @@
                                                         class="ti ti-trash"></i></a>
                                             </td>
                                         </tr>
-                                        @endforeach
+                                        @empty
+                                            <td colspan="5" class="text-center text-secondary">
+                                                {{ __('No categories found') }}
+                                            </td>
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>
