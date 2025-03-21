@@ -21,28 +21,35 @@
                                 <table class="table table-vcenter card-table">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Title</th>
-                                            <th>Email</th>
-                                            <th>Role</th>
-                                            <th class="w-1"></th>
+                                            <th>{{ __('Icon') }}</th>
+                                            <th>{{ __('Category Name') }}</th>
+                                            <th>{{ __('File Types') }}</th>
+                                            <th>{{ __('Date') }}</th>
+                                            <th class="w-8"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($categories as $category)
                                         <tr>
-                                            <td></td>
+                                            <td><i class="{{ $category->icon }}"></i></td>
                                             <td>
-
-                                            </td>
-                                            <td><a href="#" class="text-reset"></a></td>
-                                            <td>
-
+                                                {{ $category->name }}
                                             </td>
                                             <td>
-                                                <a href="#">Edit</a>
+                                                @foreach ($category->file_types as $file_type)
+                                                    <span class="badge bg-primary text-primary-fg">{{ $file_type }}</span>
+                                                @endforeach
+                                            </td>
+                                            <td>{{ formatDate($category->created_at) }}</td>
+                                            <td>
+                                                <a href="{{ route('admin.categories.edit', $category->id) }}"
+                                                    class="text-primary"><i class="ti ti-edit"></i></a>
+                                                <a class="delete-item text-danger"
+                                                    href="{{ route('admin.categories.destroy', $category->id) }}"><i
+                                                        class="ti ti-trash"></i></a>
                                             </td>
                                         </tr>
-
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

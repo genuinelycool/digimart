@@ -25,3 +25,11 @@ if(!function_exists('isAuthor')) {
         return user()->user_type == 'author' && user()->kyc_status == 1 ? true : false;
     }
 }
+
+/** format date */
+if(!function_exists('formatDate')) {
+    function formatDate(String $date) : string
+    {
+        return date('M d, Y', strtotime($date));
+    }
+}
