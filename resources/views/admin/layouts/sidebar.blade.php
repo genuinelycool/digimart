@@ -290,8 +290,9 @@
                                 <a class="dropdown-item" href="{{ route('admin.categories.index') }}">
                                     {{ __('Main Categories') }}
                                 </a>
-                                <a class="dropdown-item" href="{{ route('admin.roles.index') }}">
-                                    Role & Permissions
+
+                                <a class="dropdown-item" href="{{ route('admin.sub-categories.index') }}">
+                                    {{ __('Sub Categories') }}
                                 </a>
                             </div>
                         </div>

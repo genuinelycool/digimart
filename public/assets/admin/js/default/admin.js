@@ -4,6 +4,10 @@ const csrf = $('meta[name=csrf]').attr('content');
 
 var notyf = new Notyf();
 
+$(document).ready(function() {
+    $('.select_2').select2();
+});
+
 $(function () {
     $('.delete-item').on('click', function (e) {
         e.preventDefault();

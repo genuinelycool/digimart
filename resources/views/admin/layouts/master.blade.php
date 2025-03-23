@@ -13,7 +13,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.21.0/tabler-icons.min.css"
         integrity="sha512-XrgoTBs7P5YtpkeKqKOKkruURsawIaRrhe8QrcWeMnFeyRZiOcRNjBAX+AQeXOvx9/9fSY32dVct1PccRoCICQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-        
+    <!-- Select 2 -->
+    <link rel="stylesheet" href="{{ asset('assets/frontend/css/select2.min.css') }}">
+
     <!-- CSS files -->
     <link href="{{ asset('assets/admin/css/tabler.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/admin/css/tabler-flags.min.css') }}" rel="stylesheet" />
@@ -51,6 +53,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
     <script src="{{ asset('assets/admin/js/bootstrap-tagsinput.min.js') }}"></script>
+    <!-- select 2  -->
+    <script src="{{ asset('assets/frontend/js/select2.min.js') }}"></script>
 
     <!-- Tabler Core -->
     <script src="{{ asset('assets/admin/js/tabler.min.js') }}" defer></script>
