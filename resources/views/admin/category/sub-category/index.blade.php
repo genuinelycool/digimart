@@ -21,47 +21,31 @@
                                 <table class="table table-vcenter card-table">
                                     <thead>
                                         <tr>
-                                            <th>{{ __('Icon') }}</th>
                                             <th>{{ __('Category Name') }}</th>
-                                            <th>{{ __('File Types') }}</th>
-                                            <th>{{ __('Show At Nav') }}</th>
-                                            <th>{{ __('Show At Featured') }}</th>
+                                            <th>{{ __('Parent Category') }}</th>
                                             <th>{{ __('Date') }}</th>
                                             <th class="w-8"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{-- @forelse ($categories as $category)
+
+                                        @forelse ($subCategories as $subCategory)
+                                        {{-- @dd($subcategory) --}}
                                         <tr>
-                                            <td><i class="{{ $category->icon }}"></i></td>
                                             <td>
-                                                {{ $category->name }}
+                                                {{ $subCategory->name }}
                                             </td>
+
                                             <td>
-                                                @foreach ($category->file_types as $file_type)
-                                                    <span class="badge bg-primary text-primary-fg">{{ $file_type }}</span>
-                                                @endforeach
+                                                {{ $subCategory->category->name }}
                                             </td>
+
+                                            <td>{{ formatDate($subCategory->created_at) }}</td>
                                             <td>
-                                                @if ($category->show_at_nav)
-                                                    <span class="badge bg-green text-green-fg">{{ __('Yes') }}</span>
-                                                @else
-                                                    <span class="badge bg-red text-red-fg">{{ __('No') }}</span>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if ($category->show_at_featured)
-                                                    <span class="badge bg-green text-green-fg">{{ __('Yes') }}</span>
-                                                @else
-                                                    <span class="badge bg-red text-red-fg">{{ __('No') }}</span>
-                                                @endif
-                                            </td>
-                                            <td>{{ formatDate($category->created_at) }}</td>
-                                            <td>
-                                                <a href="{{ route('admin.categories.edit', $category->id) }}"
+                                                <a href="{{ route('admin.categories.edit', $subCategory->id) }}"
                                                     class="text-primary"><i class="ti ti-edit"></i></a>
                                                 <a class="delete-item text-danger"
-                                                    href="{{ route('admin.categories.destroy', $category->id) }}"><i
+                                                    href="{{ route('admin.categories.destroy', $subCategory->id) }}"><i
                                                         class="ti ti-trash"></i></a>
                                             </td>
                                         </tr>
@@ -69,7 +53,7 @@
                                             <td colspan="5" class="text-center text-secondary">
                                                 {{ __('No categories found') }}
                                             </td>
-                                        @endforelse --}}
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>
