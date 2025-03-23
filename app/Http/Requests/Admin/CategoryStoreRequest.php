@@ -24,7 +24,9 @@ class CategoryStoreRequest extends FormRequest
         return [
             'icon' => ['required', 'string', 'max:255'],
             'name' => ['required', 'string', 'max:100', 'unique:categories,name'],
-            'file_types' => ['required', 'string', 'max:255']
+            'file_types' => ['required', 'string', 'max:255'],
+            'show_at_nav' => ['nullable', 'boolean'],
+            'show_at_featured' => ['nullable', 'boolean'],
         ];
     }
 }

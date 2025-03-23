@@ -24,6 +24,8 @@
                                             <th>{{ __('Icon') }}</th>
                                             <th>{{ __('Category Name') }}</th>
                                             <th>{{ __('File Types') }}</th>
+                                            <th>{{ __('Show At Nav') }}</th>
+                                            <th>{{ __('Show At Featured') }}</th>
                                             <th>{{ __('Date') }}</th>
                                             <th class="w-8"></th>
                                         </tr>
@@ -39,6 +41,20 @@
                                                 @foreach ($category->file_types as $file_type)
                                                     <span class="badge bg-primary text-primary-fg">{{ $file_type }}</span>
                                                 @endforeach
+                                            </td>
+                                            <td>
+                                                @if ($category->show_at_nav)
+                                                    <span class="badge bg-green text-green-fg">{{ __('Yes') }}</span>
+                                                @else
+                                                    <span class="badge bg-red text-red-fg">{{ __('No') }}</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($category->show_at_featured)
+                                                    <span class="badge bg-green text-green-fg">{{ __('Yes') }}</span>
+                                                @else
+                                                    <span class="badge bg-red text-red-fg">{{ __('No') }}</span>
+                                                @endif
                                             </td>
                                             <td>{{ formatDate($category->created_at) }}</td>
                                             <td>

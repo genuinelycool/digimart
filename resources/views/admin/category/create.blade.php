@@ -32,6 +32,14 @@
                                 <div class="col-md-12">
                                     <x-admin.input-text name="file_types" :label="__('File Types')" data-role="tagsinput" :hint="__('The allowed files to be uploaded as main file, like (ZIP, MP4, MP3, PNG, etc)')" />
                                 </div>
+
+                                <hr>
+                                <div class="col-4">
+                                    <x-admin.input-toggle name="show_at_nav" :label="__('Show at nav')" />
+                                </div>
+                                <div class="col-4">
+                                    <x-admin.input-toggle name="show_at_featured" :label="__('Show at featured')" />
+                                </div>
                             </div>
                         </form>
 
