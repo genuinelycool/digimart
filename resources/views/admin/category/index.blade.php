@@ -78,7 +78,7 @@
                     </div>
 
                     <div class="card-footer text-end">
-
+                        {{ $categories->links() }}
                     </div>
                 </div>
             </div>

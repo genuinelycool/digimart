@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\SubCategoryStoreRequest;
+use App\Http\Requests\Admin\SubCategoryUpdateRequest;
 use App\Models\Category;
 use App\Models\SubCategory;
 use App\Services\NotificationService;
@@ -48,34 +49,42 @@ class SubCategoryController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(SubCategory $subCategory) : View
     {
-        //
+        $categories = Category::all();
+        return view('admin.category.sub-category.edit', compact('subCategory', 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(SubCategoryUpdateRequest $request, SubCategory $subCategory) : RedirectResponse
     {
-        //
+        $subCategory->name = $request->name;
+        $subCategory->category_id = $request->category;
+        $subCategory->save();
+
+        NotificationService::UPDATED();
+
+        return to_route('admin.sub-categories.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(SubCategory $subCategory)
     {
-        //
+        try {
+            $subCategory->delete();
+
+            NotificationService::DELETED();
+
+            return response()->json(['status' => 'success', 'message' => __('Deleted successfully')], 200);
+
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
     }
 }

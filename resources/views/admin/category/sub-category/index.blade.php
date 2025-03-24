@@ -42,10 +42,10 @@
 
                                             <td>{{ formatDate($subCategory->created_at) }}</td>
                                             <td>
-                                                <a href="{{ route('admin.categories.edit', $subCategory->id) }}"
+                                                <a href="{{ route('admin.sub-categories.edit', $subCategory->id) }}"
                                                     class="text-primary"><i class="ti ti-edit"></i></a>
                                                 <a class="delete-item text-danger"
-                                                    href="{{ route('admin.categories.destroy', $subCategory->id) }}"><i
+                                                    href="{{ route('admin.sub-categories.destroy', $subCategory->id) }}"><i
                                                         class="ti ti-trash"></i></a>
                                             </td>
                                         </tr>
@@ -62,7 +62,7 @@
                     </div>
 
                     <div class="card-footer text-end">
-
+                        {{ $subCategories->links() }}
                     </div>
                 </div>
             </div>

@@ -9,7 +9,7 @@
                         <h3 class="card-title">{{ __('Create Category') }}</h3>
 
                         <div class="card-actions">
-                            <x-admin.back-button :href="route('admin.categories.index')" />
+                            <x-admin.back-button :href="route('admin.sub-categories.index')" />
                         </div>
                     </div>
                     <div class="card-body">
