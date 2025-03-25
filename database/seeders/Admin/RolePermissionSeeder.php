@@ -32,9 +32,16 @@ class RolePermissionSeeder extends Seeder
     function createDefaultPermissions() : void
     {
         Permission::insert([
-            'name' => 'review products',
-            'guard_name' => 'admin',
-            'group_name' => 'Review Products'
+            [
+                'name' => 'review products',
+                'guard_name' => 'admin',
+                'group_name' => 'Review Products'
+            ],
+            [
+                'name' => 'manage categories',
+                'guard_name' => 'admin',
+                'group_name' => 'Category Module'
+            ],
         ]);
     }
 }
