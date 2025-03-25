@@ -66,7 +66,7 @@
                                             </td>
                                         </tr>
                                         @empty
-                                            <td colspan="5" class="text-center text-secondary">
+                                            <td colspan="6" class="text-center text-secondary">
                                                 {{ __('No categories found') }}
                                             </td>
                                         @endforelse

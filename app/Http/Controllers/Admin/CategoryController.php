@@ -81,6 +81,10 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         try {
+            if ($category->subCategories()->exists()) {
+                return response()->json(['status' => 'error', 'message' => __('This category has sub categories and can not be deleted')], 402);
+            }
+
             $category->delete();
 
             NotificationService::DELETED();
