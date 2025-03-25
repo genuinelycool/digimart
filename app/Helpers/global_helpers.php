@@ -33,3 +33,17 @@ if(!function_exists('formatDate')) {
         return date('M d, Y', strtotime($date));
     }
 }
+
+/** check permissions */
+if(!function_exists('canAccess')) {
+    function canAccess(array $permissions) : bool
+    {
+        $permission = auth()->guard('admin')->user()->hasAnyPermission($permissions);
+        $superAdmin = auth()->guard('admin')->user()->hasRole('super admin');
+
+        if($permission || $superAdmin) {
+            return true;
+        }
+        return false;
+    }
+}

@@ -261,6 +261,7 @@
                     </div>
                 </li>
 
+                @if(canAccess(['manage categories']))
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown"
                         data-bs-auto-close="false" role="button" aria-expanded="true">
@@ -298,6 +299,7 @@
                         </div>
                     </div>
                 </li>
+                @endif
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown"
