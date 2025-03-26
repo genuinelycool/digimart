@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\ItemController;
 use App\Http\Controllers\Frontend\KycVerificationController;
 use App\Http\Controllers\Frontend\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -19,9 +20,17 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('kyc', [KycVerificationController::class, 'index'])->name('kyc.index')->middleware('kyc');
     Route::post('kyc', [KycVerificationController::class, 'store'])->name('kyc.store')->middleware('kyc');
 
-    // Route::get('test-for-author', function () {
-    //     dd('This page is for author');
-    // })->middleware('is_author');
+    /** Author Route Group */
+    Route::group(['middleware' => 'is_author'], function () {
+        Route::get('items', [ItemController::class, 'index'])->name('items.index');
+    });
+});
+
+Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 'user.'], function () {
+    /** Author Route Group */
+    Route::group(['middleware' => 'is_author'], function () {
+        Route::get('items', [ItemController::class, 'index'])->name('items.index');
+    });
 });
 
 
