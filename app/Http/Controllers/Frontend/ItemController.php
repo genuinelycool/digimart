@@ -14,4 +14,10 @@ class ItemController extends Controller
         $categories = Category::all();
         return view('frontend.dashboard.item.index', compact('categories'));
     }
+
+    function create(Request $request)
+    {
+        $category = Category::whereSlug($request->category)->firstOrFail();
+        return view('frontend.dashboard.item.create', compact('category'));
+    }
 }

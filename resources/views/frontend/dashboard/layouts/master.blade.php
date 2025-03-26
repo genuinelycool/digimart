@@ -292,8 +292,12 @@
     <!-- select 2  -->
     <script src="{{ asset('assets/frontend/js/select2.min.js') }}"></script>
 
+    <!-- TinyMce  -->
+    <script src="{{ asset('assets/frontend/js/tinymce/tinymce.min.js') }}"></script>
     <!-- main js -->
     <script src="{{ asset('assets/frontend/js/main.js') }}"></script>
+    <!-- dashboard js -->
+    <script src="{{ asset('assets/frontend/js/default/dashboard.js') }}"></script>
 
 
 </body>
