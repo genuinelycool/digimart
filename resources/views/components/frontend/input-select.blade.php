@@ -6,7 +6,8 @@
         @endif
     </label>
     <div class="">
-        <select {{ $attributes->merge(['class' => 'common-input border ']) }} name="{{ $name }}">
+        <select {{ $attributes->merge(['class' => 'common-input border ']) }}
+            name="{{ $name }}" {{ $required ? 'required' : '' }}>
             <option value="">{{ __('Select') }}</option>
             {{ $slot }}
         </select>
