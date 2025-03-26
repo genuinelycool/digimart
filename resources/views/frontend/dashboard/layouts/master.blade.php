@@ -31,6 +31,8 @@
     <!-- Main css -->
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/main.css') }}">
 
+    @stack('styles')
+
 </head>
 
 <body>
@@ -309,6 +311,7 @@
     <!-- dashboard js -->
     <script src="{{ asset('assets/frontend/js/default/dashboard.js') }}"></script>
 
+    @stack('scripts')
 
 </body>
 
