@@ -131,8 +131,8 @@
             <hr>
             <div class="row">
 
-                <div class="col-lg-7">
-                    <div class="dropzone mt-4" id="fileUpload">
+                <div class="col-lg-7 mb-4">
+                    <div class="dropzone" id="fileUpload">
                         <div class="dz-message text-center">
                             <div class="mb-2 file-text-wrapper">
                                 <i class="bi bi-plus add-file-icon"></i>
@@ -142,7 +142,7 @@
                         </div>
                     </div>
 
-                    <ul class="list-group mt-4" id="fileList">
+                    <ul class="list-group" id="fileList">
                         <!-- Uploaded files will appear here -->
                     </ul>
                 </div>
@@ -196,7 +196,7 @@
         // Initialize Dropzone
         Dropzone.autoDiscover = false;
         const dropzone = new Dropzone("#fileUpload", {
-            url: "/upload", // Server endpoint
+            url: "{{ route('user.items.uploads') }}", // Server endpoint
             maxFilesize: 100, // Max file size in MB
             parallelUploads: 5, // Number of files to upload in parallel
             uploadMultiple: true,

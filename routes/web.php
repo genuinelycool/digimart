@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
     Route::group(['middleware' => 'is_author'], function () {
         Route::get('items', [ItemController::class, 'index'])->name('items.index');
         Route::get('items/create', [ItemController::class, 'create'])->name('items.create');
+        Route::post('item-uploads', [ItemController::class, 'itemUploads'])->name('items.uploads');
     });
 });
 
