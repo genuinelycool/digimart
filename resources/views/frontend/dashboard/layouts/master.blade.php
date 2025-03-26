@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/line-awesome.min.css') }}">
     <!-- Select 2 -->
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/select2.min.css') }}">
+    <!-- Bootstrap Tagsinput -->
+    <link href="{{ asset('assets/admin/css/bootstrap-tagsinput.css') }}" rel="stylesheet" />
     <!-- Tabler Icons CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.21.0/tabler-icons.min.css"
         integrity="sha512-XrgoTBs7P5YtpkeKqKOKkruURsawIaRrhe8QrcWeMnFeyRZiOcRNjBAX+AQeXOvx9/9fSY32dVct1PccRoCICQ=="
@@ -144,7 +146,8 @@
                                 <a href="blog-details.html" class="nav-submenu__link"> Blog Details</a>
                             </li>
                             <li class="nav-submenu__item">
-                                <a href="blog-details-sidebar.html" class="nav-submenu__link"> Blog Details Sidebar</a>
+                                <a href="blog-details-sidebar.html" class="nav-submenu__link"> Blog Details
+                                    Sidebar</a>
                             </li>
                         </ul>
                     </li>
@@ -179,7 +182,8 @@
                         <form action="#" class="search-input d-sm-block d-none">
                             <span class="icon">
                                 <img src="assets/images/icons/search-dark.svg" alt="" class="white-version">
-                                <img src="assets/images/icons/search-dark-white.svg" alt="" class="dark-version">
+                                <img src="assets/images/icons/search-dark-white.svg" alt=""
+                                    class="dark-version">
                             </span>
                             <input type="text" class="common-input common-input--md common-input--bg pill w-100"
                                 placeholder="Search here...">
@@ -192,7 +196,8 @@
                                 <div class="user-profile">
                                     <button class="user-profile__button flex-align">
                                         <span class="user-profile__thumb">
-                                            <img src="assets/images/thumbs/user-profile.png" class="cover-img" alt="">
+                                            <img src="assets/images/thumbs/user-profile.png" class="cover-img"
+                                                alt="">
                                         </span>
                                     </button>
                                     <ul class="user-profile-dropdown">
@@ -201,8 +206,8 @@
                                                 <span class="sidebar-list__icon">
                                                     <img src="assets/images/icons/sidebar-icon2.svg" alt=""
                                                         class="icon">
-                                                    <img src="assets/images/icons/sidebar-icon-active2.svg" alt=""
-                                                        class="icon icon-active">
+                                                    <img src="assets/images/icons/sidebar-icon-active2.svg"
+                                                        alt="" class="icon icon-active">
                                                 </span>
                                                 <span class="text">Profile</span>
                                             </a>
@@ -213,8 +218,8 @@
                                                 <span class="sidebar-list__icon">
                                                     <img src="assets/images/icons/sidebar-icon10.svg" alt=""
                                                         class="icon">
-                                                    <img src="assets/images/icons/sidebar-icon-active10.svg" alt=""
-                                                        class="icon icon-active">
+                                                    <img src="assets/images/icons/sidebar-icon-active10.svg"
+                                                        alt="" class="icon icon-active">
                                                 </span>
                                                 <span class="text">Settings</span>
                                             </a>
@@ -224,8 +229,8 @@
                                                 <span class="sidebar-list__icon">
                                                     <img src="assets/images/icons/sidebar-icon13.svg" alt=""
                                                         class="icon">
-                                                    <img src="assets/images/icons/sidebar-icon-active13.svg" alt=""
-                                                        class="icon icon-active">
+                                                    <img src="assets/images/icons/sidebar-icon-active13.svg"
+                                                        alt="" class="icon icon-active">
                                                 </span>
                                                 <span class="text">Logout</span>
                                             </a>
@@ -234,7 +239,8 @@
                                 </div>
 
                                 <div class="language-select flx-align select-has-icon">
-                                    <img src="assets/images/icons/globe.svg" alt="" class="globe-icon white-version">
+                                    <img src="assets/images/icons/globe.svg" alt=""
+                                        class="globe-icon white-version">
                                     <img src="assets/images/icons/globe-white.svg" alt=""
                                         class="globe-icon dark-version">
                                     <select class="select py-0 ps-2 border-0 fw-500">
@@ -294,6 +300,10 @@
 
     <!-- TinyMce  -->
     <script src="{{ asset('assets/frontend/js/tinymce/tinymce.min.js') }}"></script>
+
+    <!-- Bootstrap Tagsinput -->
+    <script src="{{ asset('assets/admin/js/bootstrap-tagsinput.min.js') }}"></script>
+
     <!-- main js -->
     <script src="{{ asset('assets/frontend/js/main.js') }}"></script>
     <!-- dashboard js -->

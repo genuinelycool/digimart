@@ -17,7 +17,8 @@ class ItemController extends Controller
 
     function create(Request $request)
     {
-        $category = Category::whereSlug($request->category)->firstOrFail();
-        return view('frontend.dashboard.item.create', compact('category'));
+        $categories = Category::all();
+        $selectedCategory = Category::with('subCategories')->whereSlug($request->category)->firstOrFail();
+        return view('frontend.dashboard.item.create', compact('selectedCategory', 'categories'));
     }
 }
