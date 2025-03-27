@@ -192,6 +192,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>
 
     <script>
+        var notyf = new Notyf({
+            duration: 5000,
+        });
+
         const csrfToken = "{{ csrf_token() }}";
         // Initialize Dropzone
         Dropzone.autoDiscover = false;
@@ -228,6 +232,13 @@
                     }
                 });
                 this.on("error", function(file, errorMessage) {
+                    console.log(errorMessage);
+                    var errors = errorMessage.errors;
+                    for (const field in errors) {
+                        errors[field].forEach((error) => {
+                            notyf.error(error);
+                        })
+                    }
                     const listItem = document.getElementById(`file-${file.upload.uuid}`);
                     if (listItem) {
                         const progressBar = listItem.querySelector(".progress-bar");

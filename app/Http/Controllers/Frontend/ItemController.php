@@ -19,11 +19,19 @@ class ItemController extends Controller
     {
         $categories = Category::all();
         $selectedCategory = Category::with('subCategories')->whereSlug($request->category)->firstOrFail();
+
+        // put category id on session
+        session()->put('selected_category', $selectedCategory->id);
+
         return view('frontend.dashboard.item.create', compact('selectedCategory', 'categories'));
     }
 
     function itemUploads(Request $request)
     {
-        dd($request->all());
+        $categorySupportedExtensions = Category::find(session()->get('selected_category'))->file_types;
+
+        $request->validate([
+            'file.*' => ['required', 'mimes:'.implode(',', $categorySupportedExtensions)],
+        ]);
     }
 }

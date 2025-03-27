@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/magnific-popup.css') }}">
     <!-- line awesome -->
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/line-awesome.min.css') }}">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
     <!-- Select 2 -->
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/select2.min.css') }}">
     <!-- Bootstrap Tagsinput -->
@@ -305,6 +307,8 @@
 
     <!-- Bootstrap Tagsinput -->
     <script src="{{ asset('assets/admin/js/bootstrap-tagsinput.min.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 
     <!-- main js -->
     <script src="{{ asset('assets/frontend/js/main.js') }}"></script>
