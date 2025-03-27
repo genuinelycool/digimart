@@ -131,7 +131,7 @@
             <hr>
             <div class="row">
 
-                <div class="col-lg-7 mb-4">
+                <div class="col-lg-12 mb-4">
                     <div class="dropzone" id="fileUpload">
                         <div class="dz-message text-center">
                             <div class="mb-2 file-text-wrapper">
@@ -144,6 +144,23 @@
 
                     <ul class="list-group" id="fileList">
                         <!-- Uploaded files will appear here -->
+                        @foreach ($uploadedItems as $item)
+                            <li class="list-group-item file-list-item d-flex align-items-center justify-content-between">
+                                <div class="w-100">
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi {{ getIcon($item->mime_type) }} fs-3 me-3 text-primary"></i>
+                                        <span>{{ $item->name }} <span class="file-size">({{ formatSize($item->size) }})</span></span>
+                                    </div>
+                                    <div class="progress me-3" style="width:100%; height: 5px;">
+                                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+                                            style="width: 100%;" id=""></div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-danger btn-sm justify-content-end ms-3"
+                                    onclick="removeFile('')"><i class="bi bi-trash3"></i>
+                                </button>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
 
@@ -156,8 +173,11 @@
                 </div>
 
                 <div class="col-md-12">
-                    <x-frontend.input-select name="preview_file" class="" :label="__('Preview File')" :required="true" id="preview_file_input">
-
+                    <x-frontend.input-select name="preview_file" class="" :label="__('Preview File')" :required="true"
+                        id="preview_file_input">
+                        @foreach ($uploadedItems as $item)
+                            <option value="{{ $item->path }}">{{ $item->name }}</option>
+                        @endforeach
                     </x-frontend.input-select>
                 </div>
                 <div class="col-md-12">
@@ -169,14 +189,21 @@
                             <option value="link">{{ __('Link') }}</option>
                         </select>
                         <select name="" id="upload_source" class="form-select">
+                            @foreach ($uploadedItems as $item)
+                                <option value="{{ $item->path }}">{{ $item->name }}</option>
+                            @endforeach
                         </select>
-                        <input type="text" class="form-control d-none" id="link_source" aria-label="Text input with dropdown button">
+                        <input type="text" class="form-control d-none" id="link_source"
+                            aria-label="Text input with dropdown button">
                     </div>
                 </div>
 
                 <div class="col-md-12">
-                    <x-frontend.input-select name="screenshots[]" class="select_2" :label="__('Screenshots')" multiple="multiple" id="screenshots_input">
-                        
+                    <x-frontend.input-select name="screenshots[]" class="select_2" :label="__('Screenshots')" multiple="multiple"
+                        id="screenshots_input">
+                        @foreach ($uploadedItems as $item)
+                            <option value="{{ $item->path }}">{{ $item->name }}</option>
+                        @endforeach
                     </x-frontend.input-select>
                 </div>
 

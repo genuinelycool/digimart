@@ -47,3 +47,42 @@ if(!function_exists('canAccess')) {
         return false;
     }
 }
+
+/** get human readable size */
+if(!function_exists('formatSize')) {
+    function formatSize($bytes, $decimalPlaces = 2) {
+        if($bytes < 0) {
+            return 0;
+        }
+
+        $sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
+        $factor = floor((strlen($bytes) - 1) / 3);
+        $formattedSize = $bytes / pow(1024, $factor);
+
+        return round($formattedSize, $decimalPlaces).$sizes[$factor];
+    }
+}
+
+/** get icon for items */
+if(!function_exists('getIcon')) {
+    function getIcon($mimeType) : string
+    {
+        $fileIcon = 'bi-file-earmark';
+
+        if(str_starts_with($mimeType, 'image/')) {
+            $fileIcon = "bi-file-earmark-image";
+        }elseif(str_starts_with($mimeType, 'video/')) {
+            $fileIcon = "bi-file-earmark-play";
+        }elseif(str_starts_with($mimeType, 'audio/')) {
+            $fileIcon = "bi-file-earmark-music";
+        }elseif(str_starts_with($mimeType, 'pdf/')) {
+            $fileIcon = "bi-file-earmark-pdf";
+        }elseif(str_starts_with($mimeType, 'text/')) {
+            $fileIcon = "bi-file-earmark-text";
+        }elseif(str_starts_with($mimeType, 'application/')) {
+            $fileIcon = "bi-file-earmark-zip";
+        }
+
+        return $fileIcon;
+    }
+}

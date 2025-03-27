@@ -26,7 +26,9 @@ class ItemController extends Controller
         // put category id on session
         session()->put('selected_category', $selectedCategory->id);
 
-        return view('frontend.dashboard.item.create', compact('selectedCategory', 'categories'));
+        $uploadedItems = UploadedFiles::where('author_id', user()->id)->where('category_id', session()->get('selected_category'))->get();
+
+        return view('frontend.dashboard.item.create', compact('selectedCategory', 'categories', 'uploadedItems'));
     }
 
     function itemUploads(Request $request)
