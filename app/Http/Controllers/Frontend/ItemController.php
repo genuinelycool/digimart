@@ -55,6 +55,11 @@ class ItemController extends Controller
             }
         }
 
+        $uploadedFiles = UploadedFiles::where('author_id', user()->id)->where('category_id', session()->get('selected_category'))->get();
+
+        return response()->json([
+            'files' => $uploadedFiles
+        ], 200);
     }
 
     function uploadFile(UploadedFile $file, string $dir = "uploads", string $disk = "local") : ?array

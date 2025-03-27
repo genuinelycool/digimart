@@ -156,7 +156,7 @@
                 </div>
 
                 <div class="col-md-12">
-                    <x-frontend.input-select name="preview_file" class="" :label="__('Preview File')" :required="true">
+                    <x-frontend.input-select name="preview_file" class="" :label="__('Preview File')" :required="true" id="preview_file_input">
 
                     </x-frontend.input-select>
                 </div>
@@ -175,7 +175,7 @@
                 </div>
 
                 <div class="col-md-12">
-                    <x-frontend.input-select name="screenshots[]" class="select_2" :label="__('Screenshots')" multiple="multiple">
+                    <x-frontend.input-select name="screenshots[]" class="select_2" :label="__('Screenshots')" multiple="multiple" id="screenshots_input">
                         <option value="">test 1</option>
                         <option value="">test 2</option>
                         <option value="">test 3</option>
@@ -229,6 +229,21 @@
                         progressBar.classList.remove("progress-bar-animated");
                         progressBar.classList.add("bg-success");
                         progressBar.style.width = "100%";
+                    }
+
+                    var previewTypeInput = document.getElementById('preview_file_input');
+                    var screenshotsInput = document.getElementById('screenshots_input');
+
+                    for (let i = 0; i < response.files.length; i++) {
+                        var previewOption = document.createElement('option');
+                        previewOption.value = response.files[i].id;
+                        previewOption.text = response.files[i].name;
+                        previewTypeInput.add(previewOption);
+
+                        var screenshotsOption = document.createElement('option');
+                        screenshotsOption.value = response.files[i].id;
+                        screenshotsOption.text = response.files[i].name;
+                        screenshotsInput.add(screenshotsOption);
                     }
                 });
                 this.on("error", function(file, errorMessage) {
