@@ -164,21 +164,19 @@
                     <label for="" class="form-label mb-2 font-18 font-heading fw-600">Main File <span
                             class="text-danger">*</span></label>
                     <div class="input-group mb-3">
-                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">Dropdown</button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                        </ul>
-                        <input type="text" class="form-control" aria-label="Text input with dropdown button">
+                        <select name="" id="main_source_selector" class="form-select">
+                            <option selected value="upload">{{ __('Upload') }}</option>
+                            <option value="link">{{ __('Link') }}</option>
+                        </select>
+                        <select name="" id="upload_source" class="form-select">
+                        </select>
+                        <input type="text" class="form-control d-none" id="link_source" aria-label="Text input with dropdown button">
                     </div>
                 </div>
 
                 <div class="col-md-12">
                     <x-frontend.input-select name="screenshots[]" class="select_2" :label="__('Screenshots')" multiple="multiple" id="screenshots_input">
-                        <option value="">test 1</option>
-                        <option value="">test 2</option>
-                        <option value="">test 3</option>
+                        
                     </x-frontend.input-select>
                 </div>
 
@@ -233,6 +231,7 @@
 
                     var previewTypeInput = document.getElementById('preview_file_input');
                     var screenshotsInput = document.getElementById('screenshots_input');
+                    var uploadSourceInput = document.getElementById('upload_source');
 
                     for (let i = 0; i < response.files.length; i++) {
                         var previewOption = document.createElement('option');
@@ -244,6 +243,11 @@
                         screenshotsOption.value = response.files[i].id;
                         screenshotsOption.text = response.files[i].name;
                         screenshotsInput.add(screenshotsOption);
+
+                        var uploadSourceOption = document.createElement('option');
+                        uploadSourceOption.value = response.files[i].id;
+                        uploadSourceOption.text = response.files[i].name;
+                        uploadSourceInput.add(uploadSourceOption);
                     }
                 });
                 this.on("error", function(file, errorMessage) {
@@ -314,5 +318,19 @@
                 listItem.remove();
             }
         }
+
+        document.getElementById("main_source_selector").addEventListener("change", function() {
+            const value = this.value;
+            const uploadSource = document.getElementById("upload_source");
+            const linkSource = document.getElementById("link_source");
+
+            if (value === "upload") {
+                uploadSource.classList.remove("d-none");
+                linkSource.classList.add("d-none");
+            } else if (value === "link") {
+                uploadSource.classList.add("d-none");
+                linkSource.classList.remove("d-none");
+            }
+        })
     </script>
 @endpush
