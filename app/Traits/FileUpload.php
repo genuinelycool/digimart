@@ -37,8 +37,8 @@ trait FileUpload {
             File::delete(public_path($path));
             return true;
         } else {
-            if (File::exists(storage_path($path))) {
-                File::delete(storage_path($path));
+            if (File::exists(storage_path('app/private/'.$path))) {
+                File::delete(storage_path('app/private/'.$path));
                 return true;
             }
         }

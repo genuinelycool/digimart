@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\UploadedFiles;
+use App\Traits\FileUpload;
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -12,6 +13,8 @@ use Illuminate\Http\UploadedFile;
 
 class ItemController extends Controller
 {
+    use FileUpload;
+
     function index() : View
     {
         $categories = Category::all();
@@ -64,7 +67,7 @@ class ItemController extends Controller
         ], 200);
     }
 
-    function uploadFile(UploadedFile $file, string $dir = "uploads", string $disk = "local") : ?array
+    function uploadFile(UploadedFile $file, string $dir = "uploads/items", string $disk = "local") : ?array
     {
         // Validate disk type
         if (!in_array($disk, ['public', 'local'])) {
@@ -79,7 +82,7 @@ class ItemController extends Controller
             return [
                 'name' => $file->getClientOriginalName(),
                 'extension' => $file->getClientOriginalExtension(),
-                'path' => "/$dir/files/$fileName",
+                'path' => "/$dir/$fileName",
                 'size' => $file->getSize(),
                 'mimeType' => $file->getMimeType()
             ];
@@ -89,5 +92,17 @@ class ItemController extends Controller
         }
 
         return null;
+    }
+
+    function itemDestroy(string $id) {
+        $file = UploadedFiles::whereId($id)->where('author_id', user()->id)->first();
+        if(!$file) {
+            return response()->json(['status' => 'error'], 422);
+        }
+
+        $this->deleteFile($file->path, 'local');
+        $file->delete();
+
+        return response()->json(['status' => 'success', 'message' => __('Deleted successfully')], 200);
     }
 }
