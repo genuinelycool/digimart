@@ -13890,3 +13890,7 @@ select {
 #select2-screenshots-pw-container-choice-e49e-grm3 {
     color: white !important;
 }
+
+.select2-selection__choice__display {
+    color: white !important;
+}
