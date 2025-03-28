@@ -258,26 +258,8 @@
                         progressBar.style.width = "100%";
                     }
 
-                    var previewTypeInput = document.getElementById('preview_file_input');
-                    var screenshotsInput = document.getElementById('screenshots_input');
-                    var uploadSourceInput = document.getElementById('upload_source');
+                    setDynamicOptions(response);
 
-                    for (let i = 0; i < response.files.length; i++) {
-                        var previewOption = document.createElement('option');
-                        previewOption.value = response.files[i].id;
-                        previewOption.text = response.files[i].name;
-                        previewTypeInput.add(previewOption);
-
-                        var screenshotsOption = document.createElement('option');
-                        screenshotsOption.value = response.files[i].id;
-                        screenshotsOption.text = response.files[i].name;
-                        screenshotsInput.add(screenshotsOption);
-
-                        var uploadSourceOption = document.createElement('option');
-                        uploadSourceOption.value = response.files[i].id;
-                        uploadSourceOption.text = response.files[i].name;
-                        uploadSourceInput.add(uploadSourceOption);
-                    }
                 });
                 this.on("error", function(file, errorMessage) {
                     console.log(errorMessage);
@@ -297,6 +279,34 @@
                 });
             },
         });
+
+        function setDynamicOptions(response) {
+            var previewTypeInput = document.getElementById('preview_file_input');
+            var screenshotsInput = document.getElementById('screenshots_input');
+            var uploadSourceInput = document.getElementById('upload_source');
+
+            previewTypeInput.innerHTML = '';
+            screenshotsInput.innerHTML = '';
+            uploadSourceInput.innerHTML = '';
+
+            for (let i = 0; i < response.files.length; i++) {
+                var previewOption = document.createElement('option');
+                previewOption.value = response.files[i].id;
+                previewOption.text = response.files[i].name;
+                previewTypeInput.add(previewOption);
+
+                var screenshotsOption = document.createElement('option');
+                screenshotsOption.value = response.files[i].id;
+                screenshotsOption.text = response.files[i].name;
+                screenshotsInput.add(screenshotsOption);
+
+                var uploadSourceOption = document.createElement('option');
+                uploadSourceOption.value = response.files[i].id;
+                uploadSourceOption.text = response.files[i].name;
+                uploadSourceInput.add(uploadSourceOption);
+            }
+        }
+
         // Function to get file icon
         function getIcon(fileType) {
             let fileIcon = "bi-file-earmark"; // Default icon
@@ -353,8 +363,13 @@
                 data: {
                     _token: csrfToken
                 },
-                success: function() {
-                    console.log(data);
+                success: function(response) {
+                    if (response.status == 'success') {
+                        notyf.success(response.message);
+                        setDynamicOptions(response);
+                    } else {
+                        notyf.error(response.message);
+                    }
                 },
                 error: function() {
 

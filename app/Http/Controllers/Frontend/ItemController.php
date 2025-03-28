@@ -15,7 +15,7 @@ class ItemController extends Controller
 {
     use FileUpload;
 
-    function index() : View
+    function index(): View
     {
         $categories = Category::all();
         return view('frontend.dashboard.item.index', compact('categories'));
@@ -41,7 +41,7 @@ class ItemController extends Controller
         $extensions = \Str::lower(implode(',', $categorySupportedExtensions));
 
         $request->validate([
-            'file.*' => ['required', 'mimes:'. $extensions],
+            'file.*' => ['required', 'mimes:' . $extensions],
         ]);
 
         foreach ($request->file('file') as $file) {
@@ -67,7 +67,7 @@ class ItemController extends Controller
         ], 200);
     }
 
-    function uploadFile(UploadedFile $file, string $dir = "uploads/items", string $disk = "local") : ?array
+    function uploadFile(UploadedFile $file, string $dir = "uploads/items", string $disk = "local"): ?array
     {
         // Validate disk type
         if (!in_array($disk, ['public', 'local'])) {
@@ -76,7 +76,7 @@ class ItemController extends Controller
 
         // Handle file upload
         try {
-            $fileName = uniqid().'.'.$file->getClientOriginalExtension();
+            $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
             $file->storeAs($dir, $fileName, $disk);
 
             return [
@@ -86,7 +86,6 @@ class ItemController extends Controller
                 'size' => $file->getSize(),
                 'mimeType' => $file->getMimeType()
             ];
-
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -94,15 +93,22 @@ class ItemController extends Controller
         return null;
     }
 
-    function itemDestroy(string $id) {
+    function itemDestroy(string $id)
+    {
         $file = UploadedFiles::whereId($id)->where('author_id', user()->id)->first();
-        if(!$file) {
-            return response()->json(['status' => 'error'], 422);
+        if (!$file) {
+            return response()->json(['status' => 'error', 'message' => __('File not found')], 200);
         }
 
-        $this->deleteFile($file->path, 'local');
-        $file->delete();
+        try {
+            $this->deleteFile($file->path, 'local');
+            $file->delete();
 
-        return response()->json(['status' => 'success', 'message' => __('Deleted successfully')], 200);
+            $uploadedFiles = UploadedFiles::where('author_id', user()->id)->where('category_id', session()->get('selected_category'))->get();
+
+            return response()->json(['status' => 'success', 'message' => __('Item Removed successfully'), 'files' => $uploadedFiles], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 'error', 'message' => $th->getMessage()], 200);
+        }
     }
 }
