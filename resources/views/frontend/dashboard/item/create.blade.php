@@ -100,11 +100,12 @@
                             </option>
                         @endforeach
                     </x-frontend.input-select>
+                    <input type="hidden" name="category_id" value="{{ $selectedCategory->id }}">
                 </div>
                 <div class="col-md-12">
                     <x-frontend.input-select name="sub_category" class="select_2" :label="__('Sub Category')" :required="true">
                         @foreach ($selectedCategory->subCategories as $subCategory)
-                            <option value="{{ $subCategory->slug }}">{{ $subCategory->name }}</option>
+                            <option value="{{ $subCategory->id }}">{{ $subCategory->name }}</option>
                         @endforeach
                     </x-frontend.input-select>
                 </div>
@@ -197,7 +198,7 @@
                                 <option value="{{ $item->path }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
-                        <input type="text" class="form-control d-none" id="link_source"
+                        <input type="text" name="link_source" class="form-control d-none" id="link_source"
                             aria-label="Text input with dropdown button">
                     </div>
                 </div>

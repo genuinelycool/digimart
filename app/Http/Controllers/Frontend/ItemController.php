@@ -118,6 +118,26 @@ class ItemController extends Controller
 
     function storeItem(Request $request) : RedirectResponse
     {
-        dd($request->all());
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
+            'category' => ['required', 'exists:categories,id'],
+            'sub_category' => ['required', 'exists:sub_categories,id'],
+            'version' => ['required', 'string', 'max:20'],
+            'demo_link' => ['nullable', 'url'],
+            'tags' => ['required', 'array'],
+            'preview_type' => ['required', 'in:image,video,audio'],
+            'preview_file' => ['required'],
+            'source_type' => ['required', 'in:upload,link'],
+            'upload_source' => ['required_if:source_type,upload', 'string', 'max:255'],
+            'link_source' => ['required_if:source_type,link', 'string', 'max:255'],
+            'screenshots' => ['nullable'],
+            'support' => ['required', 'in:0,1'],
+            'support_instruction' => ['nullable'],
+            'price' => ['required', 'numeric', 'min:1'],
+            'discount_price' => ['required', 'numeric', 'min:0', 'lt:price'],
+            'is_free' => ['required', 'in:0,1'],
+            'message_for_reviewer' => ['nullable', 'max:1000']
+        ]);
     }
 }
