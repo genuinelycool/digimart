@@ -62,8 +62,11 @@ class ItemController extends Controller
 
         $uploadedFiles = UploadedFiles::where('author_id', user()->id)->where('category_id', session()->get('selected_category'))->get();
 
+        $html = view('frontend.dashboard.layouts.partials.file-list-item', compact('uploadedFiles'))->render();
+
         return response()->json([
-            'files' => $uploadedFiles
+            'files' => $uploadedFiles,
+            'html' => $html
         ], 200);
     }
 

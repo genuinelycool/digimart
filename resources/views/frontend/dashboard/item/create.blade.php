@@ -258,6 +258,10 @@
                         progressBar.style.width = "100%";
                     }
 
+                    // set html items
+                    var fileListWrapper = document.getElementById('fileList');
+                    fileListWrapper.innerHTML = response.html;
+                    
                     setDynamicOptions(response);
 
                 });
