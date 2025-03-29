@@ -211,6 +211,86 @@
 
             </div>
         </div>
+
+        <div class="wsus__dash_order_table mt-3">
+            <div>
+                <h6>Support</h6>
+            </div>
+
+            <hr>
+            <div class="row">
+                <div class="col-md-12">
+                    <x-frontend.input-select name="support" id="support_input" :label="__('Item will be supported?')" :required="true">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </x-frontend.input-select>
+                </div>
+
+                <div class="col-md-12 d-none" id="support_instruction">
+                    <x-frontend.text-area name="support_instruction" :label="__('Support Instruction')" />
+                </div>
+            </div>
+        </div>
+
+        <div class="wsus__dash_order_table mt-3">
+            <div>
+                <h6>Pricing</h6>
+            </div>
+
+            <hr>
+            <div class="row">
+                <div class="col-md-6">
+                    <x-frontend.input-text name="price" :label="__('Regular Price')" :required="true" />
+                </div>
+                <div class="col-md-6">
+                    <x-frontend.input-text name="discount_price" :label="__('Discount Price')" />
+                </div>
+            </div>
+        </div>
+
+        <div class="wsus__dash_order_table mt-3">
+            <div>
+                <h6>Free Item</h6>
+            </div>
+
+            <hr>
+            <div class="row">
+                <div class="col-md-12">
+                    <div>
+                        <p class="text-dark">{{ __('You can allow downloading the item for free, please note that everyone can download the item directly from the item page without purchasing.') }}</p>
+                    </div>
+                    <x-frontend.input-select name="is_free" id="is_free" :label="__('Is item will be free?')" :required="true">
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </x-frontend.input-select>
+                </div>
+            </div>
+        </div>
+
+        <div class="wsus__dash_order_table mt-3">
+            <div>
+                <h6>Message to the Reviewer</h6>
+            </div>
+
+            <hr>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <x-frontend.text-area name="message_for_reviewer" :label="__('Message')" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="wsus__dash_order_table mt-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </form>
 @endsection
 
@@ -261,7 +341,7 @@
                     // set html items
                     var fileListWrapper = document.getElementById('fileList');
                     fileListWrapper.innerHTML = response.html;
-                    
+
                     setDynamicOptions(response);
 
                 });
@@ -392,6 +472,17 @@
             } else if (value === "link") {
                 uploadSource.classList.add("d-none");
                 linkSource.classList.remove("d-none");
+            }
+        })
+
+        document.getElementById("support_input").addEventListener("change", function() {
+            const value = this.value;
+            const supportInstruction = document.getElementById('support_instruction');
+
+            if (value === '1') {
+                supportInstruction.classList.remove('d-none');
+            } else if (value === '0') {
+                supportInstruction.classList.add('d-none');
             }
         })
     </script>
