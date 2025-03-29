@@ -67,7 +67,9 @@
         </div>
     </div>
 
-    <form action="">
+    <form action="" method="POST" enctype="multipart/form-data" id="product_form">
+        @csrf
+
         <div class="wsus__dash_order_table mt-3">
             <div>
                 <h6>Name And Description</h6>
@@ -118,7 +120,7 @@
                         {{ __('Tags') }} <span>*</span>
                     </label>
                     <br>
-                    <input type="text" value="" data-role="tagsinput" />
+                    <input type="text" name="tags[]" value="" data-role="tagsinput" />
                 </div>
             </div>
         </div>
@@ -186,11 +188,11 @@
                     <label for="" class="form-label mb-2 font-18 font-heading fw-600">Main File <span
                             class="text-danger">*</span></label>
                     <div class="input-group mb-3">
-                        <select name="" id="main_source_selector" class="form-select">
+                        <select name="link_source" id="main_source_selector" class="form-select">
                             <option selected value="upload">{{ __('Upload') }}</option>
                             <option value="link">{{ __('Link') }}</option>
                         </select>
-                        <select name="" id="upload_source" class="form-select">
+                        <select name="upload_source" id="upload_source" class="form-select">
                             @foreach ($uploadedItems as $item)
                                 <option value="{{ $item->path }}">{{ $item->name }}</option>
                             @endforeach
@@ -257,7 +259,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <div>
-                        <p class="text-dark">{{ __('You can allow downloading the item for free, please note that everyone can download the item directly from the item page without purchasing.') }}</p>
+                        <p class="text-dark">
+                            {{ __('You can allow downloading the item for free, please note that everyone can download the item directly from the item page without purchasing.') }}
+                        </p>
                     </div>
                     <x-frontend.input-select name="is_free" id="is_free" :label="__('Is item will be free?')" :required="true">
                         <option value="0">No</option>
@@ -484,6 +488,25 @@
             } else if (value === '0') {
                 supportInstruction.classList.add('d-none');
             }
+        })
+
+        /** submit form */
+        $("#product_form").on('submit', function(e) {
+            e.preventDefault();
+
+            let formData = $(this).serialize();
+
+            $.ajax({
+                method: 'POST',
+                url: '/user/item/store',
+                data: formData,
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function() {
+
+                }
+            })
         })
     </script>
 @endpush

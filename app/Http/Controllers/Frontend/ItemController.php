@@ -8,6 +8,7 @@ use App\Models\UploadedFiles;
 use App\Traits\FileUpload;
 use Exception;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 
@@ -113,5 +114,10 @@ class ItemController extends Controller
         } catch (\Throwable $th) {
             return response()->json(['status' => 'error', 'message' => $th->getMessage()], 200);
         }
+    }
+
+    function storeItem(Request $request) : RedirectResponse
+    {
+        dd($request->all());
     }
 }
