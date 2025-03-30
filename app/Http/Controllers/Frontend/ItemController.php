@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Frontend\ItemStoreRequest;
 use App\Models\Category;
 use App\Models\UploadedFiles;
 use App\Traits\FileUpload;
@@ -116,32 +117,8 @@ class ItemController extends Controller
         }
     }
 
-    function storeItem(Request $request) : RedirectResponse
+    function storeItem(ItemStoreRequest $request) : RedirectResponse
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string'],
-            'category' => ['required', 'exists:categories,id'],
-            'sub_category' => ['required', 'exists:sub_categories,id'],
-            'version' => ['required', 'string', 'max:20'],
-            'demo_link' => ['nullable', 'url'],
-            'tags' => ['required', 'array'],
-            'preview_type' => ['required', 'in:image,video,audio'],
-            'preview_file' => ['required'],
-            'source_type' => ['required', 'in:upload,link'],
-            'upload_source' => ['required_if:source_type,upload', 'nullable', 'string', 'max:255'],
-            'link_source' => ['required_if:source_type,link', 'nullable', 'string', 'max:255'],
-            'screenshots' => ['nullable'],
-            'support' => ['required', 'in:0,1'],
-            'support_instruction' => ['nullable'],
-            'price' => ['required', 'numeric', 'min:1'],
-            'discount_price' => ['nullable', 'numeric', 'min:0', 'lt:price'],
-            'is_free' => ['required', 'in:0,1'],
-            'message_for_reviewer' => ['nullable', 'max:1000']
-        ],[
-            'discount_price.lt' => __('The discount price must be less than the regular price.'),
-        ]);
-
         dd('Request Pass');
     }
 }

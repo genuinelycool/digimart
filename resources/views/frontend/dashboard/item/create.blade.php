@@ -504,8 +504,11 @@
                 success: function(response) {
                     console.log(response);
                 },
-                error: function() {
-
+                error: function(xhr, status, error) {
+                    var errors = xhr.responseJSON.errors;
+                    $.each(errors, function(key, value) {
+                        notyf.error(value[0]);
+                    })
                 }
             })
         })
