@@ -100,7 +100,7 @@
                             </option>
                         @endforeach
                     </x-frontend.input-select>
-                    <input type="hidden" name="category_id" value="{{ $selectedCategory->id }}">
+                    <input type="hidden" name="category" value="{{ $selectedCategory->id }}">
                 </div>
                 <div class="col-md-12">
                     <x-frontend.input-select name="sub_category" class="select_2" :label="__('Sub Category')" :required="true">
@@ -189,7 +189,7 @@
                     <label for="" class="form-label mb-2 font-18 font-heading fw-600">Main File <span
                             class="text-danger">*</span></label>
                     <div class="input-group mb-3">
-                        <select name="link_source" id="main_source_selector" class="form-select">
+                        <select name="source_type" id="main_source_selector" class="form-select">
                             <option selected value="upload">{{ __('Upload') }}</option>
                             <option value="link">{{ __('Link') }}</option>
                         </select>

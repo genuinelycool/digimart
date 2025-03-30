@@ -129,15 +129,19 @@ class ItemController extends Controller
             'preview_type' => ['required', 'in:image,video,audio'],
             'preview_file' => ['required'],
             'source_type' => ['required', 'in:upload,link'],
-            'upload_source' => ['required_if:source_type,upload', 'string', 'max:255'],
-            'link_source' => ['required_if:source_type,link', 'string', 'max:255'],
+            'upload_source' => ['required_if:source_type,upload', 'nullable', 'string', 'max:255'],
+            'link_source' => ['required_if:source_type,link', 'nullable', 'string', 'max:255'],
             'screenshots' => ['nullable'],
             'support' => ['required', 'in:0,1'],
             'support_instruction' => ['nullable'],
             'price' => ['required', 'numeric', 'min:1'],
-            'discount_price' => ['required', 'numeric', 'min:0', 'lt:price'],
+            'discount_price' => ['nullable', 'numeric', 'min:0', 'lt:price'],
             'is_free' => ['required', 'in:0,1'],
             'message_for_reviewer' => ['nullable', 'max:1000']
+        ],[
+            'discount_price.lt' => __('The discount price must be less than the regular price.'),
         ]);
+
+        dd('Request Pass');
     }
 }
