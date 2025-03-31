@@ -120,19 +120,21 @@ class ItemController extends Controller
 
     function storeItem(ItemStoreRequest $request) : RedirectResponse
     {
+        // dd($request->all());
+
         $item = new Item();
         $item->author_id = user()->id;
         $item->name = $request->name;
         $item->description = $request->description;
-        $item->category_id = $request->category_id;
+        $item->category_id = $request->category;
         $item->sub_category_id = $request->sub_category;
         $item->version = $request->version;
         $item->demo_link = $request->demo_link;
-        $item->tags = $request->tags;
+        $item->tags = explode(',', $request->tags);
         $item->preview_type = $request->preview_type;
-        $item->preview_image = $request->preview_image;
-        $item->preview_video = $request->preview_video;
-        $item->preview_audio = $request->preview_audio;
+        $item->preview_image = $request->preview_file;
+        $item->preview_video = $request->preview_file;
+        $item->preview_audio = $request->preview_file;
         $item->main_file = $request->source_type == 'upload' ? $request->upload_source : $request->link_source;
         $item->is_main_file_external = $request->source_type == 'upload' ? 0 : 1;
         $item->screenshots = $request->screenshots;

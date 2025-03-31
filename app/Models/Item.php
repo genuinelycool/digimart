@@ -20,7 +20,7 @@ class Item extends Model
             ->saveSlugsTo('slug');
     }
 
-    protected $cast = [
+    protected $casts = [
         'tags' => 'array',
         'screenshots' => 'array'
     ];

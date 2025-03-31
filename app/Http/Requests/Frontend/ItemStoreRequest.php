@@ -28,7 +28,7 @@ class ItemStoreRequest extends FormRequest
             'sub_category' => ['required', 'exists:sub_categories,id'],
             'version' => ['required', 'string', 'max:20'],
             'demo_link' => ['nullable', 'url'],
-            'tags' => ['required', 'array'],
+            'tags' => ['required', 'string', 'max:255'],
             'preview_type' => ['required', 'in:image,video,audio'],
             'preview_file' => ['required'],
             'source_type' => ['required', 'in:upload,link'],
