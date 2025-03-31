@@ -502,7 +502,9 @@
                 url: '/user/item/store',
                 data: formData,
                 success: function(response) {
-                    console.log(response);
+                    if (response.status == 'success') {
+                        window.location.href = response.redirect;
+                    }
                 },
                 error: function(xhr, status, error) {
                     var errors = xhr.responseJSON.errors;

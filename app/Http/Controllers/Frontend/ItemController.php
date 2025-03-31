@@ -7,10 +7,11 @@ use App\Http\Requests\Frontend\ItemStoreRequest;
 use App\Models\Category;
 use App\Models\Item;
 use App\Models\UploadedFiles;
+use App\Services\NotificationService;
 use App\Traits\FileUpload;
 use Exception;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 
@@ -118,10 +119,8 @@ class ItemController extends Controller
         }
     }
 
-    function storeItem(ItemStoreRequest $request) : RedirectResponse
+    function storeItem(ItemStoreRequest $request) : JsonResponse
     {
-        dd($request->all());
-
         $item = new Item();
         $item->author_id = user()->id;
         $item->name = $request->name;
@@ -146,6 +145,8 @@ class ItemController extends Controller
         $item->is_free = $request->is_free;
         $item->save();
 
-        dd($item);
+        NotificationService::CREATED();
+
+        return response()->json(['status' => 'success', 'redirect' => route('user.items.index')], 200);
     }
 }
