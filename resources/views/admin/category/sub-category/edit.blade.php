@@ -13,7 +13,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('admin.sub-categories.update', $subCategory->id) }}" method="POST">
+                        <form action="{{ route('admin.sub-categories.update', $subCategory->id) }}" method="POST" class="x-form">
                             @csrf
                             @method('PUT')
 
@@ -37,7 +37,7 @@
                     </div>
 
                     <div class="card-footer text-end">
-                        <x-admin.submit-button :label="__('Update')" onclick="$('form').submit();" />
+                        <x-admin.submit-button :label="__('Update')" onclick="$('.x-form').submit();" />
                     </div>
                 </div>
             </div>

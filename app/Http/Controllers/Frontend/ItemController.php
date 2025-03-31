@@ -120,7 +120,7 @@ class ItemController extends Controller
 
     function storeItem(ItemStoreRequest $request) : RedirectResponse
     {
-        // dd($request->all());
+        dd($request->all());
 
         $item = new Item();
         $item->author_id = user()->id;

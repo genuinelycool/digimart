@@ -17,7 +17,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('admin.categories.update', $category->id) }}" method="POST">
+                        <form action="{{ route('admin.categories.update', $category->id) }}" method="POST" class="x-form">
                             @csrf
                             @method('PUT')
 
@@ -42,12 +42,13 @@
                                     <x-admin.input-toggle name="show_at_featured" :label="__('Show at featured')" :checked="$category->show_at_featured" />
                                 </div>
                             </div>
+                            {{-- <button type="submit">submit</button> --}}
                         </form>
 
                     </div>
 
                     <div class="card-footer text-end">
-                        <x-admin.submit-button :label="__('Update')" onclick="$('form').submit();" />
+                        <x-admin.submit-button :label="__('Update')" onclick="$('.x-form').submit();" />
                     </div>
                 </div>
             </div>
