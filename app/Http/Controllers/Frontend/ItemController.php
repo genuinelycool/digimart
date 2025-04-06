@@ -22,7 +22,9 @@ class ItemController extends Controller
     function index(): View
     {
         $categories = Category::all();
-        return view('frontend.dashboard.item.index', compact('categories'));
+        $items = Item::with(['category', 'subCategory'])->where('author_id', user()->id)->paginate(15);
+
+        return view('frontend.dashboard.item.index', compact('categories', 'items'));
     }
 
     function create(Request $request)

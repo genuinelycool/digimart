@@ -19,87 +19,62 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th class="sn">
-                            serial
-                        </th>
                         <th class="details">
-                            details
-                        </th>
-                        <th class="p_date">
-                            Purchase Date
-                        </th>
-                        <th class="e_date">
-                            Expired Date
+                            Details
                         </th>
                         <th class="price">
                             Price
                         </th>
+                        <th class="p_date">
+                            Publish Date
+                        </th>
+                        <th class="status">
+                            Status
+                        </th>
                         <th class="action">
-                            action
+                            Action
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="sn">
-                            <p>1</p>
-                        </td>
-                        <td class="details">
-                            <a class="title" href="#">Complete Blender Creator Learn 3D Modelling.</a>
-                        </td>
-                        <td class="p_date">
-                            <p>2021-12-28</p>
-                        </td>
-                        <td class="e_date">
-                            <p>2021-12-28</p>
-                        </td>
-                        <td class="price">
-                            <p>$300</p>
-                        </td>
-                        <td class="action">
-                            <a class="view" href="#"><i class="ti ti-eye"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="sn">
-                            <p>2</p>
-                        </td>
-                        <td class="details">
-                            <a class="title" href="#">Complete Blender Creator Learn 3D Modelling.</a>
-                        </td>
-                        <td class="p_date">
-                            <p>2021-12-28</p>
-                        </td>
-                        <td class="e_date">
-                            <p>2021-12-28</p>
-                        </td>
-                        <td class="price">
-                            <p>$300</p>
-                        </td>
-                        <td class="action">
-                            <a class="view" href="#"><i class="ti ti-eye"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="sn">
-                            <p>3</p>
-                        </td>
-                        <td class="details">
-                            <a class="title" href="#">Complete Blender Creator Learn 3D Modelling.</a>
-                        </td>
-                        <td class="p_date">
-                            <p>2021-12-28</p>
-                        </td>
-                        <td class="e_date">
-                            <p>2021-12-28</p>
-                        </td>
-                        <td class="price">
-                            <p>$300</p>
-                        </td>
-                        <td class="action">
-                            <a class="view" href="#"><i class="ti ti-eye"></i></a>
-                        </td>
-                    </tr>
+                    @forelse($items as $item)
+                        <tr>
+                            <td class="details">
+                                <div>
+                                    <div>
+                                        @if ($item->preview_type == 'image')
+                                            <img src="" alt="">
+                                        @elseif($item->preview_type == 'video')
+                                            <img src="" alt="">
+                                        @elseif($item->preview_type == 'audio')
+                                            <img src="" alt="">
+                                        @endif
+                                    </div>
+                                    <div>
+                                        <h6>{{ $item->name }}</h6>
+                                        <div class="d-flex">
+                                            <span class="text-primary">{{ $item->category->name }}</span>
+                                            <span class="ms-2 me-2">/</span>
+                                            <span class="text-primary">{{ $item->subCategory->name }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="details">
+                                <a class="title" href="#">Complete Blender Creator Learn 3D Modelling.</a>
+                            </td>
+                            <td class="p_date">
+                                <p>2021-12-28</p>
+                            </td>
+                            <td class="e_date">
+                                <p>2021-12-28</p>
+                            </td>
+                            <td class="price">
+                                <p>$300</p>
+                            </td>
+                        </tr>
+                    @empty
+                    @endforelse
                 </tbody>
             </table>
         </div>
