@@ -40,17 +40,16 @@
                     @forelse($items as $item)
                         <tr>
                             <td class="details">
-                                <div>
-                                    <div>
-                                        @if ($item->preview_type == 'image')
-                                            <img src="{{ asset($item->preview_image) }}" alt="">
-                                        @elseif($item->preview_type == 'video')
-                                            <img src="" alt="">
-                                        @elseif($item->preview_type == 'audio')
-                                            <img src="" alt="">
-                                        @endif
-                                    </div>
-                                    <div>
+                                <div class="d-flex">
+                                    @if ($item->preview_type == 'image')
+                                        <img style="width: 80px; height: 80px object-fit: cover;"
+                                            src="{{ asset($item->preview_image) }}" alt="">
+                                    @elseif($item->preview_type == 'video')
+                                        <img src="{{ asset('default/video.webp') }}" alt="">
+                                    @elseif($item->preview_type == 'audio')
+                                        <img src="{{ asset('default/audio.webp') }}" alt="">
+                                    @endif
+                                    <div class="ms-3">
                                         <h6>{{ $item->name }}</h6>
                                         <div class="d-flex">
                                             <span class="text-primary">{{ $item->category->name }}</span>
@@ -60,17 +59,29 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="details">
-                                <a class="title" href="#">Complete Blender Creator Learn 3D Modelling.</a>
+                            <td class="">
+                                @if ($item->discount_price > 0)
+                                    <span class="d-flex"><del>${{ $item->price }}</del>
+                                        <h6 class="ms-2">${{ $item->discount_price }}</h6>
+                                    </span>
+                                @else
+                                    <h6>${{ $item->price }}</h6>
+                                @endif
                             </td>
                             <td class="p_date">
-                                <p>2021-12-28</p>
+                                <p>{{ formatDate($item->created_at) }}</p>
                             </td>
                             <td class="e_date">
-                                <p>2021-12-28</p>
+                                @if ($item->status == 'pending')
+                                    <div class="badge bg-warning">{{ __('Pending') }}</div>
+                                @elseif($item->status == 'active')
+                                    <div class="badge bg-success">{{ __('Active') }}</div>
+                                @elseif($item->status == 'inactive')
+                                    <div class="badge bg-secondary">{{ __('Inactive') }}</div>
+                                @endif
                             </td>
                             <td class="price">
-                                <p>$300</p>
+                                <a href="" class="btn btn-sm btn-primary">Edit</a>
                             </td>
                         </tr>
                     @empty
