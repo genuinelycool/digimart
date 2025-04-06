@@ -81,7 +81,7 @@
                                 @endif
                             </td>
                             <td class="price">
-                                <a href="" class="btn btn-sm btn-primary">Edit</a>
+                                <a href="{{ route('user.items.edit', $item->id) }}" class="btn btn-sm btn-primary">Edit</a>
                             </td>
                         </tr>
                     @empty

@@ -161,4 +161,12 @@ class ItemController extends Controller
 
         return response()->json(['status' => 'success', 'redirect' => route('user.items.index')], 200);
     }
+
+    function itemEdit (string $id) : View
+    {
+        $categories = Category::all();
+        $item = Item::with(['category', 'subCategory'])->where('id', $id)->where('author_id', user()->id)->firstOrFail();
+
+        return view('frontend.dashboard.item.edit', compact('categories', 'item'));
+    }
 }
