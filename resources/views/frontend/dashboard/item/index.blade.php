@@ -43,7 +43,7 @@
                                 <div>
                                     <div>
                                         @if ($item->preview_type == 'image')
-                                            <img src="" alt="">
+                                            <img src="{{ asset($item->preview_image) }}" alt="">
                                         @elseif($item->preview_type == 'video')
                                             <img src="" alt="">
                                         @elseif($item->preview_type == 'audio')

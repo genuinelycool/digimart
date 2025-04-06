@@ -14,6 +14,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\File;
 
 class ItemController extends Controller
 {
@@ -146,6 +147,15 @@ class ItemController extends Controller
         $item->status = 'pending';
         $item->is_free = $request->is_free;
         $item->save();
+
+        /** Move public files in public folder */
+        $publicFiles = $request->screenshots ?? [];
+        $publicFiles[] = $request->preview_file;
+        foreach ($publicFiles as $file) {
+            if (File::exists(storage_path('app/private/' . $file))) {
+                File::move(storage_path('app/private/' . $file), public_path($file));
+            }
+        }
 
         NotificationService::CREATED();
 
