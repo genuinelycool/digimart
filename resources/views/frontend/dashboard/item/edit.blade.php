@@ -529,8 +529,8 @@
             let formData = $(this).serialize();
 
             $.ajax({
-                method: 'POST',
-                url: '/user/item/store',
+                method: 'PUT',
+                url: '/user/item/:id/update'.replace(':id', {{ $item->id }}),
                 data: formData,
                 success: function(response) {
                     if (response.status == 'success') {

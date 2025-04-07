@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\ItemStoreRequest;
+use App\Http\Requests\Frontend\ItemUpdateRequest;
 use App\Models\Category;
 use App\Models\Item;
 use App\Models\UploadedFiles;
@@ -122,7 +123,7 @@ class ItemController extends Controller
         }
     }
 
-    function storeItem(ItemStoreRequest $request) : JsonResponse
+    function storeItem(ItemStoreRequest $request): JsonResponse
     {
         $item = new Item();
         $item->author_id = user()->id;
@@ -162,11 +163,16 @@ class ItemController extends Controller
         return response()->json(['status' => 'success', 'redirect' => route('user.items.index')], 200);
     }
 
-    function itemEdit (string $id) : View
+    function itemEdit(string $id): View
     {
         $categories = Category::all();
         $item = Item::with(['category', 'subCategory'])->where('id', $id)->where('author_id', user()->id)->firstOrFail();
 
         return view('frontend.dashboard.item.edit', compact('categories', 'item'));
+    }
+
+    function itemUpdate(ItemUpdateRequest $request)
+    {
+        dd($request->all());
     }
 }
