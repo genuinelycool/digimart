@@ -35,7 +35,7 @@ return new class extends Migration
             $table->double('discount_price')->default(0)->nullable();
             $table->boolean('is_supported')->default(0)->nullable();
             $table->text('support_instruction')->nullable();
-            $table->enum('status', ['active', 'pending', 'inactive'])->default('pending');
+            $table->enum('status', ['resubmitted', 'pending', 'soft_rejected', 'hard_rejected', 'approved'])->default('pending');
             $table->integer('total_sales')->default(0)->nullable();
             $table->double('total_sale_amount')->default(0)->nullable();
             $table->double('total_earnings')->default(0)->nullable();
@@ -44,7 +44,7 @@ return new class extends Migration
             $table->boolean('is_best_selling')->default(0)->nullable();
             $table->boolean('is_on_discount')->default(0)->nullable();
             $table->boolean('is_featured')->default(0)->nullable();
-            
+
             $table->timestamps();
         });
     }

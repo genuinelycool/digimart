@@ -163,7 +163,8 @@
                                     class="text-danger"></span></label>
                             <div class="input-group mb-3">
                                 <select name="source_type" id="main_source_selector" class="form-select">
-                                    <option selected value="upload">{{ __('Upload') }}</option>
+                                    <option selected value="">{{ __('Select') }}</option>
+                                    <option value="upload">{{ __('Upload') }}</option>
                                     <option value="link">{{ __('Link') }}</option>
                                 </select>
                                 <select name="upload_source" id="upload_source" class="form-select">
