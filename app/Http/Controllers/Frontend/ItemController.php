@@ -168,6 +168,9 @@ class ItemController extends Controller
         $categories = Category::all();
         $item = Item::with(['category', 'subCategory'])->where('id', $id)->where('author_id', user()->id)->firstOrFail();
 
+        // put category id on session
+        session()->put('selected_category', $item->category->id);
+
         return view('frontend.dashboard.item.edit', compact('categories', 'item'));
     }
 
@@ -180,9 +183,9 @@ class ItemController extends Controller
         $item->demo_link = $request->demo_link;
         $item->tags = explode(',', $request->tags);
         if($request->filled('preview_type')) $item->preview_type = $request->preview_type;
-        if($request->filled('preview_image')) $item->preview_image = $request->preview_file;
-        if($request->filled('preview_video')) $item->preview_video = $request->preview_file;
-        if($request->filled('preview_audio')) $item->preview_audio = $request->preview_file;
+        if($request->filled('preview_file')) $item->preview_image = $request->preview_file;
+        if($request->filled('preview_file')) $item->preview_video = $request->preview_file;
+        if($request->filled('preview_file')) $item->preview_audio = $request->preview_file;
         if($request->filled('source_type')) $item->main_file = $request->source_type == 'upload' ? $request->upload_source : $request->link_source;
         if($request->filled('source_type')) $item->is_main_file_external = $request->source_type == 'upload' ? 0 : 1;
         if($request->filled('screenshots')) $item->screenshots = $request->screenshots;

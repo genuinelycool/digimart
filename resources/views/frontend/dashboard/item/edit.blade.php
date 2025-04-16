@@ -412,17 +412,17 @@
 
             for (let i = 0; i < response.files.length; i++) {
                 var previewOption = document.createElement('option');
-                previewOption.value = response.files[i].id;
+                previewOption.value = response.files[i].path;
                 previewOption.text = response.files[i].name;
                 previewTypeInput.add(previewOption);
 
                 var screenshotsOption = document.createElement('option');
-                screenshotsOption.value = response.files[i].id;
+                screenshotsOption.value = response.files[i].path;
                 screenshotsOption.text = response.files[i].name;
                 screenshotsInput.add(screenshotsOption);
 
                 var uploadSourceOption = document.createElement('option');
-                uploadSourceOption.value = response.files[i].id;
+                uploadSourceOption.value = response.files[i].path;
                 uploadSourceOption.text = response.files[i].name;
                 uploadSourceInput.add(uploadSourceOption);
             }
