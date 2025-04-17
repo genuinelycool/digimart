@@ -168,10 +168,12 @@ class ItemController extends Controller
         $categories = Category::all();
         $item = Item::with(['category', 'subCategory'])->where('id', $id)->where('author_id', user()->id)->firstOrFail();
 
+        $uploadedItems = UploadedFiles::where('author_id', user()->id)->where('category_id', $item->category_id)->get();
+
         // put category id on session
         session()->put('selected_category', $item->category->id);
 
-        return view('frontend.dashboard.item.edit', compact('categories', 'item'));
+        return view('frontend.dashboard.item.edit', compact('categories', 'item', 'uploadedItems'));
     }
 
     function itemUpdate(ItemUpdateRequest $request, string $id)
@@ -206,6 +208,8 @@ class ItemController extends Controller
                 File::move(storage_path('app/private/' . $file), public_path($file));
             }
         }
+
+        UploadedFiles::where('category_id', $item->category_id)->where('author_id', user()->id)?->delete();
 
         NotificationService::UPDATED();
 
