@@ -70,6 +70,18 @@
     <form action="" method="POST" enctype="multipart/form-data" id="product_form">
         @csrf
 
+        <ul class="nav nav-pills mt-4">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{{ route('user.items.edit', $item->id) }}">Edit Details</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('user.items.changelog', $item->id) }}">Changelogs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">History</a>
+            </li>
+        </ul>
+
         <div class="row">
             <div class="col-md-7">
                 <div class="wsus__dash_order_table mt-3">
@@ -339,7 +351,8 @@
                         </div>
                         <hr style="margin-top: 16px;">
                         <div class="col-12">
-                            <a href="{{ route('user.items.download', $item->id) }}" class="btn btn-primary w-100">{{ __('Download') }}</a>
+                            <a href="{{ route('user.items.download', $item->id) }}"
+                                class="btn btn-primary w-100">{{ __('Download') }}</a>
                         </div>
                     </div>
                 </div>

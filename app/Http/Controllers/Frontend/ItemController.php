@@ -226,4 +226,11 @@ class ItemController extends Controller
 
         abort(404);
     }
+
+    function itemChangeLog(string $id): View
+    {
+        $item = Item::where('id', $id)->where('author_id', user()->id)->firstOrFail();
+
+        return view('frontend.dashboard.item.changelog', compact('item'));
+    }
 }
