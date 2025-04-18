@@ -16,6 +16,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class ItemController extends Controller
 {
@@ -214,5 +215,15 @@ class ItemController extends Controller
         NotificationService::UPDATED();
 
         return response()->json(['status' => 'success', 'redirect' => route('user.items.index')], 200);
+    }
+
+    function itemDownload(string $id) {
+        $item = Item::where('id', $id)->where('author_id', user()->id)->firstOrFail();
+
+        if(Storage::disk('local')->exists($item->main_file)) {
+            return Storage::disk('local')->download($item->main_file);
+        }
+
+        abort(404);
     }
 }

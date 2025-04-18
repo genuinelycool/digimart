@@ -299,21 +299,21 @@
                         <div class="col-6 text-end">
                             <span>#{{ $item->id }}</span>
                         </div>
-                        <hr>
+                        <hr style="margin-top: 16px;">
                         <div class="col-6">
                             <b>{{ __('Name') }}</b>
                         </div>
                         <div class="col-6 text-end">
                             <span>{{ $item->name }}</span>
                         </div>
-                        <hr>
+                        <hr style="margin-top: 16px;">
                         <div class="col-6">
                             <b>{{ __('Category') }}</b>
                         </div>
                         <div class="col-6 text-end">
                             <span>{{ $item->category->name }} / {{ $item->subCategory->name }}</span>
                         </div>
-                        <hr>
+                        <hr style="margin-top: 16px;">
                         <div class="col-6">
                             <b>{{ __('Status') }}</b>
                         </div>
@@ -330,16 +330,16 @@
                                 <span class="badge bg-primary">{{ __('Resubmitted') }}</span>
                             @endif
                         </div>
-                        <hr>
+                        <hr style="margin-top: 16px;">
                         <div class="col-6">
                             <b>{{ __('Publish Date') }}</b>
                         </div>
                         <div class="col-6 text-end">
                             <span>{{ formatDate($item->created_at) }}</span>
                         </div>
-                        <hr>
+                        <hr style="margin-top: 16px;">
                         <div class="col-12">
-                            <a href="" class="btn btn-primary w-100">{{ __('Download') }}</a>
+                            <a href="{{ route('user.items.download', $item->id) }}" class="btn btn-primary w-100">{{ __('Download') }}</a>
                         </div>
                     </div>
                 </div>
