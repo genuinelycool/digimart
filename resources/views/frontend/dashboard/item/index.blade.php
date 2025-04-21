@@ -74,14 +74,23 @@
                             <td class="e_date">
                                 @if ($item->status == 'pending')
                                     <div class="badge bg-warning">{{ __('Pending') }}</div>
-                                @elseif($item->status == 'active')
-                                    <div class="badge bg-success">{{ __('Active') }}</div>
-                                @elseif($item->status == 'inactive')
-                                    <div class="badge bg-secondary">{{ __('Inactive') }}</div>
+                                @elseif($item->status == 'approved')
+                                    <div class="badge bg-success">{{ __('Approved') }}</div>
+                                @elseif($item->status == 'soft_rejected')
+                                    <div class="badge bg-danger">{{ __('Soft Rejected') }}</div>
+                                @elseif($item->status == 'hard_rejected')
+                                    <div class="badge bg-danger">{{ __('Hard Rejected') }}</div>
+                                @elseif($item->status == 'resubmitted')
+                                    <div class="badge bg-primary">{{ __('Resubmitted') }}</div>
                                 @endif
                             </td>
                             <td class="price">
-                                <a href="{{ route('user.items.edit', $item->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                @if ($item->status == 'approved' || $item->status == 'soft_rejected')
+                                    <a href="{{ route('user.items.edit', $item->id) }}"
+                                        class="btn btn-sm btn-primary"><i class="ti ti-edit"></i></a>
+                                @else
+                                    <button class="btn btn-sm btn-secondary"><i class="ti ti-edit"></i></button>
+                                @endif
                             </td>
                         </tr>
                     @empty

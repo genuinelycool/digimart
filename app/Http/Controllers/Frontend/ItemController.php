@@ -194,6 +194,9 @@ class ItemController extends Controller
     function itemUpdate(ItemUpdateRequest $request, string $id)
     {
         $item = Item::where('id', $id)->where('author_id', user()->id)->firstOrFail();
+
+        if($item->status !== 'approved' || $item->status !== 'soft_rejected') return abort(404);
+
         $item->name = $request->name;
         $item->description = $request->description;
         $item->version = $request->version;
