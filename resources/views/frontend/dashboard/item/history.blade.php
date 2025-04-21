@@ -25,29 +25,17 @@
                 <a class="nav-link" aria-current="page" href="{{ route('user.items.edit', $item->id) }}">Edit Details</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="{{ route('user.items.changelog', $item->id) }}">Changelogs</a>
+                <a class="nav-link" href="{{ route('user.items.changelog', $item->id) }}">Changelogs</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('user.items.history', $item->id) }}">History</a>
+                <a class="nav-link active" href="{{ route('user.items.history', $item->id) }}">History</a>
             </li>
         </ul>
 
         <div class="row">
             <div class="col-md-7">
                 <div class="wsus__dash_order_table mt-3">
-                    <div>
-                        <h6>Add New Log</h6>
-                    </div>
-
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <x-frontend.input-text name="version" :label="__('Version')" :required="true" />
-                        </div>
-                        <div class="col-md-12">
-                            <x-frontend.text-area name="description" :label="__('Description')" :required="true" />
-                        </div>
-                    </div>
+                    No data
                 </div>
             </div>
             <div class="col-md-5">
@@ -111,14 +99,6 @@
             </div>
         </div>
 
-        <div class="wsus__dash_order_table mt-3">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-12">
-                        <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </form>
 @endsection

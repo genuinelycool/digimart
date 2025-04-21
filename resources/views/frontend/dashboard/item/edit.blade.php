@@ -78,7 +78,7 @@
                 <a class="nav-link" href="{{ route('user.items.changelog', $item->id) }}">Changelogs</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">History</a>
+                <a class="nav-link" href="{{ route('user.items.history', $item->id) }}">History</a>
             </li>
         </ul>
 

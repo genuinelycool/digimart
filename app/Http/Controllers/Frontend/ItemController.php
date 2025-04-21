@@ -7,6 +7,7 @@ use App\Http\Requests\Frontend\ItemStoreRequest;
 use App\Http\Requests\Frontend\ItemUpdateRequest;
 use App\Models\Category;
 use App\Models\Item;
+use App\Models\ItemHistory;
 use App\Models\UploadedFiles;
 use App\Services\NotificationService;
 use App\Traits\FileUpload;
@@ -159,6 +160,17 @@ class ItemController extends Controller
             }
         }
 
+        // store initial history
+        $itemHistory = new ItemHistory();
+        $itemHistory->author_id = user()->id;
+        $itemHistory->item_id = $item->id;
+        $itemHistory->title = 'Initial Submission';
+        $itemHistory->body = $request->message_for_reviewer;
+        $itemHistory->status = 'pending';
+        $itemHistory->save();
+
+        UploadedFiles::where('category_id', $item->category_id)->where('author_id', user()->id)?->delete();
+
         NotificationService::CREATED();
 
         return response()->json(['status' => 'success', 'redirect' => route('user.items.index')], 200);
@@ -232,5 +244,12 @@ class ItemController extends Controller
         $item = Item::where('id', $id)->where('author_id', user()->id)->firstOrFail();
 
         return view('frontend.dashboard.item.changelog', compact('item'));
+    }
+
+    function itemHistory(string $id): View
+    {
+        $item = Item::where('id', $id)->where('author_id', user()->id)->firstOrFail();
+
+        return view('frontend.dashboard.item.history', compact('item'));
     }
 }
