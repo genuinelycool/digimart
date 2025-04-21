@@ -17,7 +17,8 @@
         </div>
     </div>
 
-    <form action="" method="POST" enctype="multipart/form-data" id="product_form">
+    <form action="{{ route('user.items.changelog.store', $item->id) }}" method="POST" enctype="multipart/form-data"
+        id="product_form">
         @csrf
 
         <ul class="nav nav-pills mt-4">
@@ -34,21 +35,27 @@
 
         <div class="row">
             <div class="col-md-7">
-                <div class="wsus__dash_order_table mt-3">
-                    <div>
-                        <h6>Add New Log</h6>
-                    </div>
+                @if ($item->status == 'approved')
+                    <div class="wsus__dash_order_table mt-3">
+                        <div>
+                            <h6>Add New Log</h6>
+                        </div>
 
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <x-frontend.input-text name="version" :label="__('Version')" :required="true" />
-                        </div>
-                        <div class="col-md-12">
-                            <x-frontend.text-area name="description" :label="__('Description')" :required="true" />
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <x-frontend.input-text name="version" :label="__('Version')" :required="true" />
+                            </div>
+                            <div class="col-md-12">
+                                <x-frontend.text-area name="description" :label="__('Description')" :required="true" />
+                            </div>
                         </div>
                     </div>
-                </div>
+                @else
+                    <div class="wsus__dash_order_table mt-3 text-center">
+                        <p>{{ __('This item is not approved yet.') }}</p>
+                    </div>
+                @endif
             </div>
             <div class="col-md-5">
                 <div class="wsus__dash_order_table mt-3">
@@ -111,14 +118,16 @@
             </div>
         </div>
 
-        <div class="wsus__dash_order_table mt-3">
-            <div class="row">
-                <div class="col-md-12">
+        @if ($item->status == 'approved')
+            <div class="wsus__dash_order_table mt-3">
+                <div class="row">
                     <div class="col-md-12">
-                        <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        @endif
     </form>
 @endsection

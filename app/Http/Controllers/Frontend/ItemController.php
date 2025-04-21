@@ -7,6 +7,7 @@ use App\Http\Requests\Frontend\ItemStoreRequest;
 use App\Http\Requests\Frontend\ItemUpdateRequest;
 use App\Models\Category;
 use App\Models\Item;
+use App\Models\ItemChangelog;
 use App\Models\ItemHistory;
 use App\Models\UploadedFiles;
 use App\Services\NotificationService;
@@ -14,6 +15,7 @@ use App\Traits\FileUpload;
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
@@ -248,8 +250,32 @@ class ItemController extends Controller
 
     function itemHistory(string $id): View
     {
+        $histories = ItemHistory::where('item_id', $id)->latest()->get();
+
         $item = Item::where('id', $id)->where('author_id', user()->id)->firstOrFail();
 
-        return view('frontend.dashboard.item.history', compact('item'));
+        return view('frontend.dashboard.item.history', compact('item', 'histories'));
+    }
+
+    function storeChangeLog(Request $request, string $id) : RedirectResponse
+    {
+        $request->validate([
+            'version' => ['required', 'string', 'max:30'],
+            'description' => ['required', 'string', 'max:1000']
+        ]);
+
+        $item = Item::where('id', $id)->where('author_id', user()->id)->firstOrFail();
+
+        if($item->status !== 'approved') return abort(404);
+
+        $changeLog = new ItemChangelog();
+        $changeLog->version = $request->version;
+        $changeLog->description = $request->description;
+        $changeLog->item_id = $item->id;
+        $changeLog->save();
+
+        NotificationService::UPDATED();
+
+        return redirect()->back();
     }
 }

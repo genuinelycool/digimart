@@ -34,9 +34,19 @@
 
         <div class="row">
             <div class="col-md-7">
-                <div class="wsus__dash_order_table mt-3">
-                    No data
-                </div>
+                @forelse ($histories as $history)
+                    <div class="wsus__dash_order_table mt-3">
+                        <h6>{{ $history->title }}</h6>
+                        <p>{{ $history->body }} </p>
+                        <p>{{ __('Status') }} : {{ Str::replace('_', ' ', $history->status) }}</p>
+                        <hr>
+                        <span>{{ __('Date') }}: {{ formatDate($history->created_at) }}</span>
+                    </div>
+                @empty
+                    <div class="wsus__dash_order_table mt-3">
+                        No data
+                    </div>
+                @endforelse
             </div>
             <div class="col-md-5">
                 <div class="wsus__dash_order_table mt-3">

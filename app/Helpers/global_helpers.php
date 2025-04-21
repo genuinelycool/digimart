@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Item;
 use App\Models\KycVerification;
 use Illuminate\Support\Facades\Auth;
 
@@ -84,5 +85,19 @@ if(!function_exists('getIcon')) {
         }
 
         return $fileIcon;
+    }
+}
+
+/** check author product status */
+if(!function_exists('authorProductStatus')) {
+    function authorProductStatus(string $productId) : string | bool
+    {
+        $item = Item::where('id', $productId)->where('author_id', user()->id)->first();
+
+        if($item) {
+            return $item->status;
+        }
+        
+        return false;
     }
 }
