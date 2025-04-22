@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Auth\NewPasswordController;
 use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ItemReviewController;
 use App\Http\Controllers\Admin\KycController;
 use App\Http\Controllers\Admin\KYCSettingController;
 use App\Http\Controllers\Admin\ProfileController;
@@ -73,5 +74,8 @@ Route::middleware('auth:admin')->prefix('admin')->as('admin.')->group(function (
     /** Settings Routes */
     Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
     Route::put('general-settings', [SettingController::class, 'updateGeneralSetting'])->name('settings.general.update');
+
+    /** item review routes */
+    Route::get('item-reviews/pending', [ItemReviewController::class, 'PendingIndex'])->name('item-reviews.pending.index');
 
 });

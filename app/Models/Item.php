@@ -31,6 +31,11 @@ class Item extends Model
         return $this->belongsTo(subCategory::class);
     }
 
+    function author() : BelongsTo
+    {
+        return $this->belongsTo(User::class, 'author_id');
+    }
+
     protected $casts = [
         'tags' => 'array',
         'screenshots' => 'array'

@@ -42,7 +42,7 @@
                             <td class="details">
                                 <div class="d-flex">
                                     @if ($item->preview_type == 'image')
-                                        <img style="width: 80px; height: 80px object-fit: cover;"
+                                        <img style="width: 80px; height: 80px; object-fit: cover;"
                                             src="{{ asset($item->preview_image) }}" alt="">
                                     @elseif($item->preview_type == 'video')
                                         <img src="{{ asset('default/video.webp') }}" alt="">
