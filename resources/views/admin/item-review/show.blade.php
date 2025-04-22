@@ -36,21 +36,25 @@
                                 <div class="accordion" id="accordion-example">
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="heading-1">
-                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                                data-bs-target="#collapse-1" aria-expanded="false">
+                                            <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapse-1"
+                                                aria-expanded="false">
                                                 {{ __('Preview') }}
                                             </button>
                                         </h2>
                                         <div id="collapse-1" class="accordion-collapse collapse"
                                             data-bs-parent="#accordion-example">
                                             <div class="accordion-body pt-0">
-                                                <strong>This is the first item's accordion body.</strong> It is hidden by
-                                                default, until the collapse plugin adds the appropriate classes that we use
-                                                to style each element. These classes control the overall appearance, as well
-                                                as the showing and hiding via CSS transitions. You can modify any of this
-                                                with custom CSS or overriding our default variables. It's also worth noting
-                                                that just about any HTML can go within the <code>.accordion-body</code>,
-                                                though the transition does limit overflow.
+                                                @if ($item->preview_type == 'image')
+                                                    <img style="max-height: 600px; width: 100%; object-fit: cover;"
+                                                        src="{{ asset($item->preview_image) }}" alt=""
+                                                        class="img-fluid">
+                                                @elseif($item->preview_type == 'video')
+                                                    <iframe src="{{ asset($item->preview_video) }}"
+                                                        frameborder="0"></iframe>
+                                                @elseif($item->preview_type == 'audio')
+                                                    <audio src="{{ asset($item->preview_audio) }}" controls></audio>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -65,13 +69,27 @@
                                         <div id="collapse-2" class="accordion-collapse collapse"
                                             data-bs-parent="#accordion-example">
                                             <div class="accordion-body pt-0">
-                                                <strong>This is the second item's accordion body.</strong> It is hidden by
-                                                default, until the collapse plugin adds the appropriate classes that we use
-                                                to style each element. These classes control the overall appearance, as well
-                                                as the showing and hiding via CSS transitions. You can modify any of this
-                                                with custom CSS or overriding our default variables. It's also worth noting
-                                                that just about any HTML can go within the <code>.accordion-body</code>,
-                                                though the transition does limit overflow.
+                                                <div id="carousel-controls" class="carousel slide" data-bs-ride="carousel">
+                                                    <div class="carousel-inner">
+                                                        @foreach ($item->screenshots as $screenshot)
+                                                            <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                                                <img class="d-block w-100" alt=""
+                                                                    src="{{ asset($screenshot) }}">
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                    <a class="carousel-control-prev" href="#carousel-controls"
+                                                        role="button" data-bs-slide="prev">
+                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Previous</span>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#carousel-controls"
+                                                        role="button" data-bs-slide="next">
+                                                        <span class="carousel-control-next-icon"
+                                                            aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Next</span>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
