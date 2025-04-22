@@ -14,4 +14,9 @@ class ItemReviewController extends Controller
         $items = Item::where('status', 'pending')->paginate(25);
         return view('admin.item-review.pending-index', compact('items'));
     }
+
+    function show(string $id) : View
+    {
+        return view('admin.item-review.show');
+    }
 }

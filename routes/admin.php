@@ -77,5 +77,5 @@ Route::middleware('auth:admin')->prefix('admin')->as('admin.')->group(function (
 
     /** item review routes */
     Route::get('item-reviews/pending', [ItemReviewController::class, 'PendingIndex'])->name('item-reviews.pending.index');
-
+    Route::get('item-reviews/pending/{id}/show', [ItemReviewController::class, 'show'])->name('item-reviews.show');
 });

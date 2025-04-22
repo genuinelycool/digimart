@@ -65,7 +65,7 @@
                                                     {{ formatDate($item->updated_at) }}
                                                 </td>
                                                 <td>
-                                                    <a href="#" class="text-primary"><i class="ti ti-eye"></i></a>
+                                                    <a href="{{ route('admin.item-reviews.show', $item->id) }}" class="text-primary"><i class="ti ti-eye"></i></a>
                                                 </td>
                                             </tr>
                                         @empty
