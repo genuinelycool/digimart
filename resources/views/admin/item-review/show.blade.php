@@ -192,7 +192,19 @@
                                 @endforelse
                             </div>
                             <div class="tab-pane fade" id="pills-contact" role="tabpanel"
-                                aria-labelledby="pills-contact-tab" tabindex="0">...</div>
+                                aria-labelledby="pills-contact-tab" tabindex="0">
+                                <form action="{{ route('admin.item-reviews.status', $item->id) }}" method="POST">
+                                    @csrf
+                                    <x-admin.input-select name="status" :label="__('Status')">
+                                        <option value="pending" @selected($item->status == 'pending')>Pending</option>
+                                        <option value="soft_rejected" @selected($item->status == 'soft_rejected')>Soft Reject</option>
+                                        <option value="hard_rejected" @selected($item->status == 'hard_rejected')>Hard Reject</option>
+                                        <option value="approved" @selected($item->status == 'approved')>Approve</option>
+                                    </x-admin.input-select>
+
+                                    <x-admin.submit-button :label="__('Update')" />
+                                </form>
+                            </div>
                         </div>
 
                     </div>

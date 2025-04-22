@@ -11,6 +11,13 @@ if(!function_exists('user')) {
     }
 }
 
+/** get logged in admin */
+if(!function_exists('admin')) {
+    function admin() {
+        return Auth::guard('admin')->user();
+    }
+}
+
 /** get pending kyc count */
 if(!function_exists('pendingKycCount')) {
     function pendingKycCount() : int
@@ -97,7 +104,7 @@ if(!function_exists('authorProductStatus')) {
         if($item) {
             return $item->status;
         }
-        
+
         return false;
     }
 }
