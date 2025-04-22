@@ -104,13 +104,7 @@
                                         <div id="collapse-3" class="accordion-collapse collapse"
                                             data-bs-parent="#accordion-example">
                                             <div class="accordion-body pt-0">
-                                                <strong>This is the third item's accordion body.</strong> It is hidden by
-                                                default, until the collapse plugin adds the appropriate classes that we use
-                                                to style each element. These classes control the overall appearance, as well
-                                                as the showing and hiding via CSS transitions. You can modify any of this
-                                                with custom CSS or overriding our default variables. It's also worth noting
-                                                that just about any HTML can go within the <code>.accordion-body</code>,
-                                                though the transition does limit overflow.
+                                                {!! $item->description !!}
                                             </div>
                                         </div>
                                     </div>
@@ -125,13 +119,12 @@
                                         <div id="collapse-4" class="accordion-collapse collapse"
                                             data-bs-parent="#accordion-example">
                                             <div class="accordion-body pt-0">
-                                                <strong>This is the fourth item's accordion body.</strong> It is hidden by
-                                                default, until the collapse plugin adds the appropriate classes that we use
-                                                to style each element. These classes control the overall appearance, as well
-                                                as the showing and hiding via CSS transitions. You can modify any of this
-                                                with custom CSS or overriding our default variables. It's also worth noting
-                                                that just about any HTML can go within the <code>.accordion-body</code>,
-                                                though the transition does limit overflow.
+                                                @if ($item->is_supported == 1)
+                                                    <span class="badge bg-success text-white">{{ __('Supported') }}</span>
+                                                @else
+                                                    <span
+                                                        class="badge bg-danger text-white">{{ __('Not Supported') }}</span>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -146,13 +139,16 @@
                                         <div id="collapse-5" class="accordion-collapse collapse"
                                             data-bs-parent="#accordion-example">
                                             <div class="accordion-body pt-0">
-                                                <strong>This is the fourth item's accordion body.</strong> It is hidden by
-                                                default, until the collapse plugin adds the appropriate classes that we use
-                                                to style each element. These classes control the overall appearance, as well
-                                                as the showing and hiding via CSS transitions. You can modify any of this
-                                                with custom CSS or overriding our default variables. It's also worth noting
-                                                that just about any HTML can go within the <code>.accordion-body</code>,
-                                                though the transition does limit overflow.
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <x-admin.input-text name="price" :value="$item->price"
+                                                            :label="__('Regular Price')" disabled />
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <x-admin.input-text name="discount_price" :value="$item->discount_price"
+                                                            :label="__('Discount Price')" disabled />
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -167,20 +163,34 @@
                                         <div id="collapse-6" class="accordion-collapse collapse"
                                             data-bs-parent="#accordion-example">
                                             <div class="accordion-body pt-0">
-                                                <strong>This is the fourth item's accordion body.</strong> It is hidden by
-                                                default, until the collapse plugin adds the appropriate classes that we use
-                                                to style each element. These classes control the overall appearance, as well
-                                                as the showing and hiding via CSS transitions. You can modify any of this
-                                                with custom CSS or overriding our default variables. It's also worth noting
-                                                that just about any HTML can go within the <code>.accordion-body</code>,
-                                                though the transition does limit overflow.
+                                                @if ($item->is_free == 1)
+                                                    <span class="badge bg-success text-white">{{ __('Free Item') }}</span>
+                                                @else
+                                                    <span class="badge bg-danger text-white">{{ __('Not Free') }}</span>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="pills-profile" role="tabpanel"
-                                aria-labelledby="pills-profile-tab" tabindex="0">...</div>
+                                aria-labelledby="pills-profile-tab" tabindex="0">
+                                @forelse ($item->histories as $history)
+                                    <div class="card mt-3">
+                                        <div class="card-body">
+                                            <h4>{{ $history->title }}</h4>
+                                            <p>{{ $history->body }} </p>
+                                            <p>{{ __('Status') }} : {{ Str::replace('_', ' ', $history->status) }}</p>
+                                            <hr>
+                                            <span>{{ __('Date') }}: {{ formatDate($history->created_at) }}</span>
+                                        </div>
+                                    </div>
+                                @empty
+                                    <div class="wsus__dash_order_table mt-3">
+                                        No data
+                                    </div>
+                                @endforelse
+                            </div>
                             <div class="tab-pane fade" id="pills-contact" role="tabpanel"
                                 aria-labelledby="pills-contact-tab" tabindex="0">...</div>
                         </div>

@@ -17,7 +17,7 @@ class ItemReviewController extends Controller
 
     function show(string $id) : View
     {
-        $item = Item::findOrFail($id);
+        $item = Item::with('histories')->findOrFail($id);
         return view('admin.item-review.show', compact('item'));
     }
 }

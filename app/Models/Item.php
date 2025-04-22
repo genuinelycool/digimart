@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -34,6 +35,11 @@ class Item extends Model
     function author() : BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');
+    }
+
+    function histories() : HasMany
+    {
+        return $this->hasMany(ItemHistory::class)->latest();
     }
 
     protected $casts = [
