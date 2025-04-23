@@ -11,34 +11,44 @@ use App\Services\NotificationService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Storage;
 
-class ItemReviewController extends Controller
+class ItemReviewController extends Controller implements HasMiddleware
 {
+    static function Middleware(): array
+    {
+        return [
+            new Middleware('permission:review products')
+        ];
+    }
+
     function pendingIndex(): View
     {
         $items = Item::where('status', 'pending')->paginate(25);
         return view('admin.item-review.pending-index', compact('items'));
     }
 
-    function approveIndex() : View
+    function approveIndex(): View
     {
         $items = Item::where('status', 'approved')->paginate(25);
         return view('admin.item-review.approved-index', compact('items'));
     }
 
-    function hardRejectedIndex() : View
+    function hardRejectedIndex(): View
     {
         $items = Item::where('status', 'hard_rejected')->paginate(25);
         return view('admin.item-review.hard-rejected-index', compact('items'));
     }
 
-    function softRejectedIndex() : View
+    function softRejectedIndex(): View
     {
         $items = Item::where('status', 'soft_rejected')->paginate(25);
         return view('admin.item-review.soft-rejected-index', compact('items'));
     }
 
-    function resubmittedIndex() : View
+    function resubmittedIndex(): View
     {
         $items = Item::where('status', 'resubmitted')->paginate(25);
         return view('admin.item-review.resubmitted-index', compact('items'));
@@ -92,5 +102,16 @@ class ItemReviewController extends Controller
         NotificationService::UPDATED();
 
         return redirect()->back();
+    }
+
+    function itemDownload(string $id)
+    {
+        $item = Item::where('id', $id)->firstOrFail();
+
+        if (Storage::disk('local')->exists($item->main_file)) {
+            return Storage::disk('local')->download($item->main_file);
+        }
+
+        abort(404);
     }
 }

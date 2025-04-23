@@ -108,3 +108,11 @@ if(!function_exists('authorProductStatus')) {
         return false;
     }
 }
+
+/** get item status count */
+if(!function_exists('getItemStatusCount')) {
+    function getItemStatusCount(string $status) : int
+    {
+        return Item::select('status')->where('status', $status)->count();
+    }
+}

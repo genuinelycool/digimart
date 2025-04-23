@@ -327,49 +327,48 @@
                     </div>
                 </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown"
-                        data-bs-auto-close="false" role="button" aria-expanded="true">
-                        <span class="nav-link-icon d-md-none d-lg-inline-block">
-                            <i class="ti ti-user-scan"></i>
-                        </span>
-                        <span class="nav-link-title">
-                            Product Review
-                        </span>
-                    </a>
-                    <div class="dropdown-menu">
-                        <div class="dropdown-menu-columns">
-                            <div class="dropdown-menu-column">
-                                <a class="dropdown-item" href="{{ route('admin.item-reviews.pending.index') }}">
-                                    Pending
-                                    <span
-                                        class="badge badge-sm bg-yellow-lt text-uppercase ms-auto">0</span>
-                                </a>
-                                <a class="dropdown-item" href="{{ route('admin.item-reviews.resubmitted.index') }}">
-                                    Resubmitted
-                                    <span
-                                        class="badge badge-sm bg-yellow-lt text-uppercase ms-auto">0</span>
-                                </a>
-                                <a class="dropdown-item" href="{{ route('admin.item-reviews.softrejected.index') }}">
-                                    Soft Rejected
-                                    <span
-                                        class="badge badge-sm bg-yellow-lt text-uppercase ms-auto">0</span>
-                                </a>
-                                <a class="dropdown-item" href="{{ route('admin.item-reviews.hardrejected.index') }}">
-                                    Hard Rejected
-                                    <span
-                                        class="badge badge-sm bg-yellow-lt text-uppercase ms-auto">0</span>
-                                </a>
-                                <a class="dropdown-item" href="{{ route('admin.item-reviews.approved.index') }}">
-                                    Approved
-                                    <span
-                                        class="badge badge-sm bg-yellow-lt text-uppercase ms-auto">0</span>
-                                </a>
+                @if (canAccess(['review products']))
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown"
+                            data-bs-auto-close="false" role="button" aria-expanded="true">
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                <i class="ti ti-user-scan"></i>
+                            </span>
+                            <span class="nav-link-title">
+                                Product Review
+                            </span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-menu-columns">
+                                <div class="dropdown-menu-column">
+                                    <a class="dropdown-item" href="{{ route('admin.item-reviews.pending.index') }}">
+                                        Pending
+                                        <span
+                                            class="badge badge-sm bg-yellow-lt text-uppercase ms-auto">{{ getItemStatusCount('pending') }}</span>
+                                    </a>
+                                    <a class="dropdown-item"
+                                        href="{{ route('admin.item-reviews.resubmitted.index') }}">
+                                        Resubmitted
+                                        <span
+                                            class="badge badge-sm bg-yellow-lt text-uppercase ms-auto">{{ getItemStatusCount('resubmitted') }}</span>
+                                    </a>
+                                    <a class="dropdown-item"
+                                        href="{{ route('admin.item-reviews.softrejected.index') }}">
+                                        Soft Rejected
+                                    </a>
+                                    <a class="dropdown-item"
+                                        href="{{ route('admin.item-reviews.hardrejected.index') }}">
+                                        Hard Rejected
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('admin.item-reviews.approved.index') }}">
+                                        Approved
+                                    </a>
 
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </li>
+                    </li>
+                @endif
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown"
