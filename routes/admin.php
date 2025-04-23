@@ -76,7 +76,11 @@ Route::middleware('auth:admin')->prefix('admin')->as('admin.')->group(function (
     Route::put('general-settings', [SettingController::class, 'updateGeneralSetting'])->name('settings.general.update');
 
     /** item review routes */
-    Route::get('item-reviews/pending', [ItemReviewController::class, 'PendingIndex'])->name('item-reviews.pending.index');
+    Route::get('item-reviews/pending', [ItemReviewController::class, 'pendingIndex'])->name('item-reviews.pending.index');
+    Route::get('item-reviews/approve', [ItemReviewController::class, 'approveIndex'])->name('item-reviews.approved.index');
+    Route::get('item-reviews/hard-rejected', [ItemReviewController::class, 'hardRejectedIndex'])->name('item-reviews.hardrejected.index');
+    Route::get('item-reviews/soft-rejected', [ItemReviewController::class, 'softRejectedIndex'])->name('item-reviews.softrejected.index');
+    Route::get('item-reviews/resubmitted', [ItemReviewController::class, 'resubmittedIndex'])->name('item-reviews.resubmitted.index');
     Route::get('item-reviews/{id}/show', [ItemReviewController::class, 'show'])->name('item-reviews.show');
     Route::post('item-reviews/{id}/status', [ItemReviewController::class, 'updateStatus'])->name('item-reviews.status');
 });

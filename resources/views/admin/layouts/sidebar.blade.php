@@ -345,9 +345,27 @@
                                     <span
                                         class="badge badge-sm bg-yellow-lt text-uppercase ms-auto">0</span>
                                 </a>
-                                <a class="dropdown-item" href="{{ route('admin.kyc-settings.index') }}">
-                                    KYC Settings
+                                <a class="dropdown-item" href="{{ route('admin.item-reviews.resubmitted.index') }}">
+                                    Resubmitted
+                                    <span
+                                        class="badge badge-sm bg-yellow-lt text-uppercase ms-auto">0</span>
                                 </a>
+                                <a class="dropdown-item" href="{{ route('admin.item-reviews.softrejected.index') }}">
+                                    Soft Rejected
+                                    <span
+                                        class="badge badge-sm bg-yellow-lt text-uppercase ms-auto">0</span>
+                                </a>
+                                <a class="dropdown-item" href="{{ route('admin.item-reviews.hardrejected.index') }}">
+                                    Hard Rejected
+                                    <span
+                                        class="badge badge-sm bg-yellow-lt text-uppercase ms-auto">0</span>
+                                </a>
+                                <a class="dropdown-item" href="{{ route('admin.item-reviews.approved.index') }}">
+                                    Approved
+                                    <span
+                                        class="badge badge-sm bg-yellow-lt text-uppercase ms-auto">0</span>
+                                </a>
+
                             </div>
                         </div>
                     </div>

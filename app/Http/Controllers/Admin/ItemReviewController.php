@@ -14,10 +14,34 @@ use Illuminate\Http\Request;
 
 class ItemReviewController extends Controller
 {
-    function PendingIndex(): View
+    function pendingIndex(): View
     {
         $items = Item::where('status', 'pending')->paginate(25);
         return view('admin.item-review.pending-index', compact('items'));
+    }
+
+    function approveIndex() : View
+    {
+        $items = Item::where('status', 'approved')->paginate(25);
+        return view('admin.item-review.approved-index', compact('items'));
+    }
+
+    function hardRejectedIndex() : View
+    {
+        $items = Item::where('status', 'hard_rejected')->paginate(25);
+        return view('admin.item-review.hard-rejected-index', compact('items'));
+    }
+
+    function softRejectedIndex() : View
+    {
+        $items = Item::where('status', 'soft_rejected')->paginate(25);
+        return view('admin.item-review.soft-rejected-index', compact('items'));
+    }
+
+    function resubmittedIndex() : View
+    {
+        $items = Item::where('status', 'resubmitted')->paginate(25);
+        return view('admin.item-review.resubmitted-index', compact('items'));
     }
 
     function show(string $id): View
