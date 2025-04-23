@@ -194,21 +194,23 @@ class ItemController extends Controller
     function itemUpdate(ItemUpdateRequest $request, string $id)
     {
         $item = Item::where('id', $id)->where('author_id', user()->id)->firstOrFail();
+        // dd($item);
 
-        if($item->status !== 'approved' || $item->status !== 'soft_rejected') return abort(404);
+        // if ($item->status !== 'approved' || $item->status !== 'soft_rejected') return response()->json(['status' => 'error', 'message' => __('Item not approved yet')], 402);
+        if ($item->status == 'pending' || $item->status == 'hard_rejected') return response()->json(['status' => 'error', 'message' => __('Item not approved yet')], 402);
 
         $item->name = $request->name;
         $item->description = $request->description;
         $item->version = $request->version;
         $item->demo_link = $request->demo_link;
         $item->tags = explode(',', $request->tags);
-        if($request->filled('preview_type')) $item->preview_type = $request->preview_type;
-        if($request->filled('preview_file')) $item->preview_image = $request->preview_file;
-        if($request->filled('preview_file')) $item->preview_video = $request->preview_file;
-        if($request->filled('preview_file')) $item->preview_audio = $request->preview_file;
-        if($request->filled('source_type')) $item->main_file = $request->source_type == 'upload' ? $request->upload_source : $request->link_source;
-        if($request->filled('source_type')) $item->is_main_file_external = $request->source_type == 'upload' ? 0 : 1;
-        if($request->filled('screenshots')) $item->screenshots = $request->screenshots;
+        if ($request->filled('preview_type')) $item->preview_type = $request->preview_type;
+        if ($request->filled('preview_file')) $item->preview_image = $request->preview_file;
+        if ($request->filled('preview_file')) $item->preview_video = $request->preview_file;
+        if ($request->filled('preview_file')) $item->preview_audio = $request->preview_file;
+        if ($request->filled('source_type')) $item->main_file = $request->source_type == 'upload' ? $request->upload_source : $request->link_source;
+        if ($request->filled('source_type')) $item->is_main_file_external = $request->source_type == 'upload' ? 0 : 1;
+        if ($request->filled('screenshots')) $item->screenshots = $request->screenshots;
         $item->price = $request->price;
         $item->discount_price = $request->discount_price;
         $item->is_supported = $request->support;
@@ -219,7 +221,7 @@ class ItemController extends Controller
 
         /** Move public files in public folder */
         $publicFiles = $request->screenshots ?? [];
-        if($request->filled('preview_file')) $publicFiles[] = $request->preview_file;
+        if ($request->filled('preview_file')) $publicFiles[] = $request->preview_file;
 
         foreach ($publicFiles as $file) {
             if (File::exists(storage_path('app/private/' . $file))) {
@@ -234,10 +236,11 @@ class ItemController extends Controller
         return response()->json(['status' => 'success', 'redirect' => route('user.items.index')], 200);
     }
 
-    function itemDownload(string $id) {
+    function itemDownload(string $id)
+    {
         $item = Item::where('id', $id)->where('author_id', user()->id)->firstOrFail();
 
-        if(Storage::disk('local')->exists($item->main_file)) {
+        if (Storage::disk('local')->exists($item->main_file)) {
             return Storage::disk('local')->download($item->main_file);
         }
 
@@ -260,7 +263,7 @@ class ItemController extends Controller
         return view('frontend.dashboard.item.history', compact('item', 'histories'));
     }
 
-    function storeChangeLog(Request $request, string $id) : RedirectResponse
+    function storeChangeLog(Request $request, string $id): RedirectResponse
     {
         $request->validate([
             'version' => ['required', 'string', 'max:30'],
@@ -269,7 +272,7 @@ class ItemController extends Controller
 
         $item = Item::where('id', $id)->where('author_id', user()->id)->firstOrFail();
 
-        if($item->status !== 'approved') return abort(404);
+        if ($item->status !== 'approved') return abort(404);
 
         $changeLog = new ItemChangelog();
         $changeLog->version = $request->version;

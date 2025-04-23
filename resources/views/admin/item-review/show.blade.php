@@ -235,26 +235,19 @@
                             <div class="col-md-4">
                                 <div class="card mt-3">
                                     <div class="card-body">
-                                        <div>
-                                        </div>
-
-
                                         <div class="row">
-                                            <div class="col-12">
-                                                <h3>{{ $item->name }}</h3>
-                                            </div>
                                             <hr style="margin-top: 16px;">
-                                            <div class="col-6">
+                                            <div class="col-4">
                                                 <b>{{ __('ID') }}</b>
                                             </div>
-                                            <div class="col-6 text-end">
+                                            <div class="col-8 text-end">
                                                 <span>#{{ $item->id }}</span>
                                             </div>
                                             <hr style="margin-top: 16px;">
-                                            <div class="col-6">
+                                            <div class="col-2">
                                                 <b>{{ __('Name') }}</b>
                                             </div>
-                                            <div class="col-6 text-end">
+                                            <div class="col-10 text-end">
                                                 <span>{{ $item->name }}</span>
                                             </div>
                                             <hr style="margin-top: 16px;">
@@ -272,13 +265,16 @@
                                                 @if ($item->status == 'approved')
                                                     <span class="badge bg-green text-green-fg">{{ __('Approved') }}</span>
                                                 @elseif($item->status == 'pending')
-                                                    <span class="badge bg-yellow text-yellow-fg">{{ __('Pending') }}</span>
+                                                    <span
+                                                        class="badge bg-yellow text-yellow-fg">{{ __('Pending') }}</span>
                                                 @elseif($item->status == 'soft_reject')
-                                                    <span class="badge bg-cyan text-cyan-fg">{{ __('Soft Reject') }}</span>
+                                                    <span
+                                                        class="badge bg-cyan text-cyan-fg">{{ __('Soft Reject') }}</span>
                                                 @elseif($item->status == 'hard_reject')
                                                     <span class="badge bg-red text-red-fg">{{ __('Hard Reject') }}</span>
                                                 @elseif($item->status == 'resubmitted')
-                                                    <span class="badge bg-indigo text-indigo-fg">{{ __('Resubmitted') }}</span>
+                                                    <span
+                                                        class="badge bg-indigo text-indigo-fg">{{ __('Resubmitted') }}</span>
                                                 @endif
                                             </div>
                                             <hr style="margin-top: 16px;">
@@ -290,8 +286,13 @@
                                             </div>
                                             <hr style="margin-top: 16px;">
                                             <div class="col-12">
-                                                <a href="{{ route('admin.item.download', $item->id) }}"
-                                                    class="btn btn-primary w-100">{{ __('Download') }}</a>
+                                                @if ($item->is_main_file_external == 1)
+                                                    <a href="{{ $item->main_file }}" class="btn btn-primary w-100"
+                                                        target="_blank">{{ __('Open Link') }}</a>
+                                                @else
+                                                    <a href="{{ route('admin.item.download', $item->id) }}"
+                                                        class="btn btn-primary w-100">{{ __('Download') }}</a>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
