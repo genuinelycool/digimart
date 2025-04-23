@@ -77,7 +77,7 @@
                                 @elseif($item->status == 'approved')
                                     <div class="badge bg-success">{{ __('Approved') }}</div>
                                 @elseif($item->status == 'soft_rejected')
-                                    <div class="badge bg-danger">{{ __('Soft Rejected') }}</div>
+                                    <div class="badge bg-info">{{ __('Soft Rejected') }}</div>
                                 @elseif($item->status == 'hard_rejected')
                                     <div class="badge bg-danger">{{ __('Hard Rejected') }}</div>
                                 @elseif($item->status == 'resubmitted')
@@ -86,8 +86,8 @@
                             </td>
                             <td class="price">
                                 @if ($item->status == 'approved' || $item->status == 'soft_rejected')
-                                    <a href="{{ route('user.items.edit', $item->id) }}"
-                                        class="btn btn-sm btn-primary"><i class="ti ti-edit"></i></a>
+                                    <a href="{{ route('user.items.edit', $item->id) }}" class="btn btn-sm btn-primary"><i
+                                            class="ti ti-edit"></i></a>
                                 @else
                                     <button class="btn btn-sm btn-secondary"><i class="ti ti-edit"></i></button>
                                 @endif

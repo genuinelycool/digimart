@@ -286,6 +286,11 @@
                                             </div>
                                             <hr style="margin-top: 16px;">
                                             <div class="col-12">
+                                                @if ($item->demo_link)
+                                                    <a href="{{ $item->demo_link }}" class="btn mb-2 btn-yellow w-100"
+                                                        target="_blank">{{ __('Demo') }}</a>
+                                                @endif
+
                                                 @if ($item->is_main_file_external == 1)
                                                     <a href="{{ $item->main_file }}" class="btn btn-primary w-100"
                                                         target="_blank">{{ __('Open Link') }}</a>
