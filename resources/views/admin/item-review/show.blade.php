@@ -195,12 +195,16 @@
                                 aria-labelledby="pills-contact-tab" tabindex="0">
                                 <form action="{{ route('admin.item-reviews.status', $item->id) }}" method="POST">
                                     @csrf
-                                    <x-admin.input-select name="status" :label="__('Status')">
+                                    <x-admin.input-select name="status" :label="__('Status')" id="status">
                                         <option value="pending" @selected($item->status == 'pending')>Pending</option>
                                         <option value="soft_rejected" @selected($item->status == 'soft_rejected')>Soft Reject</option>
                                         <option value="hard_rejected" @selected($item->status == 'hard_rejected')>Hard Reject</option>
                                         <option value="approved" @selected($item->status == 'approved')>Approve</option>
                                     </x-admin.input-select>
+
+                                    <div class="d-none" id="reason">
+                                        <x-admin.input-textarea name="reason" :label="__('Reason')" :value="$item->reject_reason" />
+                                    </div>
 
                                     <x-admin.submit-button :label="__('Update')" />
                                 </form>
@@ -217,3 +221,19 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        'use strict';
+        $(function() {
+            $('#status').on('change', function() {
+                let status = $(this).val();
+                if (status == 'soft_rejected' || status == 'hard_rejected') {
+                    $('#reason').removeClass('d-none');
+                } else {
+                    $('#reason').addClass('d-none');
+                }
+            })
+        })
+    </script>
+@endpush

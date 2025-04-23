@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Item;
 use App\Models\ItemHistory;
+use App\Services\NotificationService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -38,8 +39,28 @@ class ItemReviewController extends Controller
         $history->status = $request->status;
         $history->author_id = $item->author_id;
         $history->reviewer_id = admin()->id;
-        $history->body = __('Congratulations! Your item has been approved.');
+
+        switch ($request->status) {
+            case 'approved':
+                $history->title = 'Item Approved';
+            $history->body = __('Congratulations! Your item has been approved.');
+                break;
+
+            case 'soft_rejected':
+                $history->title = 'Item Soft Rejected';
+                $history->body = $request->reason;
+                break;
+
+            case 'hard_rejected':
+                $history->title = 'Item Hard Rejected';
+                $history->body = $request->reason;
+                break;
+        }
 
         $history->save();
+
+        NotificationService::UPDATED();
+
+        return redirect()->back();
     }
 }
