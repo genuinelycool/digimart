@@ -284,4 +284,22 @@ class ItemController extends Controller
 
         return redirect()->back();
     }
+
+    function itemChangeLogStore(Request $request, string $id): RedirectResponse
+    {
+        $request->validate([
+            'version' => ['required', 'string', 'max:30'],
+            'description' => ['required', 'string', 'max:1000']
+        ]);
+
+        $item = Item::where('id', $id)->where('author_id', user()->id)->firstOrFail();
+        $item->changeLogs()->create([
+            'version' => $request->version,
+            'description' => $request->description
+        ]);
+
+        NotificationService::UPDATED();
+
+        return redirect()->back();
+    }
 }

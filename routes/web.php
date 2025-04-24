@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
         Route::get('item/{id}/changelog', [ItemController::class, 'itemChangeLog'])->name('items.changelog');
         Route::post('item/{id}/changelog', [ItemController::class, 'storeChangeLog'])->name('items.changelog.store');
         Route::get('item/{id}/history', [ItemController::class, 'itemHistory'])->name('items.history');
+        Route::post('item/{id}/changelog', [ItemController::class, 'itemChangeLogStore'])->name('items.changelog.store');
     });
 });
 

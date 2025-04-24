@@ -15,31 +15,36 @@ class Item extends Model
     /**
      * Get the options for generating the slug.
      */
-    public function getSlugOptions() : SlugOptions
+    public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom('name')
             ->saveSlugsTo('slug');
     }
 
-    function category() : BelongsTo
+    function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
-    function subCategory() : BelongsTo
+    function subCategory(): BelongsTo
     {
         return $this->belongsTo(subCategory::class);
     }
 
-    function author() : BelongsTo
+    function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');
     }
 
-    function histories() : HasMany
+    function histories(): HasMany
     {
         return $this->hasMany(ItemHistory::class)->latest();
+    }
+
+    function changeLogs(): HasMany
+    {
+        return $this->hasMany(ItemChangelog::class)->latest();
     }
 
     protected $casts = [

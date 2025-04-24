@@ -39,14 +39,31 @@
 
                         <hr>
                         <div class="row">
-                            <div class="col-md-12">
-                                <x-frontend.input-text name="version" :label="__('Version')" :required="true" />
+                            <div class="col-12">
+                                <form action="{{ route('user.items.changelog.store', $item->id) }}" method="POST">
+                                    @csrf
+
+                                    <div class="col-md-12">
+                                        <x-frontend.input-text name="version" :label="__('Version')" :required="true" />
+                                    </div>
+                                    <div class="col-md-12">
+                                        <x-frontend.text-area name="description" :label="__('Description')" :required="true" />
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
+                                </form>
                             </div>
-                            <div class="col-md-12">
-                                <x-frontend.text-area name="description" :label="__('Description')" :required="true" />
-                            </div>
+
                         </div>
                     </div>
+
+
+                    @foreach ($item->changelogs as $log)
+                        <div class="wsus__dash_order_table mt-3 text-left">
+                            <h6>{{ __('Version') }} : {{ $log->version }}</h6>
+                            <p>{!! nl2br($log->description) !!}</p>
+                        </div>
+                    @endforeach
                 @else
                     <div class="wsus__dash_order_table mt-3 text-center">
                         <p>{{ __('This item is not approved yet.') }}</p>
@@ -113,17 +130,5 @@
                 </div>
             </div>
         </div>
-
-        @if ($item->status == 'approved')
-            <div class="wsus__dash_order_table mt-3">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-12">
-                            <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endif
     </form>
 @endsection
