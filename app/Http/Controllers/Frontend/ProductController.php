@@ -17,4 +17,11 @@ class ProductController extends Controller
 
         return view('frontend.pages.products', compact('products'));
     }
+
+    function show(string $slug): View
+    {
+        $product = Item::where('slug', $slug)->whereStatus('approved')->firstOrFail();
+
+        return view('frontend.pages.product-details', compact('product'));
+    }
 }

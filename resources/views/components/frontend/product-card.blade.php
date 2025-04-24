@@ -1,7 +1,7 @@
 <div class="col-lg-6 col-xl-4 col-sm-6">
     <div class="product-item ">
         <div class="product-item__thumb d-flex">
-            <a href="product-details.html" class="link w-100">
+            <a href="{{ route('products.show', $product->slug) }}" class="link w-100">
                 @if ($product->preview_type == 'image')
                     <img src="{{ asset($product->preview_image) }}" alt="" class="cover-img">
                 @elseif($product->preview_type == 'video')
@@ -32,7 +32,7 @@
                 </div>
             </div>
             <h6 class="product-item__title">
-                <a href="#" class="link">{{ $product->name }}</a>
+                <a href="{{ route('products.show', $product->slug) }}" class="link">{{ $product->name }}</a>
             </h6>
             <div class="product-item__info flx-between gap-2">
                 <span class="product-item__author">
