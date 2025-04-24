@@ -42,7 +42,9 @@
                         @if ($product->preview_type == 'image')
                             <img src="{{ asset($product->preview_image) }}" alt="product" class="img-fluod w-100">
                         @elseif($product->preview_type == 'video')
-
+                            <video id="player" playsinline controls data-poster="">
+                                <source src="{{ asset($product->preview_video) }}" type="video/mp4" />
+                            </video>
                         @elseif($product->preview_type == 'audio')
                         @endif
                     </div>
@@ -471,3 +473,9 @@
     </section>
     <!-- ======================= Product Details Section End ==================== -->
 @endsection
+
+@push('scripts')
+    <script>
+        const player = new Plyr('#player');
+    </script>
+@endpush

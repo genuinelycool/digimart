@@ -126,7 +126,12 @@ if (!function_exists('getItemStatusCount')) {
 if (!function_exists('getFileSize')) {
     function getFileSize(string $path): string
     {
+        try {
+            return formatSize(File::size(storage_path('app/private/' . $path)));
+        } catch (\Exception $e) {
+            return '0 B';
+        }
+
         // return formatSize(Storage::disk('local')->size('private/'.$path));
-        return formatSize(File::size(storage_path('app/private/' . $path)));
     }
 }

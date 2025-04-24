@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/line-awesome.min.css') }}">
     <!-- Select 2 -->
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/select2.min.css') }}">
+    <!-- plyr css -->
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+
     <!-- Tabler Icons CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.21.0/tabler-icons.min.css"
         integrity="sha512-XrgoTBs7P5YtpkeKqKOKkruURsawIaRrhe8QrcWeMnFeyRZiOcRNjBAX+AQeXOvx9/9fSY32dVct1PccRoCICQ=="
@@ -139,7 +142,8 @@
                                 <a href="blog-details.html" class="nav-submenu__link"> Blog Details</a>
                             </li>
                             <li class="nav-submenu__item">
-                                <a href="blog-details-sidebar.html" class="nav-submenu__link"> Blog Details Sidebar</a>
+                                <a href="blog-details-sidebar.html" class="nav-submenu__link"> Blog Details
+                                    Sidebar</a>
                             </li>
                         </ul>
                     </li>
@@ -162,7 +166,7 @@
         <!-- ==================== Dynamic content End ==================== -->
 
         <!-- ==================== Footer Start Here ==================== -->
-       @include('frontend.layouts.footer')
+        @include('frontend.layouts.footer')
         <!-- ==================== Footer End Here ==================== -->
 
     </main>
@@ -188,9 +192,13 @@
     <!-- select 2  -->
     <script src="{{ asset('assets/frontend/js/select2.min.js') }}"></script>
 
+    <!-- plyr js -->
+    <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
     <!-- main js -->
     <script src="{{ asset('assets/frontend/js/main.js') }}"></script>
 
+    @stack('scripts')
 
 </body>
 
