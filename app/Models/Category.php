@@ -11,7 +11,7 @@ class Category extends Model
         'file_types' => 'array'
     ];
 
-    function subCategories() : HasMany
+    function subCategories(): HasMany
     {
         return $this->hasMany(SubCategory::class);
     }
