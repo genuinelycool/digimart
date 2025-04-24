@@ -51,15 +51,7 @@
                         <a href="javascript:void(0)" class="nav-menu__link">Home</a>
                     </li>
                     <li class="nav-menu__item">
-                        <a href="javascript:void(0)" class="nav-menu__link">Products</a>
-                        <ul class="nav-submenu">
-                            <li class="nav-submenu__item">
-                                <a href="all-product.html" class="nav-submenu__link"> All Products</a>
-                            </li>
-                            <li class="nav-submenu__item">
-                                <a href="product-details.html" class="nav-submenu__link"> Product Details</a>
-                            </li>
-                        </ul>
+                        <a href="{{ route('products') }}" class="nav-menu__link">Products</a>
                     </li>
                     <li class="nav-menu__item has-submenu">
                         <a href="javascript:void(0)" class="nav-menu__link">Pages</a>
@@ -133,12 +125,14 @@
 
             @foreach ($categories as $category)
                 <li class="category_menu_list {{ $category->subCategories->count() > 0 ? 'has-submenu' : '' }}">
-                    <a class="category_menu_link" href="#">{{ $category->name }}</a>
+                    <a class="category_menu_link"
+                        href="{{ route('products', ['category' => $category->slug]) }}">{{ $category->name }}</a>
                     @if ($category->subCategories->count() > 0)
                         <ul class="nav-submenu">
                             @foreach ($category->subCategories as $subCategory)
                                 <li class="nav-submenu__item">
-                                    <a href="#" class="nav-submenu__link">{{ $subCategory->name }}</a>
+                                    <a href="{{ route('products', ['category' => $category->slug, 'sub-category' => $subCategory->slug]) }}"
+                                        class="nav-submenu__link">{{ $subCategory->name }}</a>
                                 </li>
                             @endforeach
                         </ul>
