@@ -417,20 +417,20 @@
                         </div>
 
                         <div class="wsus__sidebar_author_info mt-4">
-                            <h3>Auther Profile</h3>
+                            <h3>Author Profile</h3>
                             <div class="wsus__sidebar_author_text">
                                 <div class="img">
-                                    <img src="assets/images/thumbs/authorLogo.png" alt="author"
+                                    <img src="{{ asset($product->author->avatar) }}" alt="author"
                                         class="img-fluid w-100">
                                 </div>
                                 <div class="text">
-                                    <h4>Design Craft</h4>
-                                    <p>Signup- 23july 2022,</p>
+                                    <h4>{{ $product->author->name }}</h4>
+                                    <p>Signup- {{ formatDate($product->author->created_at) }}</p>
                                 </div>
                             </div>
                             <ul class="d-flex flex-wrap justify-content-center">
                                 <li>
-                                    <h4>85</h4>
+                                    <h4>{{ $product->author->products()->count() }}</h4>
                                     <p>products</p>
                                 </li>
                                 <li>
@@ -444,26 +444,22 @@
                         <div class="wsus__sidebar_pro_info mt-4">
                             <h3>product Info</h3>
                             <ul>
-                                <li><span>Relesaed</span> March 31,2022</li>
-                                <li><span>Updated</span> July 23,2022</li>
-                                <li><span>File Type</span> Wordpress File</li>
-                                <li><span>High Resolution</span> YES</li>
-                                <li><span>Cross browser</span> Compatibility</li>
-                                <li><span>Documentation</span> Documented</li>
-                                <li><span>Layout</span> Responsive</li>
-                                <li><span>File Size</span> 12.4 MB</li>
+                                <li><span>Released</span> {{ formatDate($product->created_at) }}</li>
+                                <li><span>Updated</span> {{ formatDate($product->updated_at) }}</li>
+                                @if ($product->is_main_file_external)
+                                    <li><span>Source </span> Url</li>
+                                @else
+                                    <li><span>File Type</span> {{ explode('.', $product->main_file)[1] }}</li>
+                                @endif
+
+                                @if ($product->is_main_file_external == 0)
+                                    <li><span>File Size</span> {{ getFileSize($product->main_file) }}</li>
+                                @endif
                                 <li><span>Tags</span>
                                     <p>
-                                        <a href="#">accountant,</a>
-                                        <a href="#">advertising,</a>
-                                        <a href="#">advisor,</a>
-                                        <a href="#">agency,</a>
-                                        <a href="#">broker,</a>
-                                        <a href="#">business,</a>
-                                        <a href="#">consulting,</a>
-                                        <a href="#">creative,</a>
-                                        <a href="#">elementor,</a>
-                                        <a href="#">finance</a>
+                                        @foreach ($product->tags as $tag)
+                                            <a href="#">{{ $tag }} {{ $loop->last ? '' : ',' }}</a>
+                                        @endforeach
                                     </p>
                                 </li>
                             </ul>
