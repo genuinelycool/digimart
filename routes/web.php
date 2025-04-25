@@ -25,7 +25,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('kyc', [KycVerificationController::class, 'store'])->name('kyc.store')->middleware('kyc');
 
     /** Cart Routes */
-    Route::resource('cart', CartItemController::class);
+    Route::get('cart', [CartItemController::class, 'index'])->name('cart.index');
+    Route::post('add-cart/{id}', [CartItemController::class, 'store'])->name('cart.store');
 
     /** Author Route Group */
     Route::group(['middleware' => 'is_author'], function () {

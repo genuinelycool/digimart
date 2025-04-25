@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Title -->
     <title> Digital Market Place HTML Template</title>
     <!-- Favicon -->
@@ -198,6 +200,14 @@
 
     <!-- main js -->
     <script src="{{ asset('assets/frontend/js/main.js') }}"></script>
+
+    <!-- dynamic js -->
+
+    <!-- global js variables -->
+    <script src="{{ asset('assets/frontend/js/default/default-variables.js') }}"></script>
+
+    <!-- cart js -->
+    <script src="{{ asset('assets/frontend/js/default/cart.js') }}"></script>
 
     @stack('scripts')
 
