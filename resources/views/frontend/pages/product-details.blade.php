@@ -38,16 +38,23 @@
         <div class="container">
             <div class="row">
                 <div class="col-xl-8 col-lg-7 ">
-                    <div class="wsus__product_details_img">
-                        @if ($product->preview_type == 'image')
+                    @if ($product->preview_type == 'image')
+                        <div class="wsus__product_details_img">
                             <img src="{{ asset($product->preview_image) }}" alt="product" class="img-fluod w-100">
-                        @elseif($product->preview_type == 'video')
+                        </div>
+                    @elseif($product->preview_type == 'video')
+                        <div class="wsus__product_details_img">
                             <video id="player" playsinline controls data-poster="">
                                 <source src="{{ asset($product->preview_video) }}" type="video/mp4" />
                             </video>
-                        @elseif($product->preview_type == 'audio')
-                        @endif
-                    </div>
+                        </div>
+                    @elseif($product->preview_type == 'audio')
+                        <div class="wsus__product_details_img" style="height: 82px;">
+                            <audio id="player" controls>
+                                <source src="{{ asset($product->preview_audio) }}" type="audio/mp3" />
+                            </audio>
+                        </div>
+                    @endif
 
                     <div class="wsus__product_details_text">
                         <ul class="nav nav-pills" id="pills-tab" role="tablist">
