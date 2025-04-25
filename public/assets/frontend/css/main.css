@@ -13894,3 +13894,7 @@ select {
 .select2-selection__choice__display {
     color: white !important;
 }
+
+.product-item:hover .product-item__thumb::before {
+    height: 0% !important;
+}
