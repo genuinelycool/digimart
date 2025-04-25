@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\CartItemController;
 use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ItemController;
@@ -22,6 +23,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     /** Kyc Routes */
     Route::get('kyc', [KycVerificationController::class, 'index'])->name('kyc.index')->middleware('kyc');
     Route::post('kyc', [KycVerificationController::class, 'store'])->name('kyc.store')->middleware('kyc');
+
+    /** Cart Routes */
+    Route::resource('cart', CartItemController::class);
 
     /** Author Route Group */
     Route::group(['middleware' => 'is_author'], function () {
