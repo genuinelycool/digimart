@@ -172,11 +172,12 @@
     </main>
 
     <!-- Jquery js -->
-    <script src="{{ asset('assets/frontend/js/jquery-3.7.1.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
     <!-- Bootstrap Bundle Js -->
     <script src="{{ asset('assets/frontend/js/boostrap.bundle.min.js') }}"></script>
-    <!-- CountDown -->
-    <script src="{{ asset('assets/frontend/js/countdown.js') }}"></script>
+
     <!-- counter up -->
     <script src="{{ asset('assets/frontend/js/counterup.min.js') }}"></script>
     <!-- Slick js -->
@@ -199,6 +200,9 @@
     <script src="{{ asset('assets/frontend/js/main.js') }}"></script>
 
     @stack('scripts')
+
+    <!-- CountDown -->
+    {{-- <script src="{{ asset('assets/frontend/js/countdown.js') }}"></script> --}}
 
 </body>
 

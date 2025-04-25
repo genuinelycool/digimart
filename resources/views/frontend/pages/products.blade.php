@@ -123,8 +123,8 @@
                     <!-- ===================== Filter Sidebar Start ============================= -->
                     <div class="filter-sidebar">
                         <!-- <button type="button"
-                                        class="filter-sidebar__close p-2 position-absolute end-0 top-0 z-index-1 text-body hover-text-main font-20 d-lg-none d-block"><i
-                                            class="las la-times"></i></button> -->
+                                                        class="filter-sidebar__close p-2 position-absolute end-0 top-0 z-index-1 text-body hover-text-main font-20 d-lg-none d-block"><i
+                                                            class="las la-times"></i></button> -->
                         <div class="filter-sidebar__item">
                             <button type="button"
                                 class="filter-sidebar__button font-16 text-capitalize fw-500">Category</button>
@@ -3435,3 +3435,23 @@
     </section>
     <!-- ======================== All Product Section End ====================== -->
 @endsection
+
+@push('scripts')
+    <script>
+        const player = new Plyr('.player', {
+            controls: []
+        });
+        const audioPlayer = new Plyr('.audio-player');
+
+        $(function() {
+            $('.product-video').on('mouseover', function() {
+                player.muted = true;
+                player.play();
+            })
+
+            $('.product-video').on('mouseout', function() {
+                player.pause();
+            })
+        })
+    </script>
+@endpush

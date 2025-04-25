@@ -9,9 +9,9 @@
     // ============================== Light & Dark Mode Js Start=====================
 
 
-    // ============================== Light & Dark Mode Js End============================== 
+    // ============================== Light & Dark Mode Js End==============================
 
-    // ============================== Auto Suggestion Js Start ============================== 
+    // ============================== Auto Suggestion Js Start ==============================
     $('.auto-suggestion-input').on('input', function (event) {
       event.stopPropagation();
       $(this).addClass('active');
@@ -22,16 +22,16 @@
       $('.auto-suggestion-input').removeClass('active');
       $('.auto-suggestion-list').removeClass('active');
     });
-    // ============================== Auto Suggestion Js End ============================== 
+    // ============================== Auto Suggestion Js End ==============================
 
 
-    // ============================== Auto Suggestion Text value place to the input field Js End ============================== 
+    // ============================== Auto Suggestion Text value place to the input field Js End ==============================
     $('.auto-suggestion-list__item').on('click', function (event) {
       event.preventDefault();
       const textValue = $(this).text().trim();
       $('.auto-suggestion-input').val(textValue);
     });
-    // ============================== Auto Suggestion Text value place to the input field Js End ============================== 
+    // ============================== Auto Suggestion Text value place to the input field Js End ==============================
 
 
     // ============== Mobile Menu Sidebar Js Start ========
@@ -141,15 +141,15 @@
     // ================================ Remove Sale Offer Js End =============================
 
     // ================================ CountDown Js Start =============================
-    if (document.querySelector('.countdown')) {
-      const myCountdown = new countdown({
-        target: '.countdown',
-        dayWord: ' Days:',
-        hourWord: ' Hour: ',
-        minWord: ' Min:',
-        secWord: ' Sec:'
-      });
-    }
+    // if (document.querySelector('.countdown')) {
+    //   const myCountdown = new countdown({
+    //     target: '.countdown',
+    //     dayWord: ' Days:',
+    //     hourWord: ' Hour: ',
+    //     minWord: ' Min:',
+    //     secWord: ' Sec:'
+    //   });
+    // }
     // ================================ CountDown Js End =============================
 
     // ========================= popular Category Js Start ==============
@@ -704,7 +704,7 @@
 
     // For device width size js start
     // let screenSize = screen.width
-    // alert(' Your Screen Size is: ' + screenSize + 'pixel'); 
+    // alert(' Your Screen Size is: ' + screenSize + 'pixel');
     // For device width size js start
 
     let socialShareBtn = $('.social-share');
