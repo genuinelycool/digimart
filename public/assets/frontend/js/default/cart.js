@@ -1,5 +1,8 @@
 "use strict"
 
+// Notyf init
+var notyf = new Notyf();
+
 $(function() {
     $('.add-cart').on('click', function(e){
         e.preventDefault();
@@ -8,9 +11,9 @@ $(function() {
 
         $.ajax({
             method: 'POST',
-            url: '/add-cart/' + id,
+            url: route('cart.store', id),
             data: {
-                __token: csrfToken
+                _token: csrfToken
             },
             beforeSend: function() {
 
@@ -19,7 +22,8 @@ $(function() {
 
             },
             error: function(xhr, status, error) {
-
+                let errorMessage = xhr.responseJSON.message;
+                notyf.error(errorMessage);
             }
         })
     })
