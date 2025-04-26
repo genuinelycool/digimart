@@ -16,13 +16,20 @@ $(function() {
                 _token: csrfToken
             },
             beforeSend: function() {
-
+                $(`#cart-btn-${id}`).text('Adding...');
             },
             success: function(data) {
+                console.log(data);
+                if (data.status == 'success') {
+                    notyf.success(data.message);
 
+                    $(`#cart-btn-${id}`).text('Add to cart');
+                }
             },
             error: function(xhr, status, error) {
                 let errorMessage = xhr.responseJSON.message;
+                $(`#cart-btn-${id}`).text('Add to cart');
+                
                 notyf.error(errorMessage);
             }
         })
